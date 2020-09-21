@@ -1,0 +1,6 @@
+framework module Pods_OpenMarketPlace_swift {
+  umbrella header "Pods-OpenMarketPlace-swift-umbrella.h"
+
+  export *
+  module * { export * }
+}

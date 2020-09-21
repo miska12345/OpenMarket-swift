@@ -1,0 +1,442 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0008516925191F7700BFE2BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0008516825191F7700BFE2BE /* AppDelegate.swift */; };
+		0008516B25191F7700BFE2BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0008516A25191F7700BFE2BE /* SceneDelegate.swift */; };
+		0008516D25191F7700BFE2BE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0008516C25191F7700BFE2BE /* ContentView.swift */; };
+		0008516F25191F7900BFE2BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0008516E25191F7900BFE2BE /* Assets.xcassets */; };
+		0008517225191F7900BFE2BE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0008517125191F7900BFE2BE /* Preview Assets.xcassets */; };
+		0008517525191F7900BFE2BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0008517325191F7900BFE2BE /* LaunchScreen.storyboard */; };
+		635F213FFFBC8F8E5ABBE673 /* Pods_OpenMarketPlace_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAF59AC61A2835352AB721D2 /* Pods_OpenMarketPlace_swift.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0008516525191F7700BFE2BE /* OpenMarketPlace-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenMarketPlace-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0008516825191F7700BFE2BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0008516A25191F7700BFE2BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		0008516C25191F7700BFE2BE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0008516E25191F7900BFE2BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0008517125191F7900BFE2BE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0008517425191F7900BFE2BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0008517625191F7900BFE2BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6B5C11D769E898BD972E5E0D /* Pods-OpenMarketPlace-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenMarketPlace-swift.release.xcconfig"; path = "Target Support Files/Pods-OpenMarketPlace-swift/Pods-OpenMarketPlace-swift.release.xcconfig"; sourceTree = "<group>"; };
+		D7A15A8D78960472C131A27F /* Pods-OpenMarketPlace-swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenMarketPlace-swift.debug.xcconfig"; path = "Target Support Files/Pods-OpenMarketPlace-swift/Pods-OpenMarketPlace-swift.debug.xcconfig"; sourceTree = "<group>"; };
+		DAF59AC61A2835352AB721D2 /* Pods_OpenMarketPlace_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenMarketPlace_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0008516225191F7700BFE2BE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				635F213FFFBC8F8E5ABBE673 /* Pods_OpenMarketPlace_swift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0008515C25191F7700BFE2BE = {
+			isa = PBXGroup;
+			children = (
+				0008516725191F7700BFE2BE /* OpenMarketPlace-swift */,
+				0008516625191F7700BFE2BE /* Products */,
+				F8CDF7311A43AECD17972038 /* Pods */,
+				F8B2AD9E84575D416ACC7BE0 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		0008516625191F7700BFE2BE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0008516525191F7700BFE2BE /* OpenMarketPlace-swift.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0008516725191F7700BFE2BE /* OpenMarketPlace-swift */ = {
+			isa = PBXGroup;
+			children = (
+				00085180251920C400BFE2BE /* Model */,
+				0008517F251920BA00BFE2BE /* View */,
+				0008516825191F7700BFE2BE /* AppDelegate.swift */,
+				0008516A25191F7700BFE2BE /* SceneDelegate.swift */,
+				0008516E25191F7900BFE2BE /* Assets.xcassets */,
+				0008517325191F7900BFE2BE /* LaunchScreen.storyboard */,
+				0008517625191F7900BFE2BE /* Info.plist */,
+				0008517025191F7900BFE2BE /* Preview Content */,
+			);
+			path = "OpenMarketPlace-swift";
+			sourceTree = "<group>";
+		};
+		0008517025191F7900BFE2BE /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				0008517125191F7900BFE2BE /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0008517F251920BA00BFE2BE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0008516C25191F7700BFE2BE /* ContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		00085180251920C400BFE2BE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				000851882519238500BFE2BE /* GRPC */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		000851882519238500BFE2BE /* GRPC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GRPC;
+			sourceTree = "<group>";
+		};
+		F8B2AD9E84575D416ACC7BE0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DAF59AC61A2835352AB721D2 /* Pods_OpenMarketPlace_swift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F8CDF7311A43AECD17972038 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D7A15A8D78960472C131A27F /* Pods-OpenMarketPlace-swift.debug.xcconfig */,
+				6B5C11D769E898BD972E5E0D /* Pods-OpenMarketPlace-swift.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0008516425191F7700BFE2BE /* OpenMarketPlace-swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0008517925191F7900BFE2BE /* Build configuration list for PBXNativeTarget "OpenMarketPlace-swift" */;
+			buildPhases = (
+				C780C56EC22A9E3A37C54DA1 /* [CP] Check Pods Manifest.lock */,
+				0008516125191F7700BFE2BE /* Sources */,
+				0008516225191F7700BFE2BE /* Frameworks */,
+				0008516325191F7700BFE2BE /* Resources */,
+				FC7A5856716D7CAECA77E81E /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OpenMarketPlace-swift";
+			productName = "OpenMarketPlace-swift";
+			productReference = 0008516525191F7700BFE2BE /* OpenMarketPlace-swift.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0008515D25191F7700BFE2BE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					0008516425191F7700BFE2BE = {
+						CreatedOnToolsVersion = 12.0;
+					};
+				};
+			};
+			buildConfigurationList = 0008516025191F7700BFE2BE /* Build configuration list for PBXProject "OpenMarketPlace-swift" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0008515C25191F7700BFE2BE;
+			productRefGroup = 0008516625191F7700BFE2BE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0008516425191F7700BFE2BE /* OpenMarketPlace-swift */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0008516325191F7700BFE2BE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0008517525191F7900BFE2BE /* LaunchScreen.storyboard in Resources */,
+				0008517225191F7900BFE2BE /* Preview Assets.xcassets in Resources */,
+				0008516F25191F7900BFE2BE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C780C56EC22A9E3A37C54DA1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OpenMarketPlace-swift-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC7A5856716D7CAECA77E81E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OpenMarketPlace-swift/Pods-OpenMarketPlace-swift-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OpenMarketPlace-swift/Pods-OpenMarketPlace-swift-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OpenMarketPlace-swift/Pods-OpenMarketPlace-swift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0008516125191F7700BFE2BE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0008516925191F7700BFE2BE /* AppDelegate.swift in Sources */,
+				0008516B25191F7700BFE2BE /* SceneDelegate.swift in Sources */,
+				0008516D25191F7700BFE2BE /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0008517325191F7900BFE2BE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0008517425191F7900BFE2BE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0008517725191F7900BFE2BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0008517825191F7900BFE2BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0008517A25191F7900BFE2BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7A15A8D78960472C131A27F /* Pods-OpenMarketPlace-swift.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"OpenMarketPlace-swift/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "OpenMarketPlace-swift/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "io.openmarket.OpenMarketPlace-swift";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0008517B25191F7900BFE2BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B5C11D769E898BD972E5E0D /* Pods-OpenMarketPlace-swift.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"OpenMarketPlace-swift/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "OpenMarketPlace-swift/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "io.openmarket.OpenMarketPlace-swift";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0008516025191F7700BFE2BE /* Build configuration list for PBXProject "OpenMarketPlace-swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0008517725191F7900BFE2BE /* Debug */,
+				0008517825191F7900BFE2BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0008517925191F7900BFE2BE /* Build configuration list for PBXNativeTarget "OpenMarketPlace-swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0008517A25191F7900BFE2BE /* Debug */,
+				0008517B25191F7900BFE2BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0008515D25191F7700BFE2BE /* Project object */;
+}
