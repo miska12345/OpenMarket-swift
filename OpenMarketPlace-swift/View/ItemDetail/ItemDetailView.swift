@@ -23,7 +23,7 @@ struct ItemDetailView: View {
                     //TODO change to coin image later
                     Text("$").font(.system(size: 20))
                         .padding(.bottom, 20)
-                    Text("\(item.itemPrice)")
+                    Text("\(item.price)")
                         .font(.system(size: 40))
                 }.padding(.leading, -180)
                 
@@ -41,7 +41,7 @@ struct ItemDetailView: View {
                 .cornerRadius(15)                
                 
                 
-                ItemDescriptionAndSeller(itemAbout: item.itemAbout, itemDescription: item.itemDescription, organization: org)
+                ItemDescriptionAndSeller(itemDescription: item.description, organization: org)
                 //Todo change org[0] to some actual organization
                 ItemList(listName: "Similar Item", itemCollection: staticData, organization: org)
             }.padding(.top, 40)
@@ -50,8 +50,8 @@ struct ItemDetailView: View {
     }
 }
 
-struct ItemDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        ItemDetailView(item: Item(imageName: "yeezy", itemName: "Yeezy 350 Cinder", itemDescription: "My yeezy feel like skating on ice and very smooth", itemAbout: ["big", "small", "warm"], itemPrice: 100), org: org[0])
-    }
-}
+//struct ItemDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ItemDetailView(item: Item(imageName: "yeezy", itemName: "Yeezy 350 Cinder", itemDescription: "My yeezy feel like skating on ice and very smooth", itemAbout: ["big", "small", "warm"], itemPrice: 100), org: org[0])
+//    }
+//}

@@ -11,7 +11,7 @@ struct CheckoutView: View {
     @EnvironmentObject var manager: CartManager
     var cart: Cart
     let iconColor = Color.red
-    let itemFontColor = Color(0x2c3e50)
+    let itemFontColor = Color(hex: 0x2c3e50)
     
     var body: some View {
         VStack {
@@ -67,7 +67,10 @@ struct CheckoutView_Previews: PreviewProvider {
     }
 }
 
-let previewCart = Cart(id: "1", shopName: "AAA", items: [
-    Item(id: "1", itemName: "MAcbook pro super long name bla bla bnla bla bla", price: 5.32, description: "Pickup at my house", quantity: 3),
-    Item(id: "2", itemName: "Great banana", price: 5.32, description: "Pickup at my house", quantity: 2)
-])
+let previewCart = Cart(id: "1", shopName: "AAA", items: [])
+
+//
+//let previewCart = Cart(id: "1", shopName: "AAA", items: [
+//    Item(id: "1", itemName: "MAcbook pro super long name bla bla bnla bla bla", price: 5.32, description: "Pickup at my house", quantity: 3),
+//    Item(id: "2", itemName: "Great banana", price: 5.32, description: "Pickup at my house", quantity: 2)
+//])

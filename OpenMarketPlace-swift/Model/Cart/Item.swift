@@ -13,6 +13,7 @@ struct Item: Identifiable, Hashable {
     let price: Double
     let description: String
     let quantity: Int
+    var imageName: String = "cssa_logo"
     
     func getTotalPriceRounded() -> String {
         return String(format: "%.2f", price * Double(quantity))

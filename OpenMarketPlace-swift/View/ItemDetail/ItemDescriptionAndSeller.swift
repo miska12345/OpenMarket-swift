@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ItemDescriptionAndSeller: View{
     
-    let itemAbout: [String]
     let itemDescription: String
     let organization: Organization
     var body: some View {
@@ -57,6 +56,6 @@ struct ItemDescriptionAndSeller: View{
 
 struct ItemAboutBulletList_Previews: PreviewProvider {
     static var previews: some View {
-       ItemDescriptionAndSeller(itemAbout: ["big","small", "warm"], itemDescription: "This is very big very small and very warm at the same time", organization: org[0])
+       ItemDescriptionAndSeller(itemDescription: "This is very big very small and very warm at the same time", organization: org[0])
     }
 }

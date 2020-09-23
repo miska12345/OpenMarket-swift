@@ -31,7 +31,7 @@ struct TrendingRow: View {
                         .padding(.vertical, 10)
                     VStack {
                         Text(item.itemName).fontWeight(.heavy).multilineTextAlignment(.center).lineLimit(1)
-                        Text(item.itemDescription).font(.system(size: 15))
+                        Text(item.description).font(.system(size: 15))
                     }
                     Spacer()
                 }).background(Color(Color.RGBColorSpace.sRGB, red: 251/255.0, green: 243/255.0, blue: 243/255.0, opacity: 0.94))
@@ -45,8 +45,8 @@ struct TrendingRow: View {
     }
 }
 
-struct TrendingRow_Previews: PreviewProvider {
-    static var previews: some View {
-        TrendingRow(item: Item(imageName: "yeezy", itemName: "Yeezy 350", itemDescription: "yoyo", itemAbout: ["big"], itemPrice: 100), organization: org[0])
-    }
-}
+//struct TrendingRow_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TrendingRow(item: Item(imageName: "yeezy", itemName: "Yeezy 350", itemDescription: "yoyo", itemAbout: ["big"], itemPrice: 100), organization: org[0])
+//    }
+//}

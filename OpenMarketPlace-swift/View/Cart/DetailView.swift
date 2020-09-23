@@ -23,11 +23,11 @@ struct DetailView: View {
     }
 }
 
-struct DetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailView(cart: cart)
-    }
-}
+//struct DetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+////        DetailView(cart: [Cart]())
+//    }
+//}
 
 struct DetailHeader: View {
     @ObservedObject var cart: Cart
@@ -123,8 +123,9 @@ struct DetailItem: View {
     }
 }
 
-let cart = Cart(id: "1", shopName: "UW", items: [
-    Item(id: "1", itemName: "MAcbook pro super long name bla bla bnla bla bla", price: 5.32, description: "Pickup at my house", quantity: 3),
-    Item(id: "2", itemName: "A super long description that is blablbba good", price: 5.32, description: "Pickup at my house", quantity: 3),
-    Item(id: "3", itemName: "MAcbook pro super long name bla bla bnla bla bla", price: 5.32, description: "Pickup at my house", quantity: 3),
-])
+let cart = [Cart]()
+//let cart = Cart(id: "1", shopName: "UW", items: [
+//    Item(id: "1", itemName: "MAcbook pro super long name bla bla bnla bla bla", price: 5.32, description: "Pickup at my house", quantity: 3),
+//    Item(id: "2", itemName: "A super long description that is blablbba good", price: 5.32, description: "Pickup at my house", quantity: 3),
+//    Item(id: "3", itemName: "MAcbook pro super long name bla bla bnla bla bla", price: 5.32, description: "Pickup at my house", quantity: 3),
+//])

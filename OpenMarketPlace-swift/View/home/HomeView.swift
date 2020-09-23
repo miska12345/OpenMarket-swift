@@ -15,7 +15,7 @@ struct HomeView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 15){
-                    ImageSlideView(index: $index.animation(), maxIndex: 2, recommened: self.recommend)
+                    ImageSlideView(index: $index.animation(), maxIndex: org.count - 1, recommened: self.recommend)
                     .aspectRatio(4/3, contentMode: .fit)
                         
                     .background(Color(Color.RGBColorSpace.sRGB, red: 251/255.0, green: 243/255.0, blue: 243/255.0, opacity: 0.94))
@@ -52,12 +52,11 @@ struct HomeView_Previews: PreviewProvider {
     }
 }
 
-let staticData = [Item(imageName: "yeezy", itemName: "Yeezy 350", itemDescription: "This my yeezy,  it is really light and you will feel like skating on shit", itemAbout: ["big","small","warm"], itemPrice: 100),
-                  Item(imageName: "COM", itemName: "COM NB", itemDescription: "COM is very nb desne", itemAbout: ["big","small","warm"], itemPrice: 100),
-                  Item(imageName: "Ee", itemName: "Ee NB", itemDescription: "Ee is also very nb desne", itemAbout: ["big","small","warm"], itemPrice: 100),
-                  Item(imageName: "Ee", itemName: "Ee NB", itemDescription: "Ee is also very nb desne", itemAbout: ["big","small","warm"], itemPrice: 100)]
+let staticData = [
+    Item(id: "1", itemName: "kucf", price: 3.313, description: "aaaa", quantity: 2)
+]
 
-let org = [Organization(organizationName: "UW CSSA", organizationPicture: "cssa_logo",organizationDescription: "This is a very big very small very warm club", organizationStoreItems: staticData, organizationStoreCurrency: nil),
-           Organization(organizationName: "UW CSSA", organizationPicture: "cssa_logo",organizationDescription: "This is a very big very small very warm club", organizationStoreItems: staticData, organizationStoreCurrency: nil),
-           Organization(organizationName: "UW CSSA", organizationPicture: "cssa_logo",organizationDescription: "This is a very big very small very warm club", organizationStoreItems: staticData, organizationStoreCurrency: nil)]
+let org = [
+    Organization(organizationName: "AA", organizationPicture: "cssa_logo", organizationDescription: "AA", organizationStoreItems: [Item](), organizationStoreCurrency: ["fuck coin"])
+]
 
