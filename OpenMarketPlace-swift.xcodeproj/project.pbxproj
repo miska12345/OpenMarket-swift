@@ -14,6 +14,9 @@
 		0008517225191F7900BFE2BE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0008517125191F7900BFE2BE /* Preview Assets.xcassets */; };
 		0008517525191F7900BFE2BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0008517325191F7900BFE2BE /* LaunchScreen.storyboard */; };
 		635F213FFFBC8F8E5ABBE673 /* Pods_OpenMarketPlace_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAF59AC61A2835352AB721D2 /* Pods_OpenMarketPlace_swift.framework */; };
+		D692C0CD2519BEC700280F19 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D692C0CC2519BEC700280F19 /* ProfileView.swift */; };
+		D692C0D02519BF8D00280F19 /* OrgMinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D692C0CF2519BF8D00280F19 /* OrgMinView.swift */; };
+		D6A3F9F62519905B00FEE4C9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A3F9F52519905B00FEE4C9 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		0008517425191F7900BFE2BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0008517625191F7900BFE2BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B5C11D769E898BD972E5E0D /* Pods-OpenMarketPlace-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenMarketPlace-swift.release.xcconfig"; path = "Target Support Files/Pods-OpenMarketPlace-swift/Pods-OpenMarketPlace-swift.release.xcconfig"; sourceTree = "<group>"; };
+		D692C0CC2519BEC700280F19 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		D692C0CF2519BF8D00280F19 /* OrgMinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrgMinView.swift; sourceTree = "<group>"; };
+		D6A3F9F52519905B00FEE4C9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		D7A15A8D78960472C131A27F /* Pods-OpenMarketPlace-swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenMarketPlace-swift.debug.xcconfig"; path = "Target Support Files/Pods-OpenMarketPlace-swift/Pods-OpenMarketPlace-swift.debug.xcconfig"; sourceTree = "<group>"; };
 		DAF59AC61A2835352AB721D2 /* Pods_OpenMarketPlace_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenMarketPlace_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -86,6 +92,8 @@
 		0008517F251920BA00BFE2BE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D692C0C62519BE9300280F19 /* Profile */,
+				D6A3F9EF25198F5800FEE4C9 /* Login */,
 				0008516C25191F7700BFE2BE /* ContentView.swift */,
 			);
 			path = View;
@@ -104,6 +112,23 @@
 			children = (
 			);
 			path = GRPC;
+			sourceTree = "<group>";
+		};
+		D692C0C62519BE9300280F19 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D692C0CC2519BEC700280F19 /* ProfileView.swift */,
+				D692C0CF2519BF8D00280F19 /* OrgMinView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		D6A3F9EF25198F5800FEE4C9 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				D6A3F9F52519905B00FEE4C9 /* LoginView.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		F8B2AD9E84575D416ACC7BE0 /* Frameworks */ = {
@@ -239,6 +264,9 @@
 			files = (
 				0008516925191F7700BFE2BE /* AppDelegate.swift in Sources */,
 				0008516B25191F7700BFE2BE /* SceneDelegate.swift in Sources */,
+				D692C0D02519BF8D00280F19 /* OrgMinView.swift in Sources */,
+				D692C0CD2519BEC700280F19 /* ProfileView.swift in Sources */,
+				D6A3F9F62519905B00FEE4C9 /* LoginView.swift in Sources */,
 				0008516D25191F7700BFE2BE /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
