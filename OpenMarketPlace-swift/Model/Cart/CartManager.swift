@@ -30,6 +30,7 @@ class CartManager: ObservableObject {
     
     func fetchData() {
         print("Fetching data")
+        carts.removeAll()
         addCart(for: Cart(id: "1", shopName: "Fish", items: [
             Item(id: "1", itemName: "Apple", price: 3.13, description: "Good for your health", quantity: 5)
         ]))

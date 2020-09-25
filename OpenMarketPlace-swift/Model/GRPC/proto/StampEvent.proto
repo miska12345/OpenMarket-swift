@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+option java_package = "io.openmarket.event.grpc";
+option java_outer_classname = "EventProto";
+
+package event;
+
+service StampEvent {
+  rpc createEvent (CreateEventRequest) returns (CreateEventResult) {}
+  rpc deleteEvent (DeleteEventRequest) returns (DeleteEventResult) {}
+  rpc redeem (RedeemRequest) returns (RedeemResult) {}
+  rpc getEvent (GetEventRequest) returns (GetEventResult) {}
+}
+
+message CreateEventRequest {
+  string currency = 1;
+  string expiresAt = 2;
+  double rewardAmount = 3;
+  double totalAmount = 4;
+}
+
+message CreateEventResult {
+  Error error = 1;
+  string eventId = 2;
+}
+
+message DeleteEventRequest {
+  string eventId = 1;
+}
+
+message DeleteEventResult {
+    Error error = 1;
+}
+
+message RedeemRequest {
+  string eventId = 1;
+}
+
+message RedeemResult {
+  Error error = 1;
+  string message = 2;
+  string transactionId = 3;
+  Event event = 4;
+}
+
+message GetEventRequest {
+  string eventId = 1;
+}
+
+message GetEventResult {
+  Error error = 1;
+  Event event = 2;
+}
+
+message Event {
+  string eventId = 1;
+  string owner = 2;
+  OwnerType type = 3;
+  string currency = 4;
+  string expiresAt = 5;
+  string createdAt = 6;
+  double rewardAmount = 7;
+  double totalAmount = 8;
+  double remainingAmount = 9;
+  string successMessage = 10;
+  string errorMessage = 11;
+}
+
+enum Error {
+  NOTHING = 0;
+  UNAUTHORIZED = 1;
+  INVALID_EVENT_ID = 2;
+  ALREADY_REDEEMED = 3;
+  OUT_OF_COINS = 4;
+  UNKNOWN = 5;
+}
+
+enum OwnerType {
+  USER = 0;
+  ORGANIZATION = 1;
+}

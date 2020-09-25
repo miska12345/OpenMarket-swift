@@ -41,7 +41,7 @@ class Cart: Identifiable, ObservableObject, Equatable {
         var currentSubtotal = 0.0
         for item in items {
             currentSubtotal += item.price * Double(item.quantity)
-        }
+        }   
         updateSubtotalHelper(with: currentSubtotal)
     }
     

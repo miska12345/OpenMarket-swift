@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+option java_package = "io.openmarket.account.grpc";
+
+
+message RegistrationRequest {
+    string username = 1;
+    string password = 2;
+    string displayName = 3;
+}
+
+message LoginRequest  {
+    string username = 1;
+    string password = 2;
+}
+
+message LoginResult {
+    string cred = 1;
+    string username = 2;
+    enum Status {
+        LOGIN_SUCCESS = 0;
+        LOGIN_FAIL_INCORRECT_PASSWORD_OR_USERNAME = 1;
+        LOGIN_FAIL_INVALID_PARAM = 2;
+    }
+    Status loginStatus = 3;
+}
+
+message RegistrationResult {
+    enum Status {
+       REGISTER_SUCCESS = 0;
+       USERNAME_ALREADY_EXIST = 1;
+       INVALID_PARAM = 2;
+    }
+
+    Status registerStatus = 1;
+}
+
+message UpdateRequest {
+    enum Type{
+        CHANGE_NAME = 0;
+        CHANGE_PASS = 1;
+    }
+    Type updateType = 1;
+    string username = 2;
+    string newDisplayName = 3;
+    string newPassword = 4;
+    repeated string newTags = 5;
+}
+
+message UpdateResult {
+    enum Status {
+        UPDATE_FAILED_INVALID_PARAM = 0;
+        UPDATE_FAILED_USER_NOT_FOUND = 1;
+        UPDATE_SUCCESS = 2;
+    }
+    Status updateStatus = 1;
+    string newDisplayName = 2;
+}
+
+service Account {
+    rpc handleLogin(LoginRequest) returns (LoginResult) {}
+    rpc handleRegister(RegistrationRequest) returns (RegistrationResult){}
+}

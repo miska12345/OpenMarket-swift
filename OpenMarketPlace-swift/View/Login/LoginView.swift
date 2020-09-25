@@ -8,63 +8,65 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State var username: String = ""
-    @State var password: String = ""
+    @ObservedObject var session: SessionManager
+    @State var username: String = "123"
+    @State var password: String = "123"
+    @State private var presentedPasswordReset = false
+    @State private var presentedTabBarView = false
+    
     var body: some View {
         ZStack {
             Color(red: 0.9547, green: 0.9297, blue: 0.9297).ignoresSafeArea()
             VStack(alignment: .center, spacing: nil, content: {
+                Spacer()
                 Text("OPEN MARKET")
                     .font(.largeTitle)
                     .foregroundColor(Color(red: 0.7578, green: 0.6484, blue: 0.6484))
                 Image("cart")
                     .resizable()
-                    .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(width: 100, height: 80, alignment: .center)
                     .padding()
-                TextField("Username", text: $username)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .lineLimit(30)
-                    .frame(width: 300, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                TextField("Password", text: $password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .lineLimit(30)
-                    .frame(width: 300, height: 40, alignment: .center)
-
-                Button(action: {
-                    print("");
-                }) {
-                    RoundedRectangle(cornerRadius: 10.0)
-                        .foregroundColor(.white)
-                        .frame(width: 100, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .overlay(
-                            Text("Log in").foregroundColor(Color(red: 0.7578, green: 0.6484, blue: 0.6484))
-                        )
-                        .cornerRadius(10.0)
-                }.animation(.spring())
-                .padding(.vertical)
-                
-                Button(action: {
-                    print("");
-                }) {
-                    RoundedRectangle(cornerRadius: 10.0)
-                        .foregroundColor(.white)
-                        .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .overlay(
-                            Text("Register").foregroundColor(Color(red: 0.7578, green: 0.6484, blue: 0.6484))
-                        )
-                        .cornerRadius(10.0)
-                }.animation(.spring())
+                VStack(alignment: .center) {
+                    TextFieldView(string: self.$username,
+                        passwordMode: false,
+                        placeholder: "Enter your username",
+                        iconName: "person.crop.circle.fill")
+                        .padding(.vertical, 8)
+                        
+                    VStack(alignment: .trailing) {
+                        TextFieldView(string: self.$password,
+                            passwordMode: true,
+                            placeholder: "Enter your password",
+                            iconName: "lock.fill")
+                        
+                        Button(action: { self.presentedPasswordReset = true }) {
+                            Text("Forgot password?")
+                                .foregroundColor(Color.blue)
+                                .bold()
+                                .font(.footnote)
+                        }
+                        .sheet(isPresented: $presentedPasswordReset) {
+                            Text("Not yet implemented")
+                        }
+                    }
+                    .padding(.vertical, 8)
+                    LoginButtons(session: session, bindUsername: $username,
+                                 bindPassword: $password,
+                                 bindPresentedTabBarView: $presentedTabBarView)
+                }
+                .fullScreenCover(isPresented: $presentedTabBarView, content: {
+                    TabBarView(session: session)
+                })
+                Spacer()
             })
+            .padding(.top)
+            .padding(.horizontal, 30)
         }
-        
-        
     }
-    
-    
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(session: SessionManager())
     }
 }

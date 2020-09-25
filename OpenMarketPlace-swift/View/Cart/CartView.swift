@@ -48,13 +48,13 @@ struct CartView: View {
         }
     }
 }
-//
-//struct CartView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CartView().environmentObject(manager)
-//            .previewDevice("iPhone 11")
-//    }
-//}
+
+struct CartView_Previews: PreviewProvider {
+    static var previews: some View {
+        CartView().environmentObject(CartManager.shared)
+            .previewDevice("iPhone 11")
+    }
+}
 
 struct CartItem: View {
     @EnvironmentObject var manager: CartManager
