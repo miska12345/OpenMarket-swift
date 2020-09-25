@@ -1,0 +1,80 @@
+syntax = "proto3";
+option java_outer_classname = "MarketPlaceProto";
+option java_package = "io.openmarket.marketplace.grpc";
+
+package marketplace;
+
+message ItemGrpc {
+  string itemId = 1;
+  string itemName = 2;
+  string itemImageLink = 3;
+  string itemDescription = 4;
+  double itemPrice = 5;
+  int32 itemStock = 6;
+  string belongTo = 7;
+  string category = 8;
+  // for order only
+  int32 itemCount = 9;
+}
+
+message GetSimilarItemsRequest {
+  string itemIds = 1;
+  string itemCategory = 2;
+  int32  withCount = 3;
+}
+
+message GetSimilarItemsResult {
+  repeated ItemGrpc items = 1;
+}
+
+message CheckOutRequest{
+  repeated ItemGrpc items = 1;
+  string fromOrg = 2;
+  string currencyId = 3;
+}
+
+message CheckOutResult {
+  enum Status {
+    SUCCESS = 0;
+    FAIL_PAYMENT_CANNOT_BE_VERIFIED = 1;
+    FAIL_TRANSACTION_TIME_OUT = 2;
+    FAIL_ITEM_OUT_OF_STOCK = 3;
+    SUCESS_WITH_FEW_ITEM_OUT_OF_STOCK = 4;
+  }
+  Status checkoutStatus = 1;
+  repeated ItemGrpc unprocessedItem = 2;
+}
+
+message AddItemRequest {
+  ItemGrpc item = 1;
+}
+
+message AddItemResult {
+  string itemName = 1;
+  enum Status {
+    SUCCESS = 0;
+    FAILED = 1;
+  }
+  Status addStatus = 2;
+}
+
+message GetOrgItemsRequest{
+  string orgId = 1;
+  enum GetItemsType {
+    ALL = 0;
+    LIMITED = 1;
+  }
+
+  GetItemsType requestType = 2;
+}
+
+message GetOrgItemsResult{
+  repeated ItemGrpc items = 1;
+}
+
+service MarketPlace{
+  rpc handleAddItems(AddItemRequest) returns (AddItemResult) {}
+  rpc handleGetOrgItems(GetOrgItemsRequest) returns (GetOrgItemsResult) {}
+  rpc handleCheckout(CheckOutRequest) returns (CheckOutResult){}
+  rpc handleGetSimilarItems(GetSimilarItemsRequest) returns (GetSimilarItemsResult) {}
+}

@@ -20,7 +20,7 @@ struct EventDetailView: View {
                 Text("Successful")
                     .font(.title)
                     .bold()
-                Text("You are in! $\(event.rewardAmount) \(event.currency) will be rewarded to your account shortly.")
+                Text("You are in! $\(String(format: "%.2f", event.rewardAmount)) \(event.currency) will be rewarded to your account shortly.")
                     .foregroundColor(.secondary)
                     .padding(.vertical)
                     .padding(.horizontal, 30)

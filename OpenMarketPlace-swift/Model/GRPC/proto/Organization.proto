@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_package = "io.openmarket.organization.grpc";
+service Organization {
+  rpc addOrganization (orgMetadata) returns (orgName) {}
+  rpc getOrganization (orgName) returns (orgMetadata){}
+  rpc updateOrganization(orgMetadata) returns (orgName) {}
+}
+
+message orgName {
+  string orgName = 1;
+}
+
+message orgMetadata {
+  string orgName = 1;
+  string orgDescription = 2;
+  string orgOwnerId = 3;
+  string orgSlogan = 4;
+  string orgPortraitS3Key = 5;
+  repeated string orgCurrencies = 6;
+}
+

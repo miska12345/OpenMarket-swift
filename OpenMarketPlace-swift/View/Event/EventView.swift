@@ -50,6 +50,9 @@ struct EventView: View {
                         EventDetailView(presentedBinding: $enable, event: event!)
                 }
             }
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Error!"), message: Text(self.alertMessage!), dismissButton: .destructive(Text("OK")))
+            }
             .navigationTitle("Event")
             .navigationBarTitleDisplayMode(.inline)
         }
