@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Item: Identifiable, Hashable {
+struct Item: Identifiable, Hashable, Equatable {
     let id: String
     let itemName: String
     let price: Double
@@ -26,5 +26,9 @@ struct Item: Identifiable, Hashable {
     
     func copy() -> Item{
         return Item(id: self.id, itemName: self.itemName, price: self.price, description: self.description, orderQuantity: self.orderQuantity, stock: self.stock, category: self.category, owner: self.owner)
+    }
+    
+    static func == (lhs: Item, rhs: Item) -> Bool {
+        return lhs.id == rhs.id
     }
 }

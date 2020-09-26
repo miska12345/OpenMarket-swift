@@ -26,7 +26,6 @@ class CartManager: ObservableObject {
     }
     
     func addItemToCart(newItem: Item) {
-        print("Adding to cart")
         let currency = newItem.itemCurrency
         for cart in carts {
             if (cart.id == currency){
@@ -43,14 +42,6 @@ class CartManager: ObservableObject {
         } else {
             print("No such cart")
         }
-    }
-    
-    func fetchData() {
-        print("Fetching data")
-        carts.removeAll()
-        addCart(for: Cart(id: "1", shopName: "Fish", items: [
-            Item(id: "1", itemName: "Apple", price: 3.13, description: "Good for your health", orderQuantity: 5, stock: 1, category: "Food", owner: "ChaCha")
-        ]))
     }
     
     func onDeleteCartTapped(for cart: Cart) {
