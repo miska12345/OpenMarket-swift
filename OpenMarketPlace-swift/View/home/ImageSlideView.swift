@@ -9,15 +9,17 @@ struct ImageSlideView: View {
     @State private var offset = CGFloat.zero
     @State private var dragging = false
     @State private var toOrganization: Int! = -1
-    init(index: Binding<Int>, maxIndex: Int, recommened: [Organization]) {
+    @ObservedObject var session: SessionManager
+    init(index: Binding<Int>, maxIndex: Int, recommened: [Organization], session: SessionManager) {
         self._index = index
         self.maxIndex = maxIndex
         self.recommened = recommened
+        self.session = session
     }
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            NavigationLink(destination: OrganizationStore(organization: recommened[self.index]), tag: 1, selection: $toOrganization) {
+            NavigationLink(destination: OrganizationStore(organization: recommened[index], session: session), tag: 1, selection: $toOrganization) {
                 EmptyView()
             }.buttonStyle(PlainButtonStyle())
             GeometryReader { geometry in

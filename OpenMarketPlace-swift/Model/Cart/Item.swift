@@ -12,10 +12,19 @@ struct Item: Identifiable, Hashable {
     let itemName: String
     let price: Double
     let description: String
-    let quantity: Int
+    var orderQuantity: Int
+    var stock: Int
     var imageName: String = "cssa_logo"
+    let category: String
+    let owner: String
+    //ADD THIS TO INIT LATER
+    let itemCurrency: String = "FuckCoin"
     
     func getTotalPriceRounded() -> String {
-        return String(format: "%.2f", price * Double(quantity))
+        return String(format: "%.2f", price * Double(orderQuantity))
+    }
+    
+    func copy() -> Item{
+        return Item(id: self.id, itemName: self.itemName, price: self.price, description: self.description, orderQuantity: self.orderQuantity, stock: self.stock, category: self.category, owner: self.owner)
     }
 }

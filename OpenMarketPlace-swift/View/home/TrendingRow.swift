@@ -11,10 +11,11 @@ struct TrendingRow: View {
     @State var item: Item
     @State private var toDetailView: Int! = 0
     let organization: Organization
+    @ObservedObject var session: SessionManager
     var body: some View {
         HStack{
             NavigationLink(
-                destination: ItemDetailView(item: item, org: organization),
+                destination: ItemDetailView(item: item, org: organization, session: session),
                 tag: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/,
                 selection: $toDetailView) {
                 EmptyView()

@@ -15,7 +15,7 @@ struct DetailView: View {
             VStack {
                 DetailHeader(cart: cart)
                 ForEach(cart.items, id: \.self) { item in
-                    DetailItem(item: item, quantity: item.quantity).environmentObject(cart).environmentObject(manager)
+                    DetailItem(item: item, quantity: item.orderQuantity).environmentObject(cart).environmentObject(manager)
                     Divider().padding()
                 }
             }

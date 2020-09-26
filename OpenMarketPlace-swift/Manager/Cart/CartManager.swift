@@ -8,7 +8,6 @@
 import Foundation
 
 class CartManager: ObservableObject {
-    static let shared = CartManager(carts: [])
     
     @Published var carts = [Cart]()
     
@@ -17,7 +16,25 @@ class CartManager: ObservableObject {
     }
     
     func addCart(for cart: Cart) {
-        carts.append(cart)
+        for oldCart in carts {
+            if (cart.id == oldCart.id) {
+                return
+            }
+            
+        }
+        self.carts.append(cart)
+    }
+    
+    func addItemToCart(newItem: Item) {
+        print("Adding to cart")
+        let currency = newItem.itemCurrency
+        for cart in carts {
+            if (cart.id == currency){
+                cart.addItem(with: newItem)
+                return
+            }
+        }
+        addCart(for: Cart(id: currency, shopName: newItem.owner, items: [newItem]))
     }
     
     func deleteCart(for cart: Cart) {
@@ -32,7 +49,7 @@ class CartManager: ObservableObject {
         print("Fetching data")
         carts.removeAll()
         addCart(for: Cart(id: "1", shopName: "Fish", items: [
-            Item(id: "1", itemName: "Apple", price: 3.13, description: "Good for your health", quantity: 5)
+            Item(id: "1", itemName: "Apple", price: 3.13, description: "Good for your health", orderQuantity: 5, stock: 1, category: "Food", owner: "ChaCha")
         ]))
     }
     

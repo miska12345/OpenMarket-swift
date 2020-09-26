@@ -11,6 +11,7 @@ struct ItemList: View {
     var listName: String
     var itemCollection: [Item]
     let organization: Organization
+    @ObservedObject var session: SessionManager
     var body: some View {
         VStack{
             Text(listName).font(.title)
@@ -19,7 +20,7 @@ struct ItemList: View {
             Divider()
             VStack{
                 ForEach(itemCollection) { item in
-                    TrendingRow(item: item, organization: organization)
+                    TrendingRow(item: item, organization: organization, session: session)
                     Divider()
                 }
             }
@@ -27,8 +28,8 @@ struct ItemList: View {
     }
 }
 
-struct ItemList_Previews: PreviewProvider {
-    static var previews: some View {
-        ItemList(listName: "New List", itemCollection: staticData, organization: org[0])
-    }
-}
+//struct ItemList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ItemList(listName: "New List", itemCollection: staticData, organization: org[0])
+//    }
+//}

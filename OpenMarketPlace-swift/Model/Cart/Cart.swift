@@ -8,6 +8,7 @@
 import Foundation
 
 class Cart: Identifiable, ObservableObject, Equatable {
+    //currency id
     let id: String
     let shopName: String
     @Published var subtotal = 0.0
@@ -22,16 +23,20 @@ class Cart: Identifiable, ObservableObject, Equatable {
     
     func setItemQuantity(with item: Item, q quantity: Int) {
         if let index = items.firstIndex(of: item) {
-            let oldQuantity = items[index].quantity
-            items[index] = Item(id: item.id, itemName: item.itemName, price: item.price, description: item.description, quantity: quantity)
+            let oldQuantity = items[index].orderQuantity
+            items[index].orderQuantity = quantity
             updateSubtotal(price: item.price, quantity: quantity - oldQuantity)
         }
+    }
+    
+    func addItem(with item: Item) {
+        self.items.append(item)
     }
     
     func removeItem(with item: Item) {
         if let index = items.firstIndex(of: item) {
             items.remove(at: index)
-            updateSubtotal(price: item.price, quantity: -1 * item.quantity)
+            updateSubtotal(price: item.price, quantity: -1 * item.orderQuantity)
         } else {
             print("Item not found")
         }
@@ -40,7 +45,7 @@ class Cart: Identifiable, ObservableObject, Equatable {
     func updateSubtotal() {
         var currentSubtotal = 0.0
         for item in items {
-            currentSubtotal += item.price * Double(item.quantity)
+            currentSubtotal += item.price * Double(item.orderQuantity)
         }   
         updateSubtotalHelper(with: currentSubtotal)
     }
@@ -60,6 +65,10 @@ class Cart: Identifiable, ObservableObject, Equatable {
     
     func getSubtotalRounded() -> String {
         return String(format: "%.2f", self.subtotal)
+    }
+    
+    func contains(item: Item) -> Bool {
+        return self.items.contains(item);
     }
     
     // EventListeners

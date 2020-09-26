@@ -11,12 +11,12 @@ struct TabBarView: View {
     @ObservedObject var session: SessionManager
     var body: some View {
         TabView {
-            HomeView(data: staticData, recommend: org)
+            HomeView(data: staticData, recommend: org, session: session)
                 .tabItem {
                     Image(systemName: "1.square.fill")
                     Text("Home")
                 }
-            CartView().environmentObject(CartManager.shared)
+            CartView().environmentObject(session.cartManager!)
                 .tabItem {
                     Image(systemName: "2.square.fill")
                     Text("Cart")

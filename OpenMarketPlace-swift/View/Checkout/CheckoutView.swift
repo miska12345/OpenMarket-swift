@@ -36,7 +36,7 @@ struct CheckoutView: View {
                 VStack(alignment: .leading) {
                     Text("\(item.itemName)").lineLimit(2)
                     Spacer()
-                    Text("Quantity: \(item.quantity)")
+                    Text("Quantity: \(item.orderQuantity)")
                 }.foregroundColor(self.itemFontColor)
                 Spacer()
                 Text("$\(item.getTotalPriceRounded())").bold()

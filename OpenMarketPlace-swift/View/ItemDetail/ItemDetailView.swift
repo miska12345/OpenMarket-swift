@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct ItemDetailView: View {
-    let item : Item
+    @State var item : Item
     let org: Organization
+    @State var itemSwift: [Item] = [Item]()
+    @ObservedObject var session: SessionManager
+    @State var itemPopulated = false;
     var body: some View {
         
         ScrollView {
@@ -23,17 +26,18 @@ struct ItemDetailView: View {
                     //TODO change to coin image later
                     Text("$").font(.system(size: 20))
                         .padding(.bottom, 20)
-                    Text("\(item.price)")
+                        .padding(.leading, 5)
+                    Text("\(item.price, specifier: "%.2f")")
                         .font(.system(size: 40))
                 }.padding(.leading, -180)
-                
                 Text("Pickup Only & In store only")
                     .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                     .padding(.leading, -160)
                 Divider()
                 
                 Button(action: {
-                    
+                    self.item.orderQuantity = 1
+                    session.cartManager?.addItemToCart(newItem: item.copy())
                 }, label: {
                     Text("Add to Cart").font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/).foregroundColor(.black)
                 }).frame(width: 400, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
@@ -42,9 +46,22 @@ struct ItemDetailView: View {
                 
                 
                 ItemDescriptionAndSeller(itemDescription: item.description, organization: org)
-                //Todo change org[0] to some actual organization
-                ItemList(listName: "Similar Item", itemCollection: staticData, organization: org)
+                //Todo add owner for items
+                ItemList(listName: "Similar Item", itemCollection: itemSwift, organization: org, session: session)
             }.padding(.top, 40)
+            .onAppear{
+                if (!itemPopulated) {
+                    self.session.marketplaceManager?.getSimilarItems(itemId: item.id, itemCategory: item.category, withCount: 5, perform: { (itemsGrpc, error) in
+                        if (error == nil) {
+                            for index in 0 ... (itemsGrpc!.count - 1){
+                                let temp : Marketplace_ItemGrpc = itemsGrpc![index]
+                                itemSwift.append(Item(id: temp.itemID, itemName: temp.itemName, price: temp.itemPrice, description: temp.itemDescription, orderQuantity: 0, stock: Int(temp.itemStock), category: temp.category, owner: temp.belongTo))
+                            }
+                            self.itemPopulated = true;
+                        }
+                    })
+                }
+            }
         }
         
     }

@@ -65,6 +65,7 @@
 		004AC4D8251AA3EC00E0EA33 /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004AC4D7251AA3EC00E0EA33 /* CartManager.swift */; };
 		004AC4E9251ABD1C00E0EA33 /* CartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004AC4E8251ABD1C00E0EA33 /* CartButton.swift */; };
 		635F213FFFBC8F8E5ABBE673 /* Pods_OpenMarketPlace_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAF59AC61A2835352AB721D2 /* Pods_OpenMarketPlace_swift.framework */; };
+		679CC471251E9E5000CDEF9E /* MarketplaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679CC470251E9E5000CDEF9E /* MarketplaceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -126,6 +127,7 @@
 		004705B7251E9D0300BE9E6B /* Organization.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Organization.grpc.swift; sourceTree = "<group>"; };
 		004AC4D7251AA3EC00E0EA33 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
 		004AC4E8251ABD1C00E0EA33 /* CartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartButton.swift; sourceTree = "<group>"; };
+		679CC470251E9E5000CDEF9E /* MarketplaceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketplaceManager.swift; sourceTree = "<group>"; };
 		6B5C11D769E898BD972E5E0D /* Pods-OpenMarketPlace-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenMarketPlace-swift.release.xcconfig"; path = "Target Support Files/Pods-OpenMarketPlace-swift/Pods-OpenMarketPlace-swift.release.xcconfig"; sourceTree = "<group>"; };
 		D7A15A8D78960472C131A27F /* Pods-OpenMarketPlace-swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenMarketPlace-swift.debug.xcconfig"; path = "Target Support Files/Pods-OpenMarketPlace-swift/Pods-OpenMarketPlace-swift.debug.xcconfig"; sourceTree = "<group>"; };
 		DAF59AC61A2835352AB721D2 /* Pods_OpenMarketPlace_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenMarketPlace_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -258,7 +260,6 @@
 			children = (
 				0008519B2519742C00BFE2BE /* Cart.swift */,
 				0008519F2519748B00BFE2BE /* Item.swift */,
-				004AC4D7251AA3EC00E0EA33 /* CartManager.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -387,6 +388,8 @@
 		0047051E251D8D2A00BE9E6B /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				679CC479251EFA7D00CDEF9E /* Cart */,
+				679CC46F251E9E2800CDEF9E /* MarketPlaceManager */,
 				0047057A251E754900BE9E6B /* Session */,
 				0047050C251D822200BE9E6B /* Auth */,
 				000CF687251D6E0900EAAEED /* Event */,
@@ -440,6 +443,22 @@
 				000CF5FE251ADDB500EAAEED /* CheckoutView.swift */,
 			);
 			path = Checkout;
+			sourceTree = "<group>";
+		};
+		679CC46F251E9E2800CDEF9E /* MarketPlaceManager */ = {
+			isa = PBXGroup;
+			children = (
+				679CC470251E9E5000CDEF9E /* MarketplaceManager.swift */,
+			);
+			path = MarketPlaceManager;
+			sourceTree = "<group>";
+		};
+		679CC479251EFA7D00CDEF9E /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				004AC4D7251AA3EC00E0EA33 /* CartManager.swift */,
+			);
+			path = Cart;
 			sourceTree = "<group>";
 		};
 		F8B2AD9E84575D416ACC7BE0 /* Frameworks */ = {
@@ -608,6 +627,7 @@
 				0047052D251D9EEF00BE9E6B /* User.swift in Sources */,
 				0008518B2519250F00BFE2BE /* CartView.swift in Sources */,
 				004705AC251E8BBE00BE9E6B /* EventDetailView.swift in Sources */,
+				679CC471251E9E5000CDEF9E /* MarketplaceManager.swift in Sources */,
 				000CF602251AE4FA00EAAEED /* ColorExtension.swift in Sources */,
 				00470572251DBD6200BE9E6B /* KeyboardAdaptive.swift in Sources */,
 				00470514251D8B6900BE9E6B /* AccountService.pb.swift in Sources */,
@@ -773,14 +793,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"OpenMarketPlace-swift/Preview Content\"";
-				DEVELOPMENT_TEAM = P7BR9K94MN;
+				DEVELOPMENT_TEAM = 3WQ45D7894;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "OpenMarketPlace-swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "io.openmarket.OpenMarketPlace-swifta";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.openmarket.OpenMarketPlace-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -795,14 +815,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"OpenMarketPlace-swift/Preview Content\"";
-				DEVELOPMENT_TEAM = P7BR9K94MN;
+				DEVELOPMENT_TEAM = 3WQ45D7894;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "OpenMarketPlace-swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "io.openmarket.OpenMarketPlace-swifta";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.openmarket.OpenMarketPlace-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
