@@ -22,11 +22,15 @@ struct EventView: View {
     
     @State var event: Event_Event? = nil
     
+    @State var code: String? = nil
+    
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack {
-                    CartButton(title: "Scan QR Code", perform: {
+                    CartButton(title: "Scan QR Code", backgroundColor: AppColors.generalBackgroundButtonColor, fontColor: AppColors.generalButtonForegroundColor,
+                               perform: {
+                        self.viewType = .QR
                         self.enable = true
                     }).padding()
                     
@@ -34,6 +38,7 @@ struct EventView: View {
                     switch self.viewType {
                     case .QR:
                         QRView(presentedQRView: $enable, perform: { code in
+                            self.enable = false
                             session.eventManager?.redeem(code) { event, error in
                                 if error != nil {
                                     self.alertType = .error
@@ -43,11 +48,13 @@ struct EventView: View {
                                 }
                                 self.viewType = .DETAIL
                                 self.event = event!
-                                self.enable = true
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    self.enable = true
+                                }
                             }
                         })
                     case .DETAIL:
-                        EventDetailView(presentedBinding: $enable, event: event!)
+                        EventDetailView(presentedBinding: $enable, event: self.event!)
                 }
             }
             .alert(isPresented: $showAlert) {

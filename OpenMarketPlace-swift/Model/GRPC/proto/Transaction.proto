@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+option java_package = "io.openmarket.transaction.grpc";
+option java_outer_classname = "TransactionProto";
+
+package transaction;
+
+service Transaction {
+  rpc processPayment (PaymentRequest) returns (PaymentResult) {}
+  rpc processQuery (QueryRequest) returns (QueryResult) {}
+  rpc processRefund (RefundRequest) returns (RefundResult) {}
+  rpc processGetWallet (GetWalletRequest) returns (GetWalletResult) {}
+}
+
+enum Status {
+  PENDING = 0;
+  COMPLETED = 1;
+  ERROR = 2;
+  REFUND_STARTED = 3;
+  REFUNDED = 4;
+}
+
+enum ErrorCategory {
+  INSUFFICIENT_BALANCE = 0;
+}
+
+message Error {
+  ErrorCategory category = 1;
+}
+
+message GetWalletResult {
+  map<string, double> currencies = 1;
+}
+
+message GetWalletRequest {
+
+}
+
+message MoneyAmount {
+  string currencyId = 1;
+  double amount = 2;
+}
+
+message QueryRequest {
+  enum QueryType {
+    TRANSACTION_ID = 0;
+    PAYER_ID = 1;
+  }
+  QueryType type = 1;
+  string param = 2;
+}
+
+message QueryResult {
+  repeated QueryResultItem items = 1;
+}
+
+message QueryResultItem {
+  enum Type {
+    TRANSFER = 0;
+    PAY = 1;
+    REFUND = 2;
+  }
+  Type type = 1;
+  string transactionId = 2;
+  MoneyAmount moneyAmount = 3;
+  string createdAt = 4;
+  string payerId = 5;
+  string recipientId = 6;
+  Status status = 7;
+}
+
+message PaymentRequest {
+  enum Type {
+    TRANSFER = 0;
+    PAY = 1;
+  }
+  Type type = 1;
+  string recipientId = 2;
+  MoneyAmount moneyAmount = 3;
+  string note = 4;
+}
+
+// Response message with the greetings
+message PaymentResult {
+  string transactionId = 1;
+}
+
+message RefundRequest {
+  string transactionId = 1;
+  string reason = 2;
+}
+
+message RefundResult {
+  Error error = 1;
+  PaymentRefund refund = 2;
+}
+
+message PaymentRefund {
+  string refundId = 1;
+  string transactionId = 2;
+  MoneyAmount moneyAmount = 3;
+  string createdAt = 4;
+  string reason = 5;
+  Status status = 6;
+  string updatedAt = 7;
+}

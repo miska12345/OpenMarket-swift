@@ -25,7 +25,6 @@ class EventManager {
             print(callResult)
             switch result?.error {
             case .nothing:
-                print("good")
                 perform(result?.event, nil)
             case .invalidEventID, .alreadyRedeemed, .outOfCoins:
                 perform(nil, OMError(message: result?.message))

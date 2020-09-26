@@ -51,18 +51,15 @@ struct LoginView: View {
                     }
                     .padding(.vertical, 8)
                     LoginButtons(session: session, bindUsername: $username,
-                                 bindPassword: $password,
-                                 bindPresentedTabBarView: $presentedTabBarView)
+                                 bindPassword: $password)
                 }
-                .fullScreenCover(isPresented: $presentedTabBarView, content: {
-                    TabBarView(session: session)
-                })
                 Spacer()
             })
             .padding(.top)
             .padding(.horizontal, 30)
         }
     }
+    
 }
 
 struct LoginView_Previews: PreviewProvider {

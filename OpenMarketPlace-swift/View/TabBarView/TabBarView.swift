@@ -31,6 +31,11 @@ struct TabBarView: View {
                     Image(systemName: "4.square.fill")
                     Text("Event")
                 }
+            WalletView(session: session)
+                .tabItem {
+                    Image(systemName: "5.square.fill")
+                    Text("Event")
+                }
         }
     }
 }

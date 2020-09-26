@@ -17,11 +17,11 @@ struct LoginButtons: View {
     
     @Binding var bindUsername: String
     @Binding var bindPassword: String
-    @Binding var bindPresentedTabBarView: Bool
+    @State var presentedTabBarView: Bool = false
     
     @State private var errorMesssage: String?
     @State private var presentedAlert = false
-    @State private var presentedSignUpPage = false
+    @State private var presentedSignUpPage: Bool = false
     
     @State private var alert: alertState = .standartError
     
@@ -36,7 +36,7 @@ struct LoginButtons: View {
             }
             print("You are in!")
             self.session.initiateSession()
-            self.bindPresentedTabBarView = true
+            self.presentedTabBarView = true
         })
     }
     
@@ -69,6 +69,9 @@ struct LoginButtons: View {
                     RegistrationView(presentedBinding: self.$presentedSignUpPage)
                 }
             }
+            EmptyView().fullScreenCover(isPresented: $presentedTabBarView, content: {
+                TabBarView(session: session)
+            })
         }
     }
 }

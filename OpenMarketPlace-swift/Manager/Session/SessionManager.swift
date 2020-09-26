@@ -10,6 +10,7 @@ import Foundation
 class SessionManager: ObservableObject {
     private var isLoggedIn: Bool = false
     @Published var eventManager: EventManager? = nil
+    @Published var transactionManager: TransactionManager? = nil
     
     func initiateSession() {
         guard let token = AuthManager.shared.currentUser?.token else {
@@ -18,6 +19,7 @@ class SessionManager: ObservableObject {
         }
         DispatchQueue.main.async {
             self.eventManager = EventManager(token)
+            self.transactionManager = TransactionManager(token)
             self.isLoggedIn = true
         }
         print("Session initiated!")

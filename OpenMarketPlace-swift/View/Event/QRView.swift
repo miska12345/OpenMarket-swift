@@ -17,8 +17,8 @@ struct QRView: View {
         CodeScannerView(codeTypes: [.qr]) { result in
             switch result {
                 case .success(let code):
-                    self.presentedQRView = false
                     perform(code)
+//                    self.presentedQRView = false
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

@@ -20,7 +20,14 @@ struct EventDetailView: View {
                 Text("Successful")
                     .font(.title)
                     .bold()
-                Text("You are in! $\(String(format: "%.2f", event.rewardAmount)) \(event.currency) will be rewarded to your account shortly.")
+                Text("+ \(String(format: "%.2f", event.rewardAmount))  \(event.currency.uppercased())").foregroundColor(Color(hex: 0xe67e22)).font(.system(size: 30))
+                    .bold()
+                    .padding(.vertical)
+                    .padding(.horizontal, 30)
+                    .multilineTextAlignment(.center)
+            
+                
+                Text(event.successMessage)
                     .foregroundColor(.secondary)
                     .padding(.vertical)
                     .padding(.horizontal, 30)
@@ -29,10 +36,12 @@ struct EventDetailView: View {
             
             Spacer()
             
-            Button(action: { self.presentedBinding = false })
+            Button(action: {
+                self.presentedBinding = false
+            })
             {
                 Rectangle()
-                    .fill(Color.init(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)))
+                    .fill(AppColors.generalBackgroundButtonColor)
                     .frame(height: 50, alignment: .center)
                     .overlay(Text("Continue").foregroundColor(.white).bold())
                     .cornerRadius(8)
@@ -42,11 +51,10 @@ struct EventDetailView: View {
         }
     }
 }
-//
+
 //struct EventDetailView_Previews: PreviewProvider {
 //    @State static var bool = true
-//    @State var event: Event_Event = Event_Event()
 //    static var previews: some View {
-//        EventDetailView(presentedBinding: $bool, event: $event)
+//        EventDetailView(presentedBinding: $bool)
 //    }
 //}
