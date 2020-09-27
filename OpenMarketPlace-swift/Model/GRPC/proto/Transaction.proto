@@ -21,7 +21,8 @@ enum Status {
 }
 
 enum ErrorCategory {
-  INSUFFICIENT_BALANCE = 0;
+  NONE = 0;
+  INSUFFICIENT_BALANCE = 1;
 }
 
 message Error {
@@ -45,13 +46,17 @@ message QueryRequest {
   enum QueryType {
     TRANSACTION_ID = 0;
     PAYER_ID = 1;
+    RECIPIENT_ID = 2;
+    ALL = 3;
   }
   QueryType type = 1;
   string param = 2;
+  string exclusiveStartKey = 3;
 }
 
 message QueryResult {
   repeated QueryResultItem items = 1;
+  string lastEvaluatedKey = 2;
 }
 
 message QueryResultItem {
@@ -63,10 +68,12 @@ message QueryResultItem {
   Type type = 1;
   string transactionId = 2;
   MoneyAmount moneyAmount = 3;
-  string createdAt = 4;
-  string payerId = 5;
-  string recipientId = 6;
-  Status status = 7;
+  string payerId = 4;
+  string recipientId = 5;
+  Status status = 6;
+  string note = 7;
+  ErrorCategory error = 8;
+  string createdAt = 9;
 }
 
 message PaymentRequest {

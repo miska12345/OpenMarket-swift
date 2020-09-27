@@ -23,4 +23,20 @@ class TransactionManager {
             perform(result?.currencies, nil)
         }
     }
+    
+    func getPaidTransactions(perform: @escaping ([Transaction_QueryResultItem]?, OMError?)->()) {
+        var req = Transaction_QueryRequest()
+        req.type = Transaction_QueryRequest.QueryType.payerID
+        _ = try? client.processQuery(req) { result, callResult in
+            perform(result?.items, nil)
+        }
+    }
+    
+    func getReceivedTransactions(perform: @escaping ([Transaction_QueryResultItem]?, OMError?)->()) {
+        var req = Transaction_QueryRequest()
+        req.type = Transaction_QueryRequest.QueryType.recipientID
+        _ = try? client.processQuery(req) { result, callResult in
+            perform(result?.items, nil)
+        }
+    }
 }

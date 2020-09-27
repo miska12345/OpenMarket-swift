@@ -10,6 +10,10 @@ import SwiftUI
 struct WalletView: View {
     @ObservedObject var session: SessionManager
     @ObservedObject var currencies: DictModel = DictModel()
+    @State var currentSelection: Int = 0
+    @State var paidTransactions: [Transaction_QueryResultItem] = [Transaction_QueryResultItem]()
+    @State var receivedTransactions: [Transaction_QueryResultItem] = [Transaction_QueryResultItem]()
+    @State private var initialRefresh: Bool = false
     var body: some View {
         ZStack {
             ZStack(alignment: .bottom) {
@@ -23,7 +27,7 @@ struct WalletView: View {
                         Spacer()
                         
                         Button(action: {
-                            self.currencies.update(sm: session)
+                            refresh()
                         }) {
                             ZStack(alignment: .topTrailing) {
                                 Image(systemName: "arrow.clockwise")
@@ -38,7 +42,6 @@ struct WalletView: View {
                             }
                         }
                     }
-                    
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 16) {
                             ForEach(currencies.dict.sorted(by: >), id: \.key) { key, value in
@@ -47,22 +50,67 @@ struct WalletView: View {
                         }
                     }
                     .padding(.top, 32)
-                    
-                    
-                    
-//                    CoinSliderView(currencies: $currencies)
+                    NavBarView(selectedIndex: $currentSelection).padding(.top, 32)
                     Divider()
-                    
-                    InfoView()
-                        .edgesIgnoringSafeArea(.bottom)
-                        .frame(height: 350)
+                    buildInfoView
                     Spacer()
                 }
                 .padding(.horizontal)
-            
+            }.onAppear() {
+                if !initialRefresh {
+                    self.initialRefresh = true
+                    refresh()
+                }
             }
-        }.onAppear() {
-            print("hey")
+        }
+    }
+    
+    @ViewBuilder
+    var buildInfoView: some View {
+        if self.currentSelection == 0 {
+            paidView
+        } else {
+            receivedView
+        }
+    }
+    
+    var paidView: some View {
+        InfoView(items: $paidTransactions, isShowingPaid: true)
+            .edgesIgnoringSafeArea(.bottom)
+            .frame(height: 350)
+    }
+    
+    var receivedView: some View {
+        InfoView(items: $receivedTransactions, isShowingPaid: false)
+            .edgesIgnoringSafeArea(.bottom)
+            .frame(height: 350)
+    }
+    
+    func refresh() {
+        self.currencies.update(sm: session)
+        refreshPaidTransactions()
+        refreshReceivedTransactions()
+    }
+    
+    func refreshPaidTransactions() {
+        print("allala")
+        self.session.transactionManager?.getPaidTransactions() { result, error in
+            if error == nil {
+                DispatchQueue.main.async {
+                    self.paidTransactions = result!
+                }
+            }
+        }
+    }
+    
+    func refreshReceivedTransactions() {
+        print("allala")
+        self.session.transactionManager?.getReceivedTransactions() { result, error in
+            if error == nil {
+                DispatchQueue.main.async {
+                    self.receivedTransactions = result!
+                }
+            }
         }
     }
 }
@@ -98,19 +146,5 @@ class DictModel: ObservableObject {
 struct WalletView_Previews: PreviewProvider {
     static var previews: some View {
         WalletView(session: SessionManager())
-    }
-}
-
-struct CoinSliderView: View {
-    @Binding var currencies: Dictionary<String, Double>
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 16) {
-                ForEach(currencies.sorted(by: >), id: \.key) { key, value in
-                    CoinView(coinName: key, balance: value, colors: [Color.random, Color.random])
-                }
-            }
-        }
-        .padding(.top, 32)
     }
 }
