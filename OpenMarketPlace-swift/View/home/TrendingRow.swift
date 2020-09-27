@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TrendingRow: View {
-    @State var item: Item
+    let item: Item
     @State private var toDetailView: Int! = 0
     let organization: Organization
     @ObservedObject var session: SessionManager

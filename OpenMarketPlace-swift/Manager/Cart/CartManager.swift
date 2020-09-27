@@ -10,9 +10,10 @@ import Foundation
 class CartManager: ObservableObject {
     
     @Published var carts = [Cart]()
-    
-    init(carts: [Cart]) {
+    @Published var session : SessionManager
+    init(carts: [Cart], session : SessionManager) {
         self.carts = carts
+        self.session = session
     }
     
     func addCart(for cart: Cart) {
@@ -34,6 +35,7 @@ class CartManager: ObservableObject {
             }
         }
         addCart(for: Cart(id: currency, shopName: newItem.owner, items: [newItem]))
+        
     }
     
     func deleteCart(for cart: Cart) {
@@ -50,7 +52,23 @@ class CartManager: ObservableObject {
         }
     }
     
-    func onCheckoutTapped(for cart: Cart) {
-        print("Checkout!")
+    func onCheckoutTapped(for cart: Cart, perform: @escaping ([Marketplace_ItemGrpc]?, OMError?) -> ()) {
+        let toCheckOut = self.carts[self.carts.firstIndex(of: cart)!]
+        var checkoutItems = [Marketplace_ItemGrpc]()
+        for item in toCheckOut.items{
+            checkoutItems.append(convertToItemGrpc(item: item))
+        }
+        session.marketplaceManager?.checkout(items: checkoutItems, orgId: toCheckOut.shopName, currencyId: toCheckOut.id, perform: perform)
+    }
+    
+    func convertToItemGrpc(item : Item) -> Marketplace_ItemGrpc {
+        var itemgrpc = Marketplace_ItemGrpc()
+        itemgrpc.itemID = item.id
+        itemgrpc.itemName = item.itemName
+        itemgrpc.itemPrice = item.price
+        itemgrpc.itemCount = Int32(item.orderQuantity)
+        itemgrpc.belongTo = item.owner
+        
+        return itemgrpc
     }
 }

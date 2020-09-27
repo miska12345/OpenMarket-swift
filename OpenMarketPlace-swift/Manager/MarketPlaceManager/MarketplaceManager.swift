@@ -55,4 +55,27 @@ class MarketplaceManager: ObservableObject {
         }
     }
     
+    func checkout(items: [Marketplace_ItemGrpc], orgId: String, currencyId: String, perform: @escaping ([Marketplace_ItemGrpc]?, OMError) -> ()) {
+        var request = Marketplace_CheckOutRequest()
+        request.items = items;
+        request.fromOrg = orgId;
+        request.currencyID = currencyId
+        _ = try? self.client.handleCheckout(request) {result, callResult in
+            switch(result?.checkoutStatus) {
+                case .success:
+                    perform(nil, OMError(message: "Success"))
+                case .sucessWithFewItemOutOfStock:
+                     perform(result?.unprocessedItem, OMError(message: "Success, the following items are out of stock"))
+                case .failItemOutOfStock:
+                    perform(result?.unprocessedItem, OMError(message: "Sorry, all items are out of stock"))
+                case .failPaymentCannotBeVerified, .failTransactionTimeOut:
+                    perform(nil, OMError(message: "Sorry, your payment can not be verfied or your request timed out please try again later"))
+                default:
+                    perform(nil, OMError(message: "Unknown error, probably COVID-19"))
+            }
+        }
+        
+        
+    }
+    
 }

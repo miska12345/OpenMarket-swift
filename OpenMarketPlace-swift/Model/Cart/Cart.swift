@@ -26,15 +26,13 @@ class Cart: Identifiable, ObservableObject, Equatable {
             let oldQuantity = items[index].orderQuantity
             items[index].orderQuantity = quantity
             updateSubtotal(price: item.price, quantity: quantity - oldQuantity)
-        } else {
-            print("fuck")
         }
     }
     
     func addItem(with item: Item) {
         if (self.items.contains(item)){            
             let existingItem : Item = self.items[self.items.firstIndex(of: item)!]
-            setItemQuantity(with: existingItem, q: existingItem.orderQuantity + item.orderQuantity)            
+            setItemQuantity(with: existingItem, q: existingItem.orderQuantity + item.orderQuantity)
         } else {
             print("Appending new items")
             self.items.append(item)

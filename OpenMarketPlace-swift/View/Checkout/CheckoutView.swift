@@ -12,7 +12,9 @@ struct CheckoutView: View {
     var cart: Cart
     let iconColor = Color.red
     let itemFontColor = Color(hex: 0x2c3e50)
-    
+    @State var sheetEnable: Bool = false
+    @State var outOfStock: [Item] = [Item]()
+    @State var checkoutMessage: String = ""
     var body: some View {
         VStack {
             createIcon()
@@ -20,8 +22,12 @@ struct CheckoutView: View {
             createTotalLabel()
             createPayButton()
         }
+        .sheet(isPresented: self.$sheetEnable) {
+            CheckOutSubView(unprocessed: self.$outOfStock, checkoutMesssge: self.$checkoutMessage, showSheet: $sheetEnable)
+        }
         .navigationBarTitle(Text("Checkout"), displayMode: .inline)
     }
+
     
     func createIcon() -> some View {
         VStack {
@@ -55,17 +61,44 @@ struct CheckoutView: View {
     }
     
     func createPayButton() -> some View {
+        
         CartButton(title: "PAY NOW", perform: {
-            manager.onCheckoutTapped(for: cart)
+            var checkoutItems = [Marketplace_ItemGrpc]()
+            for item in self.cart.items{
+                checkoutItems.append(convertToItemGrpc(item: item))
+            }
+            
+            manager.session.marketplaceManager?.checkout(items: checkoutItems, orgId: self.cart.shopName, currencyId: self.cart.id) {unprocessed, error in
+                self.checkoutMessage = (error.message)!
+                if (unprocessed != nil) {
+                    for index in 0...(unprocessed!.count - 1) {
+                        let itemgrpc: Marketplace_ItemGrpc = unprocessed![index]
+
+                        self.outOfStock.append(Item(id: itemgrpc.itemID, itemName: itemgrpc.itemName, price: itemgrpc.itemPrice, description: "", orderQuantity: Int(itemgrpc.itemCount), stock: 0, category: "", owner: itemgrpc.belongTo))
+                    }
+                }
+                self.sheetEnable = true
+            }
         }).padding()
+    }
+    
+    func convertToItemGrpc(item : Item) -> Marketplace_ItemGrpc {
+        var itemgrpc = Marketplace_ItemGrpc()
+        itemgrpc.itemID = item.id
+        itemgrpc.itemName = item.itemName
+        itemgrpc.itemPrice = item.price
+        itemgrpc.itemCount = Int32(item.orderQuantity)
+        itemgrpc.belongTo = item.owner
+        
+        return itemgrpc
     }
 }
 
-struct CheckoutView_Previews: PreviewProvider {
-    static var previews: some View {
-        CheckoutView(cart: previewCart)
-    }
-}
+//struct CheckoutView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CheckoutView(cart: previewCart)
+//    }
+//}
 
 let previewCart = Cart(id: "1", shopName: "AAA", items: [])
 

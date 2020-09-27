@@ -36,8 +36,10 @@ struct ItemDetailView: View {
                 Divider()
                 
                 Button(action: {
-                    self.item.orderQuantity = 1
-                    session.cartManager?.addItemToCart(newItem: item.copy())
+                    var newItem = item.copy()
+                    newItem.orderQuantity = 1
+                    print(newItem)
+                    session.cartManager?.addItemToCart(newItem: newItem)
                 }, label: {
                     Text("Add to Cart").font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/).foregroundColor(.black)
                 }).frame(width: 400, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
@@ -50,7 +52,7 @@ struct ItemDetailView: View {
                 ItemList(listName: "Similar Item", itemCollection: itemSwift, organization: org, session: session)
             }.padding(.top, 40)
             .onAppear{
-                if (!itemPopulated) {
+                if (!self.itemPopulated) {
                     self.session.marketplaceManager?.getSimilarItems(itemId: item.id, itemCategory: item.category, withCount: 5, perform: { (itemsGrpc, error) in
                         if (error == nil) {
                             for index in 0 ... (itemsGrpc!.count - 1){

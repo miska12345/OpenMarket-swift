@@ -22,7 +22,7 @@ struct DetailButton: View {
                 .border(Color.gray, width: 1)
                 .frame(height: 80)
                 .overlay(
-                    NavigationLink(destination: DetailView(cart: cart).environmentObject(manager), isActive: $enable) {
+                    NavigationLink(destination: DetailView(session: manager.session, cart: cart).environmentObject(manager), isActive: $enable) {
                         Image("iTunesArtwork").resizable().aspectRatio(1, contentMode: .fit)
                             .frame(width: 60, height: 60)
                     }.padding()

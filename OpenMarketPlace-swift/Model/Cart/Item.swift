@@ -29,6 +29,6 @@ struct Item: Identifiable, Hashable, Equatable {
     }
     
     static func == (lhs: Item, rhs: Item) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.id.elementsEqual(rhs.id)
     }
 }

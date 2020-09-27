@@ -9,13 +9,14 @@ import SwiftUI
 
 struct DetailView: View {
     @EnvironmentObject var manager: CartManager
+    @ObservedObject var session: SessionManager
     @ObservedObject var cart: Cart
     var body: some View {
         ScrollView {
             VStack {
-                DetailHeader(cart: cart)
+                DetailHeader(cart: cart, session: session)
                 ForEach(cart.items, id: \.self) { item in
-                    DetailItem(item: item, quantity: item.orderQuantity).environmentObject(cart).environmentObject(manager)
+                    DetailItem(item: item).environmentObject(cart).environmentObject(manager)
                     Divider().padding()
                 }
             }
@@ -32,6 +33,7 @@ struct DetailView: View {
 struct DetailHeader: View {
     @ObservedObject var cart: Cart
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @ObservedObject var session: SessionManager
     var body: some View {
         VStack() {
             Description(shopName: cart.shopName, itemCount: cart.items.count, subtotal: cart.subtotal).padding(.top, 10)
@@ -48,7 +50,10 @@ struct DetailHeader: View {
                     print("dismiss")
                     self.presentationMode.wrappedValue.dismiss()
                 }) {
-                    Image(systemName: "arrow.left")
+                    HStack{
+                        Image(systemName: "arrow.left")
+                        Text("Back")
+                    }
                 },
             trailing:
                 Button(action: {
@@ -63,8 +68,7 @@ struct DetailHeader: View {
 struct DetailItem: View {
     @EnvironmentObject var manager: CartManager
     @EnvironmentObject var cart: Cart
-    var item: Item
-    @State var quantity: Int
+    @State var item: Item
     
     var controlButtonBgColor = Color.white
     
@@ -97,7 +101,7 @@ struct DetailItem: View {
                         .foregroundColor(Color.black)
                         .lineLimit(2)
                     Text("$\(String(format: "%0.2f", item.price))").foregroundColor(.red)
-                    Text("Quantity: \(String(quantity))")
+                    Text("Quantity: \(String(item.orderQuantity))")
                     Text(item.description).foregroundColor(.gray).lineLimit(1)
                 }.padding()
             }.frame(maxWidth: .infinity)
@@ -107,8 +111,8 @@ struct DetailItem: View {
     
     func createControlView() -> some View {
         HStack(alignment: .top, spacing: 10) {
-            Stepper(value: $quantity, in: 1...10, onEditingChanged: { didChange in
-                cart.onQuantityDidChanged(for: item, q: quantity)
+            Stepper(value: $item.orderQuantity, in: 1...10, onEditingChanged: { didChange in
+                cart.onQuantityDidChanged(for: item, q: item.orderQuantity)
             }) {
             }.padding(.trailing, 15)
             createControlButton(title: "Delete", action: {

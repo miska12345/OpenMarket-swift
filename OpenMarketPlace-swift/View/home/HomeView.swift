@@ -54,7 +54,7 @@ struct HomeView: View {
 //}
 
 let staticData = [
-    Item(id: "85fdeece-97b3-4f9e-b5cc-2699f6303f21", itemName: "mac1", price: 3.313, description: "aaaa", orderQuantity: 0, stock: 1, category: "Electronic", owner: "ChaCha")
+    Item(id: "85fdeece-97b3-4f9e-b5cc-2699f6303f21", itemName: "mac1", price: 3.313, description: "aaaa", orderQuantity: 0, stock: 0, category: "Electronic", owner: "ChaCha")
 ]
 
 let org = [
