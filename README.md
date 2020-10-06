@@ -19,7 +19,7 @@ This repo contains:
 Authentication is based on tokens.
 When the user login with his/her account, a JWT token issued and signed by the server will be stored and used as the call credential for any future RPC calls to the same server.
 ### Shopping
-[TODO]
+Users can browse shops hosted by organization through recommendation only (for now). All items could be add to cart from the it's detail page and checkout with coins specified by the host of the shop. Under each item's page, users can also see recommended items that are most likely either from the same shop and/or similar from items that you bought.
 ### Event
 Both organizations and users may host new events. In order to create a new event, the host must define 1) the currency that will be awarded, 2) the reward amount, 3) the total reward amount, and 4) the expiration date of the event.
 The app will generate an QR code when a new event is created.
@@ -27,3 +27,10 @@ Partcipants of the event may scan the QR code with this app and receive the virt
 
 ### Wallet
 The wallet contains an up-to-date view of the user's current balances for owned currencies as well as a full transaction history.
+
+# Todo
+* Add search shop function by name
+* Modify UI to match the general theme
+* Add buttons for making a new organization and currency
+* Add recommendation algorithm by tags
+
