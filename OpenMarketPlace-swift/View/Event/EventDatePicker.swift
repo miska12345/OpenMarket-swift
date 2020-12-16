@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct EventDatePicker: View {
+    @Binding var date: Date
+    var hideKeyboard: Bool = true
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -17,21 +19,25 @@ struct EventDatePicker: View {
                     .padding(.trailing, 5)
                     .padding(.leading, 20)
 
-                DatePicker(selection: .constant(Date()), label: { Text("Expiration date") })
+                DatePicker(selection: $date, label: { Text("Expiration date") })
                     .labelsHidden()
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                 Spacer()
             }
         }
-
         .background(
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.init(#colorLiteral(red: 0.9568627451, green: 0.9647058824, blue: 0.9764705882, alpha: 1))))
+        .onTapGesture {
+            if hideKeyboard {
+                hideKeyboard()
+            }
+        }
     }
 }
 
-struct EventDatePicker_Previews: PreviewProvider {
-    static var previews: some View {
-        EventDatePicker()
-    }
-}
+//struct EventDatePicker_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EventDatePicker(date: .constant(Date()))
+//    }
+//}

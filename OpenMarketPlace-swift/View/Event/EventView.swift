@@ -21,44 +21,134 @@ struct EventView: View {
     @State var event: Event_Event? = nil
     @State var code: String? = nil
     
+    @State var firstAppear: Bool = true
+    
+    @ObservedObject var events: EventsList = EventsList()
+    
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack {
-                    CartButton(title: "Scan QR Code", backgroundColor: AppColors.generalBackgroundButtonColor, fontColor: AppColors.generalButtonForegroundColor,
-                               perform: {
-                        self.viewType = .QR
-                        self.enable = true
-                    })
-                        .padding()
-                    
-                    CartButton(title: "Create New Event", backgroundColor: AppColors.generalBackgroundButtonColor, fontColor: AppColors.generalButtonForegroundColor,
-                               perform: {
-                        self.viewType = .NEWEVENT
-                        self.enable = true
-                    })
-                        .padding()
-
-                }.sheet(isPresented: $enable) {
-                    SheetView(session: session, enable: $enable, type: $viewType, event: $event, showAlert: $showAlert, alertMessage: $alertMessage)
-                }
-                .alert(isPresented: $showAlert) {
-                    Alert(title: Text("Error!"), message: Text(self.alertMessage!), dismissButton: .destructive(Text("OK")))
-                }
+//                VStack(alignment: .leading) {
+//                    HStack() {
+//                        Text("Events Created By You").bold().font(.headline)
+//                        Spacer()
+//                        eventRefreshButton()
+//                    }
+//                    ForEach(0..<events.items.count, id: \.self) { i in
+//                        EventViewCell(event: events.items[i], eventIndex: i).environmentObject(session)
+//                            .environmentObject(events)
+//                    }
+//                }.padding()
+                VStack(alignment: .leading) {
+                    HStack() {
+                        Text("Events Created By You").bold().font(.headline)
+                        Spacer()
+                        eventRefreshButton()
+                    }
+                    buildEventView
+                }.padding()
             .navigationTitle("Event")
             .navigationBarTitleDisplayMode(.inline)
+                .navigationBarItems(leading: Button(action: {
+                    self.viewType = .QR
+                    self.enable = true
+                }) {
+                    Image(systemName: "qrcode.viewfinder").foregroundColor(.black)
+                }, trailing: Button(action: {
+                    self.viewType = .NEWEVENT
+                    self.enable = true
+                }) {
+                    Image(systemName: "plus.circle").foregroundColor(.black)
+                })
+                    .sheet(isPresented: $enable) {
+                    SheetView(session: session, enable: $enable, type: $viewType, event: $event, showAlert: $showAlert, alertMessage: $alertMessage)
+                        
+                    }
+                    .alert(isPresented: $showAlert) {
+                        Alert(title: Text("Error!"), message: Text(self.alertMessage!), dismissButton: .destructive(Text("OK")))
+                }
+            }
+            .background(Color.init(hex: 0xf7f8fa))
+        }.onAppear(perform: {
+            if firstAppear {
+                refreshMyEvents()
+                firstAppear = false
+            }
+        })
+    }
+    
+    @ViewBuilder
+    var buildEventView: some View {
+        if events.items.count == 0 {
+            emptyEventView
+        } else {
+            regularEventView
+        }
+    }
+    
+    var emptyEventView: some View {
+        VStack {
+            HStack {
+                Image(systemName: "paperplane.fill")
+                Text("You have not created any event yet")
+            }
+            CartButton(title: "Create Event", perform: {
+            }).padding()
+        }
+        
+    }
+    
+    var regularEventView: some View {
+        ForEach(0..<events.items.count, id: \.self) { i in
+            EventViewCell(event: events.items[i], eventIndex: i).environmentObject(session)
+                .environmentObject(events)
+        }
+    }
+    
+    func refreshMyEvents() {
+        session.eventManager?.getOwnedEvent(perform: { (evs, error) in
+            if error != nil {
+                print(error!)
+            } else {
+                self.events.update(events: evs!)
+                print(evs!)
+            }
+        })
+    }
+    
+    func eventRefreshButton() -> some View {
+        Button(action: {
+            refreshMyEvents()
+        }) {
+            Image(systemName: "arrow.clockwise")
         }
     }
 }
+
+class EventsList: ObservableObject {
+    @Published var items = [Event_Event]()
+    
+    func update(events: [Event_Event]) {
+        DispatchQueue.main.async {
+            self.items = events.sorted(by: { (e1, e2) -> Bool in
+                return e1.expiresAt < e2.expiresAt
+            })
+        }
+    }
+    
+    func remove(i: Int) {
+        DispatchQueue.main.async {
+            self.items.remove(at: i)
+        }
+    }
 }
 
 
-//
-//struct SwiftUIView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EventView(session: SessionManager())
-//    }
-//}
+struct SwiftUIView_Previews: PreviewProvider {
+    static var previews: some View {
+        EventView(session: SessionManager())
+    }
+}
 
 struct SheetView: View {
     @ObservedObject var session: SessionManager
@@ -97,7 +187,7 @@ struct SheetView: View {
                 EventDetailView(presentedBinding: $enable, event: realEvent)
             }
         case .NEWEVENT:
-            NewEventView(enable: $enable)
+            NewEventView(enable: $enable, session: session)
         }
     }
 }

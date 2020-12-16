@@ -49,6 +49,12 @@ fileprivate final class Event_StampEventgetEventCallBase: ClientCallUnaryBase<Ev
   override class var method: String { return "/event.StampEvent/getEvent" }
 }
 
+internal protocol Event_StampEventgetOwnedEventCall: ClientCallUnary {}
+
+fileprivate final class Event_StampEventgetOwnedEventCallBase: ClientCallUnaryBase<Event_GetOwnedEventRequest, Event_GetOwnedEventResult>, Event_StampEventgetOwnedEventCall {
+  override class var method: String { return "/event.StampEvent/getOwnedEvent" }
+}
+
 
 /// Instantiate Event_StampEventServiceClient, then call methods of this protocol to make API calls.
 internal protocol Event_StampEventService: ServiceClient {
@@ -75,6 +81,12 @@ internal protocol Event_StampEventService: ServiceClient {
   /// Asynchronous. Unary.
   @discardableResult
   func getEvent(_ request: Event_GetEventRequest, metadata customMetadata: Metadata, completion: @escaping (Event_GetEventResult?, CallResult) -> Void) throws -> Event_StampEventgetEventCall
+
+  /// Synchronous. Unary.
+  func getOwnedEvent(_ request: Event_GetOwnedEventRequest, metadata customMetadata: Metadata) throws -> Event_GetOwnedEventResult
+  /// Asynchronous. Unary.
+  @discardableResult
+  func getOwnedEvent(_ request: Event_GetOwnedEventRequest, metadata customMetadata: Metadata, completion: @escaping (Event_GetOwnedEventResult?, CallResult) -> Void) throws -> Event_StampEventgetOwnedEventCall
 
 }
 
@@ -117,6 +129,16 @@ internal extension Event_StampEventService {
   @discardableResult
   func getEvent(_ request: Event_GetEventRequest, completion: @escaping (Event_GetEventResult?, CallResult) -> Void) throws -> Event_StampEventgetEventCall {
     return try self.getEvent(request, metadata: self.metadata, completion: completion)
+  }
+
+  /// Synchronous. Unary.
+  func getOwnedEvent(_ request: Event_GetOwnedEventRequest) throws -> Event_GetOwnedEventResult {
+    return try self.getOwnedEvent(request, metadata: self.metadata)
+  }
+  /// Asynchronous. Unary.
+  @discardableResult
+  func getOwnedEvent(_ request: Event_GetOwnedEventRequest, completion: @escaping (Event_GetOwnedEventResult?, CallResult) -> Void) throws -> Event_StampEventgetOwnedEventCall {
+    return try self.getOwnedEvent(request, metadata: self.metadata, completion: completion)
   }
 
 }
@@ -167,6 +189,18 @@ internal final class Event_StampEventServiceClient: ServiceClientBase, Event_Sta
   @discardableResult
   internal func getEvent(_ request: Event_GetEventRequest, metadata customMetadata: Metadata, completion: @escaping (Event_GetEventResult?, CallResult) -> Void) throws -> Event_StampEventgetEventCall {
     return try Event_StampEventgetEventCallBase(channel)
+      .start(request: request, metadata: customMetadata, completion: completion)
+  }
+
+  /// Synchronous. Unary.
+  internal func getOwnedEvent(_ request: Event_GetOwnedEventRequest, metadata customMetadata: Metadata) throws -> Event_GetOwnedEventResult {
+    return try Event_StampEventgetOwnedEventCallBase(channel)
+      .run(request: request, metadata: customMetadata)
+  }
+  /// Asynchronous. Unary.
+  @discardableResult
+  internal func getOwnedEvent(_ request: Event_GetOwnedEventRequest, metadata customMetadata: Metadata, completion: @escaping (Event_GetOwnedEventResult?, CallResult) -> Void) throws -> Event_StampEventgetOwnedEventCall {
+    return try Event_StampEventgetOwnedEventCallBase(channel)
       .start(request: request, metadata: customMetadata, completion: completion)
   }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EventTextField: View {
-    @State var string: String = ""
+    @Binding var string: String
     var iconName: String
     var placeholder: String
     var isNumeric: Bool = false
@@ -34,8 +34,8 @@ struct EventTextField: View {
     }
 }
 
-struct EventTextField_Previews: PreviewProvider {
-    static var previews: some View {
-        EventTextField(iconName: "cart", placeholder: "", isNumeric: true)
-    }
-}
+//struct EventTextField_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EventTextField(iconName: "cart", placeholder: "", isNumeric: true)
+//    }
+//}

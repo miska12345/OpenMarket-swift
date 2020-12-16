@@ -19,10 +19,10 @@ struct HomeView: View {
                     ImageSlideView(index: $index.animation(), maxIndex: org.count - 1,
                                    recommened: self.recommend, session: session)
                     .aspectRatio(4/3, contentMode: .fit)
-                        
+
                     .background(Color(Color.RGBColorSpace.sRGB, red: 251/255.0, green: 243/255.0, blue: 243/255.0, opacity: 0.94))
                     .clipShape(RoundedRectangle(cornerRadius: 30))
-                    
+
                     Text("Trending item").font(.title)
                         .padding(.leading, -200)
                     Divider()

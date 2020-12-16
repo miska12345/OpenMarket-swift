@@ -42,19 +42,19 @@ struct DetailHeader: View {
             ContinueToShopButton(shopName: cart.shopName).padding(.top, 3)
             Divider().padding(.top, 3)
         }
-        .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(false)
         .navigationBarTitle(Text("Detail"), displayMode: .inline)
         .navigationBarItems(
-            leading:
-                Button(action: {
-                    print("dismiss")
-                    self.presentationMode.wrappedValue.dismiss()
-                }) {
-                    HStack{
-                        Image(systemName: "arrow.left")
-                        Text("Back")
-                    }
-                },
+//            leading:
+//                Button(action: {
+//                    print("dismiss")
+//                    self.presentationMode.wrappedValue.dismiss()
+//                }) {
+//                    HStack{
+//                        Image(systemName: "arrow.left")
+//                        Text("Back")
+//                    }
+//                },
             trailing:
                 Button(action: {
                     print("search")

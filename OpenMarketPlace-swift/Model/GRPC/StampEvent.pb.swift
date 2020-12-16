@@ -120,6 +120,8 @@ struct Event_CreateEventRequest {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  var name: String = String()
+
   var currency: String = String()
 
   var expiresAt: String = String()
@@ -257,6 +259,36 @@ struct Event_GetEventResult {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
+struct Event_GetOwnedEventRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var exclusiveStartKey: String = String()
+
+  var count: UInt32 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Event_GetOwnedEventResult {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var error: Event_Error = .nothing
+
+  var lastEvaluatedKey: String = String()
+
+  var events: [Event_Event] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 struct Event_Event {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -265,6 +297,8 @@ struct Event_Event {
   var eventID: String = String()
 
   var owner: String = String()
+
+  var name: String = String()
 
   var type: Event_OwnerType = .user
 
@@ -314,41 +348,47 @@ extension Event_OwnerType: SwiftProtobuf._ProtoNameProviding {
 extension Event_CreateEventRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".CreateEventRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "currency"),
-    2: .same(proto: "expiresAt"),
-    3: .same(proto: "rewardAmount"),
-    4: .same(proto: "totalAmount"),
+    1: .same(proto: "name"),
+    2: .same(proto: "currency"),
+    3: .same(proto: "expiresAt"),
+    4: .same(proto: "rewardAmount"),
+    5: .same(proto: "totalAmount"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.currency)
-      case 2: try decoder.decodeSingularStringField(value: &self.expiresAt)
-      case 3: try decoder.decodeSingularDoubleField(value: &self.rewardAmount)
-      case 4: try decoder.decodeSingularDoubleField(value: &self.totalAmount)
+      case 1: try decoder.decodeSingularStringField(value: &self.name)
+      case 2: try decoder.decodeSingularStringField(value: &self.currency)
+      case 3: try decoder.decodeSingularStringField(value: &self.expiresAt)
+      case 4: try decoder.decodeSingularDoubleField(value: &self.rewardAmount)
+      case 5: try decoder.decodeSingularDoubleField(value: &self.totalAmount)
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.name.isEmpty {
+      try visitor.visitSingularStringField(value: self.name, fieldNumber: 1)
+    }
     if !self.currency.isEmpty {
-      try visitor.visitSingularStringField(value: self.currency, fieldNumber: 1)
+      try visitor.visitSingularStringField(value: self.currency, fieldNumber: 2)
     }
     if !self.expiresAt.isEmpty {
-      try visitor.visitSingularStringField(value: self.expiresAt, fieldNumber: 2)
+      try visitor.visitSingularStringField(value: self.expiresAt, fieldNumber: 3)
     }
     if self.rewardAmount != 0 {
-      try visitor.visitSingularDoubleField(value: self.rewardAmount, fieldNumber: 3)
+      try visitor.visitSingularDoubleField(value: self.rewardAmount, fieldNumber: 4)
     }
     if self.totalAmount != 0 {
-      try visitor.visitSingularDoubleField(value: self.totalAmount, fieldNumber: 4)
+      try visitor.visitSingularDoubleField(value: self.totalAmount, fieldNumber: 5)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Event_CreateEventRequest, rhs: Event_CreateEventRequest) -> Bool {
+    if lhs.name != rhs.name {return false}
     if lhs.currency != rhs.currency {return false}
     if lhs.expiresAt != rhs.expiresAt {return false}
     if lhs.rewardAmount != rhs.rewardAmount {return false}
@@ -663,20 +703,97 @@ extension Event_GetEventResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
+extension Event_GetOwnedEventRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetOwnedEventRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "exclusiveStartKey"),
+    2: .same(proto: "count"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.exclusiveStartKey)
+      case 2: try decoder.decodeSingularUInt32Field(value: &self.count)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.exclusiveStartKey.isEmpty {
+      try visitor.visitSingularStringField(value: self.exclusiveStartKey, fieldNumber: 1)
+    }
+    if self.count != 0 {
+      try visitor.visitSingularUInt32Field(value: self.count, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Event_GetOwnedEventRequest, rhs: Event_GetOwnedEventRequest) -> Bool {
+    if lhs.exclusiveStartKey != rhs.exclusiveStartKey {return false}
+    if lhs.count != rhs.count {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Event_GetOwnedEventResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetOwnedEventResult"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "error"),
+    2: .same(proto: "lastEvaluatedKey"),
+    3: .same(proto: "events"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularEnumField(value: &self.error)
+      case 2: try decoder.decodeSingularStringField(value: &self.lastEvaluatedKey)
+      case 3: try decoder.decodeRepeatedMessageField(value: &self.events)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.error != .nothing {
+      try visitor.visitSingularEnumField(value: self.error, fieldNumber: 1)
+    }
+    if !self.lastEvaluatedKey.isEmpty {
+      try visitor.visitSingularStringField(value: self.lastEvaluatedKey, fieldNumber: 2)
+    }
+    if !self.events.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.events, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Event_GetOwnedEventResult, rhs: Event_GetOwnedEventResult) -> Bool {
+    if lhs.error != rhs.error {return false}
+    if lhs.lastEvaluatedKey != rhs.lastEvaluatedKey {return false}
+    if lhs.events != rhs.events {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Event_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".Event"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "eventId"),
     2: .same(proto: "owner"),
-    3: .same(proto: "type"),
-    4: .same(proto: "currency"),
-    5: .same(proto: "expiresAt"),
-    6: .same(proto: "createdAt"),
-    7: .same(proto: "rewardAmount"),
-    8: .same(proto: "totalAmount"),
-    9: .same(proto: "remainingAmount"),
-    10: .same(proto: "successMessage"),
-    11: .same(proto: "errorMessage"),
+    3: .same(proto: "name"),
+    4: .same(proto: "type"),
+    5: .same(proto: "currency"),
+    6: .same(proto: "expiresAt"),
+    7: .same(proto: "createdAt"),
+    8: .same(proto: "rewardAmount"),
+    9: .same(proto: "totalAmount"),
+    10: .same(proto: "remainingAmount"),
+    11: .same(proto: "successMessage"),
+    12: .same(proto: "errorMessage"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -684,15 +801,16 @@ extension Event_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
       switch fieldNumber {
       case 1: try decoder.decodeSingularStringField(value: &self.eventID)
       case 2: try decoder.decodeSingularStringField(value: &self.owner)
-      case 3: try decoder.decodeSingularEnumField(value: &self.type)
-      case 4: try decoder.decodeSingularStringField(value: &self.currency)
-      case 5: try decoder.decodeSingularStringField(value: &self.expiresAt)
-      case 6: try decoder.decodeSingularStringField(value: &self.createdAt)
-      case 7: try decoder.decodeSingularDoubleField(value: &self.rewardAmount)
-      case 8: try decoder.decodeSingularDoubleField(value: &self.totalAmount)
-      case 9: try decoder.decodeSingularDoubleField(value: &self.remainingAmount)
-      case 10: try decoder.decodeSingularStringField(value: &self.successMessage)
-      case 11: try decoder.decodeSingularStringField(value: &self.errorMessage)
+      case 3: try decoder.decodeSingularStringField(value: &self.name)
+      case 4: try decoder.decodeSingularEnumField(value: &self.type)
+      case 5: try decoder.decodeSingularStringField(value: &self.currency)
+      case 6: try decoder.decodeSingularStringField(value: &self.expiresAt)
+      case 7: try decoder.decodeSingularStringField(value: &self.createdAt)
+      case 8: try decoder.decodeSingularDoubleField(value: &self.rewardAmount)
+      case 9: try decoder.decodeSingularDoubleField(value: &self.totalAmount)
+      case 10: try decoder.decodeSingularDoubleField(value: &self.remainingAmount)
+      case 11: try decoder.decodeSingularStringField(value: &self.successMessage)
+      case 12: try decoder.decodeSingularStringField(value: &self.errorMessage)
       default: break
       }
     }
@@ -705,32 +823,35 @@ extension Event_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
     if !self.owner.isEmpty {
       try visitor.visitSingularStringField(value: self.owner, fieldNumber: 2)
     }
+    if !self.name.isEmpty {
+      try visitor.visitSingularStringField(value: self.name, fieldNumber: 3)
+    }
     if self.type != .user {
-      try visitor.visitSingularEnumField(value: self.type, fieldNumber: 3)
+      try visitor.visitSingularEnumField(value: self.type, fieldNumber: 4)
     }
     if !self.currency.isEmpty {
-      try visitor.visitSingularStringField(value: self.currency, fieldNumber: 4)
+      try visitor.visitSingularStringField(value: self.currency, fieldNumber: 5)
     }
     if !self.expiresAt.isEmpty {
-      try visitor.visitSingularStringField(value: self.expiresAt, fieldNumber: 5)
+      try visitor.visitSingularStringField(value: self.expiresAt, fieldNumber: 6)
     }
     if !self.createdAt.isEmpty {
-      try visitor.visitSingularStringField(value: self.createdAt, fieldNumber: 6)
+      try visitor.visitSingularStringField(value: self.createdAt, fieldNumber: 7)
     }
     if self.rewardAmount != 0 {
-      try visitor.visitSingularDoubleField(value: self.rewardAmount, fieldNumber: 7)
+      try visitor.visitSingularDoubleField(value: self.rewardAmount, fieldNumber: 8)
     }
     if self.totalAmount != 0 {
-      try visitor.visitSingularDoubleField(value: self.totalAmount, fieldNumber: 8)
+      try visitor.visitSingularDoubleField(value: self.totalAmount, fieldNumber: 9)
     }
     if self.remainingAmount != 0 {
-      try visitor.visitSingularDoubleField(value: self.remainingAmount, fieldNumber: 9)
+      try visitor.visitSingularDoubleField(value: self.remainingAmount, fieldNumber: 10)
     }
     if !self.successMessage.isEmpty {
-      try visitor.visitSingularStringField(value: self.successMessage, fieldNumber: 10)
+      try visitor.visitSingularStringField(value: self.successMessage, fieldNumber: 11)
     }
     if !self.errorMessage.isEmpty {
-      try visitor.visitSingularStringField(value: self.errorMessage, fieldNumber: 11)
+      try visitor.visitSingularStringField(value: self.errorMessage, fieldNumber: 12)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -738,6 +859,7 @@ extension Event_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
   static func ==(lhs: Event_Event, rhs: Event_Event) -> Bool {
     if lhs.eventID != rhs.eventID {return false}
     if lhs.owner != rhs.owner {return false}
+    if lhs.name != rhs.name {return false}
     if lhs.type != rhs.type {return false}
     if lhs.currency != rhs.currency {return false}
     if lhs.expiresAt != rhs.expiresAt {return false}

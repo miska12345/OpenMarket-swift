@@ -9,6 +9,19 @@ import SwiftUI
 
 struct NewEventView: View {
     @Binding var enable: Bool
+    @ObservedObject var session: SessionManager
+    @State var eventName: String = ""
+    @State var rewardAmount: String = ""
+    @State var totalAmount: String = ""
+    @State var endDate: Date = Date()
+    
+    @State var showAlert: Bool = false
+    @State var alertMessage: String?
+    @State var disableOnClose: Bool = false
+    
+    @ObservedObject var currencies: DictModel = DictModel()
+    @State var currentCoinSelected = ""
+    
     var body: some View {
         VStack {
             HStack {
@@ -32,25 +45,59 @@ struct NewEventView: View {
                 }
             }
             Divider()
-            Image("asset1").resizable().aspectRatio(contentMode: .fit)
-            EventTextField(iconName: "tag.circle.fill", placeholder: "Please enter your event name")
-            EventDropDownPicker()
-            EventTextField(iconName: "dollarsign.circle.fill", placeholder: "Please enter reward amount", isNumeric: true)
-            EventTextField(iconName: "dollarsign.circle.fill", placeholder: "Please enter total amount", isNumeric: true)
-            EventDatePicker()
-            CartButton(title: "Create Event", backgroundColor: AppColors.generalBackgroundButtonColor, fontColor: AppColors.generalButtonForegroundColor,
-                       perform: {
-                        print("create")
+            ScrollView {
+                Image("asset1").resizable().aspectRatio(contentMode: .fill)
+                EventTextField(string: $eventName, iconName: "flag.fill", placeholder: "Please enter event name", isNumeric: false)
+                EventDropDownPicker(currentCoinSelected: $currentCoinSelected, currenciesDict: currencies)
+                EventTextField(string: $rewardAmount, iconName: "dollarsign.circle.fill", placeholder: "Please enter reward amount", isNumeric: true)
+                EventTextField(string: $totalAmount, iconName: "dollarsign.circle.fill", placeholder: "Please enter total amount", isNumeric: true)
+                EventDatePicker(date: $endDate, hideKeyboard: true)
+                CartButton(title: "Create Event", backgroundColor: AppColors.generalBackgroundButtonColor, fontColor: AppColors.generalButtonForegroundColor,
+                                       perform: {
+                                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                        session.eventManager?.create(name: eventName, currency: currentCoinSelected, rewardAmount: Double(rewardAmount) ?? 0.0, totalAmount: Double(totalAmount) ?? 0.0, endDate: endDate, perform: { id, error in
+                                            if error != nil {
+                                                alertMessage = error!.message
+                                                disableOnClose = false
+                                            } else {
+                                                disableOnClose = true
+                                                UIPasteboard.general.string = id
+                                                alertMessage = "You have successfully created an event! Event ID has been copied to your clipboard. \(id!)"
+                                            }
+                                            showAlert = true
+                                        })
+                            })
+                                .padding()
+            }
+            
+        }
+        .padding()
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Result"), message: Text(self.alertMessage!), dismissButton: .destructive(Text("OK")) {
+                if disableOnClose {
+                    enable = false
+                }
             })
-                .padding()
-            Spacer()
-        }.padding()
+        }.onAppear(perform: {
+            refresh()
+        })
+    }
+    
+    func refresh() {
+        self.currencies.update(sm: session)
     }
 }
 
-//struct NewEventView_Previews: PreviewProvider {
-//    @State var enable: Bool = false
-//    static var previews: some View {
-//        NewEventView(enable: $enable)
-//    }
-//}
+struct NewEventView_Previews: PreviewProvider {
+    static var previews: some View {
+        MyView()
+    }
+}
+
+struct MyView: View {
+    @State var enable: Bool = true
+    @State var session: SessionManager = SessionManager()
+    var body: some View {
+        NewEventView(enable: $enable, session: session)
+    }
+}

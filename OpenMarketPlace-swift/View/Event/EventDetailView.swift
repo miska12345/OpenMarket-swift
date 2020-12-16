@@ -32,7 +32,7 @@ struct EventDetailView: View {
                     .padding(.vertical)
                     .padding(.horizontal, 30)
                     .multilineTextAlignment(.center)
-            }
+            } 
             
             Spacer()
             
