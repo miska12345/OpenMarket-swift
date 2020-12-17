@@ -10,13 +10,15 @@ service StampEvent {
   rpc deleteEvent (DeleteEventRequest) returns (DeleteEventResult) {}
   rpc redeem (RedeemRequest) returns (RedeemResult) {}
   rpc getEvent (GetEventRequest) returns (GetEventResult) {}
+  rpc getOwnedEvent (GetOwnedEventRequest) returns (GetOwnedEventResult) {}
 }
 
 message CreateEventRequest {
-  string currency = 1;
-  string expiresAt = 2;
-  double rewardAmount = 3;
-  double totalAmount = 4;
+  string name = 1;
+  string currency = 2;
+  string expiresAt = 3;
+  double rewardAmount = 4;
+  double totalAmount = 5;
 }
 
 message CreateEventResult {
@@ -52,18 +54,30 @@ message GetEventResult {
   Event event = 2;
 }
 
+message GetOwnedEventRequest {
+  string exclusiveStartKey = 1;
+  uint32 count = 2;
+}
+
+message GetOwnedEventResult {
+  Error error = 1;
+  string lastEvaluatedKey = 2;
+  repeated Event events = 3;
+}
+
 message Event {
   string eventId = 1;
   string owner = 2;
-  OwnerType type = 3;
-  string currency = 4;
-  string expiresAt = 5;
-  string createdAt = 6;
-  double rewardAmount = 7;
-  double totalAmount = 8;
-  double remainingAmount = 9;
-  string successMessage = 10;
-  string errorMessage = 11;
+  string name = 3;
+  OwnerType type = 4;
+  string currency = 5;
+  string expiresAt = 6;
+  string createdAt = 7;
+  double rewardAmount = 8;
+  double totalAmount = 9;
+  double remainingAmount = 10;
+  string successMessage = 11;
+  string errorMessage = 12;
 }
 
 enum Error {

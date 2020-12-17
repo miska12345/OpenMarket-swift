@@ -42,19 +42,19 @@ struct DetailHeader: View {
             ContinueToShopButton(shopName: cart.shopName).padding(.top, 3)
             Divider().padding(.top, 3)
         }
-        .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(false)
         .navigationBarTitle(Text("Detail"), displayMode: .inline)
         .navigationBarItems(
-            leading:
-                Button(action: {
-                    print("dismiss")
-                    self.presentationMode.wrappedValue.dismiss()
-                }) {
-                    HStack{
-                        Image(systemName: "arrow.left")
-                        Text("Back")
-                    }
-                },
+//            leading:
+//                Button(action: {
+//                    print("dismiss")
+//                    self.presentationMode.wrappedValue.dismiss()
+//                }) {
+//                    HStack{
+//                        Image(systemName: "arrow.left")
+//                        Text("Back")
+//                    }
+//                },
             trailing:
                 Button(action: {
                     print("search")
@@ -80,7 +80,7 @@ struct DetailItem: View {
     }
     
     func createControlButton(title: String, action: @escaping ()->()) -> some View {
-        CartButton(title: title, backgroundColor: self.controlButtonBgColor, height: 40, perform: action)
+        GeneralButton(title: title, backgroundColor: self.controlButtonBgColor, height: 40, perform: action)
     }
     
     func createContentView() -> some View {

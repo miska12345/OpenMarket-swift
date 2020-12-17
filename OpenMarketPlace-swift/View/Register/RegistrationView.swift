@@ -58,19 +58,19 @@ struct RegistrationView: View {
                 Spacer()
                 
                 VStack {
-                   TextFieldView(string: $username,
+                   GeneralTextField(string: $username,
                                  passwordMode: false,
                                  placeholder: "Enter your username",
                                  iconName: "person.crop.circle.fill")
                         .padding(.vertical, 8)
                     
-                    TextFieldView(string: $password,
+                    GeneralTextField(string: $password,
                                   passwordMode: true,
                                   placeholder: "Enter your password",
                                   iconName: "lock.fill")
                         .padding(.vertical, 8)
                     
-                    TextFieldView(string: $confirmPassword,
+                    GeneralTextField(string: $confirmPassword,
                                   passwordMode: true,
                                   placeholder: "Confirm your password",
                                   iconName: "repeat")

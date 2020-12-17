@@ -24,7 +24,7 @@ struct TabBarView: View {
             ProfileView(usernmae: "apple")
                 .tabItem {
                     Image(systemName: "3.square.fill")
-                    Text("Profile}")
+                    Text("Profile")
                 }
             EventView(session: session)
                 .tabItem {
@@ -34,7 +34,7 @@ struct TabBarView: View {
             WalletView(session: session)
                 .tabItem {
                     Image(systemName: "5.square.fill")
-                    Text("Event")
+                    Text("Wallet")
                 }
         }
     }

@@ -52,7 +52,7 @@ struct CheckOutSubView: View {
             .shadow(radius: 10)
             .padding(.all, 20)
             
-            CartButton(title: "OK") {
+            GeneralButton(title: "OK") {
                 self.showSheet = false
             }.padding()
             .padding([.horizontal], 5)

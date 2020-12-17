@@ -20,7 +20,7 @@ struct CheckoutButton: View {
         .frame(width: 0, height: 0)
         .hidden()
         .buttonStyle(PlainButtonStyle())
-        CartButton(title: "Checkout \(shopName) Cart", perform: {
+        GeneralButton(title: "Checkout \(shopName) Cart", perform: {
             self.enable = true
         })
     }

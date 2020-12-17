@@ -32,7 +32,7 @@ struct CartView: View {
                 Image(systemName: "paperplane.fill")
                 Text("You have not added anything yet")
             }
-            CartButton(title: "Go Shop Shop", perform: {
+            GeneralButton(title: "Go Shop Shop", perform: {
                 print("shop")
             }).padding()
         }

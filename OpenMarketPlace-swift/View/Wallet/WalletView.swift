@@ -44,7 +44,7 @@ struct WalletView: View {
                     }
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 16) {
-                            ForEach(currencies.dict.sorted(by: >), id: \.key) { key, value in
+                            ForEach(currencies.dict.sorted(by: <), id: \.key) { key, value in
                                 CoinView(coinName: key, balance: value, colors: [Color.random, Color.random])
                             }
                         }
