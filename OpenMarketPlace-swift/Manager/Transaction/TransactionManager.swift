@@ -39,4 +39,21 @@ class TransactionManager {
             perform(result?.items, nil)
         }
     }
+    
+    func getAllTransactions(recentOnly: Bool = true, perform: @escaping ([Transaction_QueryResultItem]?, OMError?)->()) {
+        // Optimize for better performance
+        var transactions = [Transaction_QueryResultItem]()
+        var req = Transaction_QueryRequest()
+        req.type = Transaction_QueryRequest.QueryType.payerID
+        _ = try? client.processQuery(req) { result, callResult in
+            transactions += result?.items ?? []
+        }
+        req.type = Transaction_QueryRequest.QueryType.recipientID
+        _ = try? client.processQuery(req) { result, callResult in
+            transactions += result?.items ?? []
+        }
+        perform (transactions.sorted(by: { (item1, item2) -> Bool in
+            return item1.createdAt < item2.createdAt
+        }), nil)
+    }
 }

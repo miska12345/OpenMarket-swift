@@ -17,7 +17,6 @@ struct NewEventView: View {
     
     @State var showAlert: Bool = false
     @State var alertMessage: String?
-    @State var disableOnClose: Bool = false
     
     @ObservedObject var currencies: DictModel = DictModel()
     @State var currentCoinSelected = ""
@@ -38,11 +37,6 @@ struct NewEventView: View {
                 createNewEventView().navigationBarTitle(Text(""), displayMode: .inline).navigationBarHidden(true).navigationBarBackButtonHidden(true)
             }
         }
-//        .sheet(isPresented: $showGeneratedQR, onDismiss: {
-//            self.enable = false
-//        }, content: {
-//            GeneratedQRView(enable: $showGeneratedQR, title: $eventName, coinName: $currentCoinSelected, rewardAMount: $rewardAmount, expirationDate: $endDate, qrString: $newEventId)
-//        })
     }
     
     func refresh() {
@@ -85,12 +79,10 @@ struct NewEventView: View {
                                         session.eventManager?.create(name: eventName, currency: currentCoinSelected, rewardAmount: Double(rewardAmount) ?? 0.0, totalAmount: Double(totalAmount) ?? 0.0, endDate: endDate, perform: { id, error in
                                             if error != nil {
                                                 alertMessage = error!.message
-                                                disableOnClose = false
                                                 showAlert = true
                                             } else {
                                                 self.newEventId = id!
                                                 self.showGeneratedQR = true
-                                                print("OK")
                                             }
                                         })
                             })
@@ -101,9 +93,6 @@ struct NewEventView: View {
         .padding()
         .alert(isPresented: $showAlert) {
             Alert(title: Text("Result"), message: Text(self.alertMessage!), dismissButton: .destructive(Text("OK")) {
-                if disableOnClose {
-                    enable = false
-                }
             })
         }.onAppear(perform: {
             refresh()
