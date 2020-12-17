@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BottomSheet_SwiftUI
 
 struct NewWalletView: View {
     @ObservedObject var session: SessionManager
@@ -14,23 +15,37 @@ struct NewWalletView: View {
     @State var transactions: [Transaction_QueryResultItem] = [Transaction_QueryResultItem]()
     @State private var firstRefresh: Bool = true
     @State var selection: Int = 0
+    @State var bottomSheetOpened: Bool = false
     let conic = LinearGradient(gradient: Gradient(colors: [Color.white]), startPoint: .top, endPoint: .bottom)
     var body: some View {
         NavigationView {
-            ZStack {
-                conic.ignoresSafeArea()
-                VStack {
-                    WalletToolBar()
-                    SegmentControl(selection: $selection, items: [SegmentItem(selectionIndex: 0, title: "Currency", colorOnSelect: AppColors.primaryColor, colorOnUnselect: Color.gray, colorForUnderline: AppColors.primaryColor),
-                                                                  SegmentItem(selectionIndex: 1, title: "History", colorOnSelect: AppColors.primaryColor, colorOnUnselect: Color.gray)
-                                        
-                    ])
-                    ScrollView {
-                        buildTabView
+            GeometryReader { geometry in
+                ZStack {
+                    conic.ignoresSafeArea()
+                    VStack {
+                        WalletToolBar()
+                        BottomSheet(
+                            isOpen: $bottomSheetOpened,
+                            config: BottomSheetConfig(minHeightRatio: 0.75, maxHeight: geometry.size.height, indicatorSize: CGSize(width: 30, height: 3), indicatorColor: Color(hex: 0xd6d6d6))
+                        ) {
+                            ZStack {
+                                Color.white
+                                VStack {
+                                    SegmentControl(selection: $selection, items: [SegmentItem(selectionIndex: 0, title: "Currency", colorOnSelect: AppColors.primaryColor, colorOnUnselect: Color.gray, colorForUnderline: AppColors.primaryColor),
+                                                                                  SegmentItem(selectionIndex: 1, title: "History", colorOnSelect: AppColors.primaryColor, colorOnUnselect: Color.gray)
+                                                        
+                                    ])
+                                    ScrollView {
+                                        buildTabView
+                                    }
+                                }
+                                
+                            }
+                        }
+                        Spacer()
                     }
-                    Spacer()
-                }
-            }.navigationTitle("My Wallet")
+                }.navigationTitle("My Wallet")
+            }
         }.onAppear(perform: {
             if firstRefresh {
                 refresh()
