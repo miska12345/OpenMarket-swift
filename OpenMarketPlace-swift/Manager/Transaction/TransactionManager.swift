@@ -9,6 +9,8 @@ import Foundation
 
 class TransactionManager {
     private var client: Transaction_TransactionServiceClient
+    private var lastEvaluatedKeyPaidTransacs: String = ""
+    private var lastEvaluatedKeyReceivedTransacs: String = ""
     
     init(_ token: String) {
         client = Transaction_TransactionServiceClient.init(address: Constants.SERVER_ADDRESS, secure: Constants.SECURED_CONNECTION)
@@ -43,17 +45,27 @@ class TransactionManager {
     func getAllTransactions(recentOnly: Bool = true, perform: @escaping ([Transaction_QueryResultItem]?, OMError?)->()) {
         // Optimize for better performance
         var transactions = [Transaction_QueryResultItem]()
+        var req = generateQueryRequest(type: Transaction_QueryRequest.QueryType.payerID, lastEvaluatedKey: lastEvaluatedKeyPaidTransacs)
+        do {
+            try client.processQuery(req) { result, callResult in
+                transactions += result!.items
+//                self.lastEvaluatedKeyPaidTransacs = result!.lastEvaluatedKey
+                req = self.generateQueryRequest(type: Transaction_QueryRequest.QueryType.recipientID, lastEvaluatedKey: self.lastEvaluatedKeyReceivedTransacs)
+                _ = try? self.client.processQuery(req) { result, callResult in
+                    transactions += result!.items
+//                    self.lastEvaluatedKeyReceivedTransacs = result!.lastEvaluatedKey
+                    perform (transactions, nil)
+                }
+            }
+        } catch {
+            perform(nil, OMError(message: "Unexpected error occurred while fetching data"))
+        }
+    }
+    
+    private func generateQueryRequest(type: Transaction_QueryRequest.QueryType, lastEvaluatedKey: String) -> Transaction_QueryRequest {
         var req = Transaction_QueryRequest()
-        req.type = Transaction_QueryRequest.QueryType.payerID
-        _ = try? client.processQuery(req) { result, callResult in
-            transactions += result?.items ?? []
-        }
-        req.type = Transaction_QueryRequest.QueryType.recipientID
-        _ = try? client.processQuery(req) { result, callResult in
-            transactions += result?.items ?? []
-        }
-        perform (transactions.sorted(by: { (item1, item2) -> Bool in
-            return item1.createdAt < item2.createdAt
-        }), nil)
+        req.type = type
+        req.exclusiveStartKey = lastEvaluatedKey
+        return req
     }
 }

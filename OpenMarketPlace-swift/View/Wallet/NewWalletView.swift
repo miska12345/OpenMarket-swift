@@ -45,7 +45,7 @@ struct NewWalletView: View {
     }
 
     func refreshTransactions() {
-        self.session.transactionManager?.getPaidTransactions() { result, error in
+        self.session.transactionManager?.getAllTransactions() { result, error in
             if error == nil {
                 DispatchQueue.main.async {
                     self.transactions = result!
@@ -75,7 +75,9 @@ struct NewWalletView: View {
     var buildHistoryView: some View {
         VStack (alignment: .leading) {
             Text("Recent activity").font(.system(size: 25)).fontWeight(.semibold)
-            ForEach(transactions, id: \.self) { item in
+            ForEach(transactions.sorted(by: { (item1, item2) -> Bool in
+                item1.createdAt > item2.createdAt
+            }), id: \.self) { item in
                 let isPayer = item.payerID == AuthManager.shared.currentUser!.username
                 WalletHistoryCell(otherID: isPayer ? item.recipientID : item.payerID, coin: item.moneyAmount.currencyID, time: Date.fromStr(timestamp:  item.createdAt) ?? Date(), note: item.note, amount: item.moneyAmount.amount, isPayer: isPayer)
             }
@@ -83,8 +85,16 @@ struct NewWalletView: View {
     }
 }
 
-//struct NewWalletView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NewWalletView()
-//    }
-//}
+struct NewWalletView_Previews: PreviewProvider {
+    static var previews: some View {
+        preview()
+    }
+    
+    struct preview: View {
+        @State var session = SessionManager()
+        @State var dict = DictModel()
+        var body: some View {
+            NewWalletView(session: session, currencies: dict)
+        }
+    }
+}
