@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct TextFieldView: View {
+struct GeneralTextField: View {
     @Binding var string: String
     
     var passwordMode = false
@@ -42,6 +42,6 @@ struct TextFieldView: View {
 struct TextFieldView_Previews: PreviewProvider {
     @State static var myCoolBool = ""
     static var previews: some View {
-        TextFieldView(string: $myCoolBool, placeholder: "Please enter your email", iconName: "envelope.fill")
+        GeneralTextField(string: $myCoolBool, placeholder: "Please enter your email", iconName: "envelope.fill")
     }
 }

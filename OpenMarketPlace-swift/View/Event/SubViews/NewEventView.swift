@@ -22,16 +22,43 @@ struct NewEventView: View {
     @ObservedObject var currencies: DictModel = DictModel()
     @State var currentCoinSelected = ""
     
+    @State var showGeneratedQR = false
+    @State var newEventId = ""
+    
     var body: some View {
+        NavigationView {
+            ZStack {
+                NavigationLink(destination: GeneratedQRView(title: $eventName, coinName: $currentCoinSelected, rewardAMount: Binding(get: {
+                    return Double(self.rewardAmount) ?? 0.0
+                }, set: { (_) in
+                }), expirationDate: $endDate, qrString: $newEventId).navigationBarHidden(true), isActive: $showGeneratedQR) {
+                                    EmptyView()
+                }.frame(width: 0, height: 0)
+                .hidden()
+                createNewEventView().navigationBarTitle(Text(""), displayMode: .inline).navigationBarHidden(true).navigationBarBackButtonHidden(true)
+            }
+        }
+//        .sheet(isPresented: $showGeneratedQR, onDismiss: {
+//            self.enable = false
+//        }, content: {
+//            GeneratedQRView(enable: $showGeneratedQR, title: $eventName, coinName: $currentCoinSelected, rewardAMount: $rewardAmount, expirationDate: $endDate, qrString: $newEventId)
+//        })
+    }
+    
+    func refresh() {
+        self.currencies.update(sm: session)
+    }
+    
+    func createNewEventView() -> some View {
         VStack {
             HStack {
                 Text("New Event")
                     .font(.system(size: 32, weight: .bold))
                     .foregroundColor(.black)
                     .padding(.top)
-                
+
                 Spacer()
-                
+
                 Button(action: {
                     self.enable = false
                 }) {
@@ -52,19 +79,19 @@ struct NewEventView: View {
                 EventTextField(string: $rewardAmount, iconName: "dollarsign.circle.fill", placeholder: "Please enter reward amount", isNumeric: true)
                 EventTextField(string: $totalAmount, iconName: "dollarsign.circle.fill", placeholder: "Please enter total amount", isNumeric: true)
                 EventDatePicker(date: $endDate, hideKeyboard: true)
-                CartButton(title: "Create Event", backgroundColor: AppColors.generalBackgroundButtonColor, fontColor: AppColors.generalButtonForegroundColor,
+                GeneralButton(title: "Create Event", backgroundColor: AppColors.generalBackgroundButtonColor, fontColor: AppColors.generalButtonForegroundColor,
                                        perform: {
                                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                                         session.eventManager?.create(name: eventName, currency: currentCoinSelected, rewardAmount: Double(rewardAmount) ?? 0.0, totalAmount: Double(totalAmount) ?? 0.0, endDate: endDate, perform: { id, error in
                                             if error != nil {
                                                 alertMessage = error!.message
                                                 disableOnClose = false
+                                                showAlert = true
                                             } else {
-                                                disableOnClose = true
-                                                UIPasteboard.general.string = id
-                                                alertMessage = "You have successfully created an event! Event ID has been copied to your clipboard. \(id!)"
+                                                self.newEventId = id!
+                                                self.showGeneratedQR = true
+                                                print("OK")
                                             }
-                                            showAlert = true
                                         })
                             })
                                 .padding()
@@ -81,10 +108,6 @@ struct NewEventView: View {
         }.onAppear(perform: {
             refresh()
         })
-    }
-    
-    func refresh() {
-        self.currencies.update(sm: session)
     }
 }
 

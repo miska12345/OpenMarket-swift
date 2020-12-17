@@ -25,20 +25,12 @@ struct EventView: View {
     
     @ObservedObject var events: EventsList = EventsList()
     
+    @State var showQRView = false
+    @ObservedObject var qrViewToShow: GeneratedQRVIewWrapper = GeneratedQRVIewWrapper()
+    
     var body: some View {
         NavigationView {
             ScrollView {
-//                VStack(alignment: .leading) {
-//                    HStack() {
-//                        Text("Events Created By You").bold().font(.headline)
-//                        Spacer()
-//                        eventRefreshButton()
-//                    }
-//                    ForEach(0..<events.items.count, id: \.self) { i in
-//                        EventViewCell(event: events.items[i], eventIndex: i).environmentObject(session)
-//                            .environmentObject(events)
-//                    }
-//                }.padding()
                 VStack(alignment: .leading) {
                     HStack() {
                         Text("Events Created By You").bold().font(.headline)
@@ -68,12 +60,14 @@ struct EventView: View {
                         Alert(title: Text("Error!"), message: Text(self.alertMessage!), dismissButton: .destructive(Text("OK")))
                 }
             }
-            .background(Color.init(hex: 0xf7f8fa))
+            .background(AppColors.lightGray)
         }.onAppear(perform: {
             if firstAppear {
                 refreshMyEvents()
                 firstAppear = false
             }
+        }).sheet(isPresented: $showQRView, content: {
+            qrViewToShow.qrView
         })
     }
     
@@ -92,15 +86,15 @@ struct EventView: View {
                 Image(systemName: "paperplane.fill")
                 Text("You have not created any event yet")
             }
-            CartButton(title: "Create Event", perform: {
+            GeneralButton(title: "Create Event", perform: {
             }).padding()
         }
         
     }
     
     var regularEventView: some View {
-        ForEach(0..<events.items.count, id: \.self) { i in
-            EventViewCell(event: events.items[i], eventIndex: i).environmentObject(session)
+        ForEach(self.events.items, id: \.self) { item in
+            EventViewCell(showQRCodeView: $showQRView, qrViewToShow: qrViewToShow, event: item).environmentObject(session)
                 .environmentObject(events)
         }
     }
@@ -111,7 +105,6 @@ struct EventView: View {
                 print(error!)
             } else {
                 self.events.update(events: evs!)
-                print(evs!)
             }
         })
     }
@@ -136,9 +129,13 @@ class EventsList: ObservableObject {
         }
     }
     
-    func remove(i: Int) {
+    func remove(eventID: String) {
         DispatchQueue.main.async {
-            self.items.remove(at: i)
+            if let i = self.items.firstIndex(where: { (e) -> Bool in
+                return e.eventID == e.eventID
+            }) {
+                self.items.remove(at: i)
+            }
         }
     }
 }

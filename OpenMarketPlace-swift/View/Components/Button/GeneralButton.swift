@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CartButton: View {
+struct GeneralButton: View {
     var title: String
     var backgroundColor = Color.yellow
     var fontColor = Color.black
@@ -29,6 +29,6 @@ struct CartButton: View {
 
 struct CartButton_Previews: PreviewProvider {
     static var previews: some View {
-        CartButton(title: "Button", perform: { print("hi") })
+        GeneralButton(title: "Button", perform: { print("hi") })
     }
 }

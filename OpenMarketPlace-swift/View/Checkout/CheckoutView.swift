@@ -62,7 +62,7 @@ struct CheckoutView: View {
     
     func createPayButton() -> some View {
         
-        CartButton(title: "PAY NOW", perform: {
+        GeneralButton(title: "PAY NOW", perform: {
             var checkoutItems = [Marketplace_ItemGrpc]()
             for item in self.cart.items{
                 checkoutItems.append(convertToItemGrpc(item: item))

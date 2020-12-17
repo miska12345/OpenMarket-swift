@@ -80,7 +80,7 @@ struct DetailItem: View {
     }
     
     func createControlButton(title: String, action: @escaping ()->()) -> some View {
-        CartButton(title: title, backgroundColor: self.controlButtonBgColor, height: 40, perform: action)
+        GeneralButton(title: title, backgroundColor: self.controlButtonBgColor, height: 40, perform: action)
     }
     
     func createContentView() -> some View {

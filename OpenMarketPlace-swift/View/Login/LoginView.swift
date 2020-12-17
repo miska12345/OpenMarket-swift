@@ -27,14 +27,14 @@ struct LoginView: View {
                     .frame(width: 100, height: 80, alignment: .center)
                     .padding()
                 VStack(alignment: .center) {
-                    TextFieldView(string: self.$username,
+                    GeneralTextField(string: self.$username,
                         passwordMode: false,
                         placeholder: "Enter your username",
                         iconName: "person.crop.circle.fill")
                         .padding(.vertical, 8)
                         
                     VStack(alignment: .trailing) {
-                        TextFieldView(string: self.$password,
+                        GeneralTextField(string: self.$password,
                             passwordMode: true,
                             placeholder: "Enter your password",
                             iconName: "lock.fill")
