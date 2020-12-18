@@ -9,7 +9,14 @@ import SwiftUI
 
 struct ShopView: View {
     var body: some View {
-        Text("Shop")
+        ZStack {
+            Color.gray.edgesIgnoringSafeArea(.all)
+            VStack {
+                HomePageSearchBar().padding()
+                HomeViewSlider().padding(.horizontal)
+                Spacer()
+            }
+        }
     }
 }
 
