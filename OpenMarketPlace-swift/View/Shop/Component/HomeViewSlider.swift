@@ -24,7 +24,7 @@ struct HomeViewSlider: View {
         //            }
         //        }
         
-        GeometryReader() {geo in
+        GeometryReader() { geo in
             LazyHStack(spacing: 0) {
                 TabView {
                     ForEach(0..<5) {i in
@@ -36,12 +36,12 @@ struct HomeViewSlider: View {
                     }
                 }
                 .tabViewStyle(PageTabViewStyle())
-                .frame(width: geo.size.width, height: 200)
+                .frame(width: geo.size.width, height: geo.size.height)
                 .clipShape(
                     RoundedRectangle(cornerRadius: 10.0, style: .continuous)
                 )
-            }.frame(width: geo.size.width, height: 200, alignment: .center)
-            
+            }
+            .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
         }
     }
 }

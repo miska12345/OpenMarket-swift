@@ -10,11 +10,19 @@ import SwiftUI
 struct ShopView: View {
     var body: some View {
         ZStack {
-            Color.gray.edgesIgnoringSafeArea(.all)
+            Color(hex: 0xf3f3f3).edgesIgnoringSafeArea(.all)
             VStack {
                 HomePageSearchBar().padding()
-                HomeViewSlider().padding(.horizontal)
-                Spacer()
+                ScrollView {
+                    VStack {
+                        HomeViewSlider().padding(.horizontal)
+                            .frame(height: 200, alignment: .center)
+                        ForEach(0..<1) { _ in
+                            ShopPoster().padding(.horizontal)
+                        }
+                    }
+
+                }
             }
         }
     }

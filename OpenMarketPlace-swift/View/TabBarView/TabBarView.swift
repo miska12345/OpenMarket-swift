@@ -11,7 +11,7 @@ struct TabBarView: View {
     @ObservedObject var session: SessionManager
     var body: some View {
         TabView {
-            HomeView(data: staticData, recommend: org, session: session)
+            ShopView()
                 .tabItem {
                     Image(systemName: "1.square.fill")
                     Text("Home")
@@ -21,10 +21,10 @@ struct TabBarView: View {
                     Image(systemName: "2.square.fill")
                     Text("Cart")
                 }
-            ProfileView(usernmae: "apple")
+            ShopView()
                 .tabItem {
                     Image(systemName: "3.square.fill")
-                    Text("Profile")
+                    Text("Shop")
                 }
             EventView(session: session)
                 .tabItem {
