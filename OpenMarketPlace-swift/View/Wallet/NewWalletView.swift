@@ -37,7 +37,7 @@ struct NewWalletView: View {
                             let h2 = geometry.size.height
                             BottomSheet(
                                 isOpen: $bottomSheetOpened,
-                                config: BottomSheetConfig(minHeightRatio: (h1 / h2), maxHeight: h2, indicatorSize: CGSize(width: 30, height: 3), snapRatio: 0.1, indicatorColor: Color(hex: 0xd6d6d6))
+                                config: BottomSheetConfig(minHeightRatio: (h1 / h2), maxHeight: h2, indicatorSize: CGSize(width: 30, height: 3), snapRatio: 0, indicatorColor: Color(hex: 0xd6d6d6))
                             ) {
                                 ZStack {
                                     VStack {
