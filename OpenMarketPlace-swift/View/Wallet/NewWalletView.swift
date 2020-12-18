@@ -16,41 +16,55 @@ struct NewWalletView: View {
     @State private var firstRefresh: Bool = true
     @State var selection: Int = 0
     @State var bottomSheetOpened: Bool = false
-    let conic = LinearGradient(gradient: Gradient(colors: [Color.white]), startPoint: .top, endPoint: .bottom)
+    
+    struct ColorScheme {
+        static let welcomeMsgColor = Color.white
+        static let segmentedSelectorColor = AppColors.primaryColor
+    }
+    
     var body: some View {
-        NavigationView {
-            GeometryReader { geometry in
+        GeometryReader { geometry in
+            NavigationView {
                 ZStack {
-                    conic.ignoresSafeArea()
-                    VStack {
+                    Image("WalletBackground").resizable()
+                        .aspectRatio(geometry.size, contentMode: .fill)
+                        .edgesIgnoringSafeArea(.all)
+                    VStack(alignment: .center) {
+                        WalletTopBar(welcomeMsgColor: ColorScheme.welcomeMsgColor, username: AuthManager.shared.currentUser!.username).padding(.horizontal)
                         WalletToolBar()
-                        BottomSheet(
-                            isOpen: $bottomSheetOpened,
-                            config: BottomSheetConfig(minHeightRatio: 0.75, maxHeight: geometry.size.height, indicatorSize: CGSize(width: 30, height: 3), indicatorColor: Color(hex: 0xd6d6d6))
-                        ) {
-                            ZStack {
-                                Color.white
-                                VStack {
-                                    SegmentControl(selection: $selection, items: [SegmentItem(selectionIndex: 0, title: "Currency", colorOnSelect: AppColors.primaryColor, colorOnUnselect: Color.gray, colorForUnderline: AppColors.primaryColor),
-                                                                                  SegmentItem(selectionIndex: 1, title: "History", colorOnSelect: AppColors.primaryColor, colorOnUnselect: Color.gray)
-                                                        
-                                    ])
-                                    ScrollView {
-                                        buildTabView
+                        GeometryReader() { r2 in
+                            let h1 = r2.size.height
+                            let h2 = geometry.size.height
+                            BottomSheet(
+                                isOpen: $bottomSheetOpened,
+                                config: BottomSheetConfig(minHeightRatio: (h1 / h2), maxHeight: h2, indicatorSize: CGSize(width: 30, height: 3), snapRatio: 0.1, indicatorColor: Color(hex: 0xd6d6d6))
+                            ) {
+                                ZStack {
+                                    VStack {
+                                        SegmentControl(selection: $selection, items: [SegmentItem(selectionIndex: 0, title: "Currency", colorOnSelect: ColorScheme.segmentedSelectorColor, colorOnUnselect: Color.gray, colorForUnderline: ColorScheme.segmentedSelectorColor),
+                                                                                      SegmentItem(selectionIndex: 1, title: "History", colorOnSelect: AppColors.primaryColor, colorOnUnselect: Color.gray)
+                                                                                      
+                                        ])
+                                        ScrollView {
+                                            buildTabView
+                                        }
                                     }
+                                    
                                 }
-                                
                             }
                         }
+                        
                         Spacer()
-                    }
-                }.navigationTitle("My Wallet")
+                    }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+                }.navigationBarHidden(true)
+                .navigationBarTitle("", displayMode: .inline)
             }
         }.onAppear(perform: {
             if firstRefresh {
                 refresh()
                 firstRefresh = false
             }
+            
         })
     }
     
@@ -58,7 +72,7 @@ struct NewWalletView: View {
         self.currencies.update(sm: session)
         refreshTransactions()
     }
-
+    
     func refreshTransactions() {
         self.session.transactionManager?.getAllTransactions() { result, error in
             if error == nil {

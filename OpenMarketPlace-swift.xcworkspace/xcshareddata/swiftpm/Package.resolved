@@ -2,12 +2,30 @@
   "object": {
     "pins": [
       {
+        "package": "BottomSheet-SwiftUI",
+        "repositoryURL": "https://github.com/shirokova/bottomsheet-swiftui",
+        "state": {
+          "branch": null,
+          "revision": "fe87e92c734e515037be3204f836fbff33769e96",
+          "version": "1.0.0"
+        }
+      },
+      {
         "package": "CodeScanner",
         "repositoryURL": "https://github.com/twostraws/CodeScanner",
         "state": {
           "branch": "main",
           "revision": "fbeba7272e05502cf50f78649810ed5ccaf95a85",
           "version": null
+        }
+      },
+      {
+        "package": "SwipeableView",
+        "repositoryURL": "https://github.com/mroffmix/SwipebleView",
+        "state": {
+          "branch": null,
+          "revision": "1d2b22b0c97dbd5ac9e4cb16020ff5d0f4191760",
+          "version": "0.2.2"
         }
       }
     ]
