@@ -63,6 +63,19 @@
 		004AC4E9251ABD1C00E0EA33 /* GeneralButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004AC4E8251ABD1C00E0EA33 /* GeneralButton.swift */; };
 		008C27E6258C17AC0029C26F /* BottomSheet-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 008C27E5258C17AC0029C26F /* BottomSheet-SwiftUI */; };
 		008C27EB258C23240029C26F /* WalletTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008C27EA258C23240029C26F /* WalletTopBar.swift */; };
+		008C27F2258C30180029C26F /* RefreshableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008C27F1258C30180029C26F /* RefreshableScrollView.swift */; };
+		008C27F9258C334A0029C26F /* Refresh in Frameworks */ = {isa = PBXBuildFile; productRef = 008C27F8258C334A0029C26F /* Refresh */; };
+		008C2800258C45CE0029C26F /* HomePageSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008C27FF258C45CE0029C26F /* HomePageSearchBar.swift */; };
+		008C2803258C463A0029C26F /* HomePageSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008C2802258C463A0029C26F /* HomePageSearchTextField.swift */; };
+		008C2806258C4E620029C26F /* HomeViewSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008C2805258C4E620029C26F /* HomeViewSlider.swift */; };
+		008C2809258C62540029C26F /* ItemViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008C2808258C62540029C26F /* ItemViewButton.swift */; };
+		008C280C258C64240029C26F /* ItemContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008C280B258C64240029C26F /* ItemContainer.swift */; };
+		008C280F258C6B580029C26F /* ShopPoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008C280E258C6B580029C26F /* ShopPoster.swift */; };
+		008C2816258C88350029C26F /* ItemViewQuantityPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008C2815258C88350029C26F /* ItemViewQuantityPicker.swift */; };
+		008C281A258D5D0C0029C26F /* HomeViewNavBoardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008C2819258D5D0C0029C26F /* HomeViewNavBoardButton.swift */; };
+		008C2821258D629C0029C26F /* HomeViewNavBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008C2820258D629C0029C26F /* HomeViewNavBoard.swift */; };
+		008C283B258DB7E90029C26F /* Grid in Frameworks */ = {isa = PBXBuildFile; productRef = 008C283A258DB7E90029C26F /* Grid */; };
+		008C283E258DC5760029C26F /* HomeViewItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008C283D258DC5760029C26F /* HomeViewItemCell.swift */; };
 		008DE0A3258AFADA005F6F8E /* NewWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DE0A2258AFADA005F6F8E /* NewWalletView.swift */; };
 		008DE0A7258AFB58005F6F8E /* WalletSegmentedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DE0A6258AFB58005F6F8E /* WalletSegmentedPicker.swift */; };
 		008DE0AC258B192B005F6F8E /* WalletToolBarMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DE0AB258B192B005F6F8E /* WalletToolBarMenu.swift */; };
@@ -154,6 +167,17 @@
 		004AC4D7251AA3EC00E0EA33 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
 		004AC4E8251ABD1C00E0EA33 /* GeneralButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralButton.swift; sourceTree = "<group>"; };
 		008C27EA258C23240029C26F /* WalletTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTopBar.swift; sourceTree = "<group>"; };
+		008C27F1258C30180029C26F /* RefreshableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableScrollView.swift; sourceTree = "<group>"; };
+		008C27FF258C45CE0029C26F /* HomePageSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageSearchBar.swift; sourceTree = "<group>"; };
+		008C2802258C463A0029C26F /* HomePageSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageSearchTextField.swift; sourceTree = "<group>"; };
+		008C2805258C4E620029C26F /* HomeViewSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewSlider.swift; sourceTree = "<group>"; };
+		008C2808258C62540029C26F /* ItemViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewButton.swift; sourceTree = "<group>"; };
+		008C280B258C64240029C26F /* ItemContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemContainer.swift; sourceTree = "<group>"; };
+		008C280E258C6B580029C26F /* ShopPoster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopPoster.swift; sourceTree = "<group>"; };
+		008C2815258C88350029C26F /* ItemViewQuantityPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewQuantityPicker.swift; sourceTree = "<group>"; };
+		008C2819258D5D0C0029C26F /* HomeViewNavBoardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewNavBoardButton.swift; sourceTree = "<group>"; };
+		008C2820258D629C0029C26F /* HomeViewNavBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewNavBoard.swift; sourceTree = "<group>"; };
+		008C283D258DC5760029C26F /* HomeViewItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewItemCell.swift; sourceTree = "<group>"; };
 		008DE0A2258AFADA005F6F8E /* NewWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWalletView.swift; sourceTree = "<group>"; };
 		008DE0A6258AFB58005F6F8E /* WalletSegmentedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSegmentedPicker.swift; sourceTree = "<group>"; };
 		008DE0AB258B192B005F6F8E /* WalletToolBarMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletToolBarMenu.swift; sourceTree = "<group>"; };
@@ -198,7 +222,9 @@
 			files = (
 				0022AD202589AA9C0086861C /* SwipeableView in Frameworks */,
 				008C27E6258C17AC0029C26F /* BottomSheet-SwiftUI in Frameworks */,
+				008C283B258DB7E90029C26F /* Grid in Frameworks */,
 				000CF678251D56B700EAAEED /* CodeScanner in Frameworks */,
+				008C27F9258C334A0029C26F /* Refresh in Frameworks */,
 				635F213FFFBC8F8E5ABBE673 /* Pods_OpenMarketPlace_swift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,6 +323,7 @@
 		0008519825196CF700BFE2BE /* Shop */ = {
 			isa = PBXGroup;
 			children = (
+				008C27F0258C300C0029C26F /* Component */,
 				0008519525196AD800BFE2BE /* ShopView.swift */,
 			);
 			path = Shop;
@@ -424,6 +451,7 @@
 		0022AD43258AE4A00086861C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				008C27F5258C312D0029C26F /* ScrollView */,
 				0022AD49258AE5750086861C /* TextField */,
 				0022AD46258AE4E10086861C /* Button */,
 			);
@@ -524,6 +552,31 @@
 				67185AEA25203EE1008812DB /* CheckOutSubView.swift */,
 			);
 			path = Checkout;
+			sourceTree = "<group>";
+		};
+		008C27F0258C300C0029C26F /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				008C27FF258C45CE0029C26F /* HomePageSearchBar.swift */,
+				008C2802258C463A0029C26F /* HomePageSearchTextField.swift */,
+				008C2805258C4E620029C26F /* HomeViewSlider.swift */,
+				008C2808258C62540029C26F /* ItemViewButton.swift */,
+				008C280B258C64240029C26F /* ItemContainer.swift */,
+				008C280E258C6B580029C26F /* ShopPoster.swift */,
+				008C2815258C88350029C26F /* ItemViewQuantityPicker.swift */,
+				008C2819258D5D0C0029C26F /* HomeViewNavBoardButton.swift */,
+				008C2820258D629C0029C26F /* HomeViewNavBoard.swift */,
+				008C283D258DC5760029C26F /* HomeViewItemCell.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		008C27F5258C312D0029C26F /* ScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				008C27F1258C30180029C26F /* RefreshableScrollView.swift */,
+			);
+			path = ScrollView;
 			sourceTree = "<group>";
 		};
 		008DE0A5258AFB46005F6F8E /* Components */ = {
@@ -660,6 +713,8 @@
 				000CF677251D56B700EAAEED /* CodeScanner */,
 				0022AD1F2589AA9C0086861C /* SwipeableView */,
 				008C27E5258C17AC0029C26F /* BottomSheet-SwiftUI */,
+				008C27F8258C334A0029C26F /* Refresh */,
+				008C283A258DB7E90029C26F /* Grid */,
 			);
 			productName = "OpenMarketPlace-swift";
 			productReference = 0008516525191F7700BFE2BE /* OpenMarketPlace-swift.app */;
@@ -692,6 +747,8 @@
 				000CF676251D56B700EAAEED /* XCRemoteSwiftPackageReference "CodeScanner" */,
 				0022AD1E2589AA9C0086861C /* XCRemoteSwiftPackageReference "SwipebleView" */,
 				008C27E4258C17AC0029C26F /* XCRemoteSwiftPackageReference "bottomsheet-swiftui" */,
+				008C27F7258C334A0029C26F /* XCRemoteSwiftPackageReference "Refresh" */,
+				008C2839258DB7E90029C26F /* XCRemoteSwiftPackageReference "swiftui-grid" */,
 			);
 			productRefGroup = 0008516625191F7700BFE2BE /* Products */;
 			projectDirPath = "";
@@ -772,6 +829,8 @@
 				0022AD352589D8FA0086861C /* DateExtension.swift in Sources */,
 				0008516925191F7700BFE2BE /* AppDelegate.swift in Sources */,
 				000CF5FF251ADDB600EAAEED /* CheckoutView.swift in Sources */,
+				008C2821258D629C0029C26F /* HomeViewNavBoard.swift in Sources */,
+				008C27F2258C30180029C26F /* RefreshableScrollView.swift in Sources */,
 				008DE0AC258B192B005F6F8E /* WalletToolBarMenu.swift in Sources */,
 				000CF606251AFF4F00EAAEED /* CheckoutButton.swift in Sources */,
 				000851A02519748B00BFE2BE /* Item.swift in Sources */,
@@ -785,12 +844,15 @@
 				008DE0A7258AFB58005F6F8E /* WalletSegmentedPicker.swift in Sources */,
 				00ABA913252028A8004FD55D /* NewEventView.swift in Sources */,
 				004AC4E9251ABD1C00E0EA33 /* GeneralButton.swift in Sources */,
+				008C280C258C64240029C26F /* ItemContainer.swift in Sources */,
+				008C280F258C6B580029C26F /* ShopPoster.swift in Sources */,
 				000CF60E251B03FD00EAAEED /* ContinueToShopButton.swift in Sources */,
 				000CF644251D4CC600EAAEED /* QRView.swift in Sources */,
 				0008519625196AD800BFE2BE /* ShopView.swift in Sources */,
 				679CC585251F1BD500CDEF9E /* AccountService.pb.swift in Sources */,
 				67185AEB25203EE1008812DB /* CheckOutSubView.swift in Sources */,
 				0047059D251E84A700BE9E6B /* AlertType.swift in Sources */,
+				008C2816258C88350029C26F /* ItemViewQuantityPicker.swift in Sources */,
 				00470563251DB61800BE9E6B /* OMError.swift in Sources */,
 				000CF62A251B261700EAAEED /* ItemDescriptionAndSeller.swift in Sources */,
 				679CC57D251F1BD500CDEF9E /* MarketPlace.pb.swift in Sources */,
@@ -802,8 +864,10 @@
 				679CC471251E9E5000CDEF9E /* MarketplaceManager.swift in Sources */,
 				679CC58D251F1BFF00CDEF9E /* CoinView.swift in Sources */,
 				000CF602251AE4FA00EAAEED /* ColorExtension.swift in Sources */,
+				008C283E258DC5760029C26F /* HomeViewItemCell.swift in Sources */,
 				00470572251DBD6200BE9E6B /* KeyboardAdaptive.swift in Sources */,
 				679CC57A251F1BD500CDEF9E /* AccountService.proto in Sources */,
+				008C2800258C45CE0029C26F /* HomePageSearchBar.swift in Sources */,
 				679CC592251FC26500CDEF9E /* Organization.swift in Sources */,
 				679CC57F251F1BD500CDEF9E /* Organization.grpc.swift in Sources */,
 				679CC580251F1BD500CDEF9E /* Transaction.grpc.swift in Sources */,
@@ -816,17 +880,21 @@
 				008DE0B2258B1D3A005F6F8E /* WalletCoinCell.swift in Sources */,
 				000CF634251B262600EAAEED /* ProfileView.swift in Sources */,
 				00470560251DB1FE00BE9E6B /* LoginButton.swift in Sources */,
+				008C2809258C62540029C26F /* ItemViewButton.swift in Sources */,
 				679CC57B251F1BD500CDEF9E /* Organization.proto in Sources */,
 				00F5C91225204F7F00FC20C0 /* EventTextField.swift in Sources */,
 				679CC57E251F1BD500CDEF9E /* AccountService.grpc.swift in Sources */,
+				008C2803258C463A0029C26F /* HomePageSearchTextField.swift in Sources */,
 				0047057C251E755900BE9E6B /* SessionManager.swift in Sources */,
 				000CF636251B262600EAAEED /* OrganizationStore.swift in Sources */,
 				679CC582251F1BD500CDEF9E /* Organization.pb.swift in Sources */,
+				008C281A258D5D0C0029C26F /* HomeViewNavBoardButton.swift in Sources */,
 				00ABA90E251FE780004FD55D /* NavBarView.swift in Sources */,
 				0022AD38258AA26A0086861C /* GeneratedQRView.swift in Sources */,
 				679CC58E251F1BFF00CDEF9E /* WalletView.swift in Sources */,
 				0022AD1625897FE90086861C /* CurrencyPickerItem.swift in Sources */,
 				679CC581251F1BD500CDEF9E /* MarketPlace.grpc.swift in Sources */,
+				008C2806258C4E620029C26F /* HomeViewSlider.swift in Sources */,
 				0008518E251942FC00BFE2BE /* DetailView.swift in Sources */,
 				0047055D251DB13700BE9E6B /* GeneralTextField.swift in Sources */,
 				679CC578251F1BD500CDEF9E /* MarketPlace.proto in Sources */,
@@ -1069,6 +1137,22 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		008C27F7258C334A0029C26F /* XCRemoteSwiftPackageReference "Refresh" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wxxsw/Refresh";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		008C2839258DB7E90029C26F /* XCRemoteSwiftPackageReference "swiftui-grid" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/spacenation/swiftui-grid";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1086,6 +1170,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 008C27E4258C17AC0029C26F /* XCRemoteSwiftPackageReference "bottomsheet-swiftui" */;
 			productName = "BottomSheet-SwiftUI";
+		};
+		008C27F8258C334A0029C26F /* Refresh */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 008C27F7258C334A0029C26F /* XCRemoteSwiftPackageReference "Refresh" */;
+			productName = Refresh;
+		};
+		008C283A258DB7E90029C26F /* Grid */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 008C2839258DB7E90029C26F /* XCRemoteSwiftPackageReference "swiftui-grid" */;
+			productName = Grid;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

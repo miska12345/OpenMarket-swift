@@ -29,7 +29,7 @@ struct HomeViewSlider: View {
                 TabView {
                     ForEach(0..<5) {i in
                         ZStack {
-                            Image("TestPoster2")
+                            Image("Poster_PS5")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                         }

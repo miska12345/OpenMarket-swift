@@ -9,19 +9,21 @@ import SwiftUI
 
 struct ItemViewButton: View {
     var iconName: String = "plus"
+    var isSysIcon: Bool = true
     var perform: ()->() = {}
     var body: some View {
         Button(action: {
-                    print("Round Action")
+            print("Round Action")
             perform()
-                    }) {
-            Image(systemName: iconName)
+        }) {
+            let img = isSysIcon ? Image(systemName: iconName) : Image(iconName)
+                img
                 .resizable().padding(8)
                 .frame(width: 35, height: 35)
                 .foregroundColor(Color.white)
                 .background(AppColors.primaryColor)
                 .clipShape(Circle())
-                }
+        }
     }
 }
 

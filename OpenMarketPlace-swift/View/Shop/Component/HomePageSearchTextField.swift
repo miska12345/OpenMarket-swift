@@ -13,7 +13,7 @@ struct HomePageSearchTextField: View {
         VStack(alignment: .leading) {
             HStack {
                 Image(systemName: "magnifyingglass")
-                    .foregroundColor(Color.init(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
+                    .foregroundColor(Color.pink)
                     .padding(.leading, 10)
                 
                 TextField("Search here", text: $content)
@@ -22,7 +22,7 @@ struct HomePageSearchTextField: View {
                     Button(action: {
                         content = ""
                     }) {
-                        Image(systemName: "xmark.circle.fill").foregroundColor(Color(hex: 0xbdc3c7))
+                        Image(systemName: "xmark.circle.fill").foregroundColor(Color(hex: 0xc98798))
                             .padding(.trailing, 10)
                     }
                 }
@@ -32,7 +32,11 @@ struct HomePageSearchTextField: View {
             RoundedRectangle(cornerRadius: 40)
                 .fill(Color.init(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
                 .frame(height: 35)
-                .shadow(color: .gray, radius: 1, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
+//                .shadow(color: AppColors.primaryColor, radius: 2, x: 0.0, y: 0.0)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 40)
+                        .stroke(AppColors.primaryColor, lineWidth: 1)
+                )
         )
     }
 }

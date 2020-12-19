@@ -20,6 +20,24 @@
         }
       },
       {
+        "package": "Refresh",
+        "repositoryURL": "https://github.com/wxxsw/Refresh",
+        "state": {
+          "branch": "master",
+          "revision": "05a4667b8250c7cce0156882bf6385a5108ae6f0",
+          "version": null
+        }
+      },
+      {
+        "package": "Grid",
+        "repositoryURL": "https://github.com/spacenation/swiftui-grid",
+        "state": {
+          "branch": null,
+          "revision": "a3441f80bd01029507bc19e463e7c7208ffcf3f9",
+          "version": "1.0.4"
+        }
+      },
+      {
         "package": "SwipeableView",
         "repositoryURL": "https://github.com/mroffmix/SwipebleView",
         "state": {
