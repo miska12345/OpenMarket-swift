@@ -132,7 +132,7 @@ class EventsList: ObservableObject {
     func remove(eventID: String) {
         DispatchQueue.main.async {
             if let i = self.items.firstIndex(where: { (e) -> Bool in
-                return e.eventID == e.eventID
+                return e.eventID == eventID
             }) {
                 self.items.remove(at: i)
             }
