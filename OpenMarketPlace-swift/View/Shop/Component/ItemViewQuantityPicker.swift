@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ItemViewQuantityPicker: View {
-    @State var quantity: UInt = 10
+    @State var quantity: UInt = 1
     var body: some View {
         HStack {
             if quantity > 0 {

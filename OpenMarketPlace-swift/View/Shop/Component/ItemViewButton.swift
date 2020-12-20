@@ -19,7 +19,7 @@ struct ItemViewButton: View {
             let img = isSysIcon ? Image(systemName: iconName) : Image(iconName)
                 img
                 .resizable().padding(8)
-                .frame(width: 35, height: 35)
+                .frame(width: 30, height: 30)
                 .foregroundColor(Color.white)
                 .background(AppColors.primaryColor)
                 .clipShape(Circle())

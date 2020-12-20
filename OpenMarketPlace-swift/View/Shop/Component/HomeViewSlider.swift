@@ -9,21 +9,6 @@ import SwiftUI
 
 struct HomeViewSlider: View {
     var body: some View {
-        //        ScrollView(.horizontal) {
-        //            LazyHStack(spacing: 0) {
-        //                ForEach(0..<5) {i in
-        //                    ZStack {
-        //                        Image("TestPoster1")
-        //                            .resizable()
-        //                            .aspectRatio(contentMode: .fill)
-        //                            .frame(width: UIScreen.main.bounds.width, height: 200, alignment: .center)
-        //                    }
-        //                    .clipShape(
-        //                        RoundedRectangle(cornerRadius: 10.0, style: .continuous))
-        //                }
-        //            }
-        //        }
-        
         GeometryReader() { geo in
             LazyHStack(spacing: 0) {
                 TabView {

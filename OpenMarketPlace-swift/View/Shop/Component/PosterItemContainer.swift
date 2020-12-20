@@ -4,10 +4,9 @@
 //
 //  Created by ShangJin Li on 12/17/20.
 //
-
 import SwiftUI
 
-struct ItemContainer: View {
+struct PosterItemContainer: View {
     var tag: String = "New"
     var imageName: String = "Item_PS5"
     var itemName: String = "Brand New PS5 4k Gaming Experience"
@@ -36,7 +35,10 @@ struct ItemContainer: View {
                                 )
                         }
                         let priceToShow = String.toCurrencyStr(balance: price, useSymbol: true)
-                        Text(itemName).fontWeight(.semibold).lineLimit(2)
+                        Text(itemName)
+                            .fontWeight(.semibold)
+                            .lineLimit(2)
+                            .foregroundColor(.black)
                         Text(priceToShow ?? "-").font(.title).foregroundColor(.red).padding(.top, 5)
                         Spacer()
                     }
@@ -58,6 +60,6 @@ struct ItemContainer: View {
 
 struct ItemContainer_Previews: PreviewProvider {
     static var previews: some View {
-        ItemContainer()
+        PosterItemContainer()
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct OrganizationStore: View {
     @State var organization: Organization
     @State var items = [Item]()
-    @State var itemPopulated = false
+    @State var itemPopulated = true
     @ObservedObject var session : SessionManager
     var body: some View {
         ScrollView(.vertical){
@@ -53,10 +53,10 @@ struct OrganizationStore: View {
     }
 }
 
-//struct OrganizationStore_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let temp = Organization(organizationName: "UW Best", organizationPicture: "cssa_logo",
-//                                organizationDescription: "This is a very big very small very warm club", organizationStoreItems: staticData, organizationStoreCurrency: nil)
-//        OrganizationStore(organization: temp)
-//    }
-//}
+struct OrganizationStore_Previews: PreviewProvider {
+    static var previews: some View {
+        let temp = Organization(organizationName: "UW Best", organizationPicture: "cssa_logo",
+                                organizationDescription: "This is a very big very small very warm club", organizationStoreItems: staticData, organizationStoreCurrency: nil)
+        OrganizationStore(organization: temp, session: SessionManager())
+    }
+}

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeViewItemCell: View {
+    @Binding var showDetail: Bool
+
     var imageName: String = "Item_PS5"
     var itemName: String = "Brand New PS5 Get It NOW!!!!"
     var tag: RecommendedItemCellTag = RecommendedItemCellTag(text: "Free Shipping", color: .orange)
@@ -20,6 +22,7 @@ struct HomeViewItemCell: View {
         let h: CGFloat = 280
         Button(action: {
             print("Item Pressed")
+            self.showDetail = true
         }) {
             VStack {
                 ZStack (alignment: .topTrailing) {
@@ -107,6 +110,9 @@ struct RecommendedItemCellTag {
 
 struct HomeViewItemCell_Previews: PreviewProvider {
     static var previews: some View {
-        HomeViewItemCell()
+        HomeViewItemCell(showDetail: Binding(get: {
+            return true
+        }, set: { (_) in
+        }))
     }
 }

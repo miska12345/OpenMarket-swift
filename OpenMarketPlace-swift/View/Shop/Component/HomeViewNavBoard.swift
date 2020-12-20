@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct HomeViewNavBoard: View {
-    let icons = ["flame", "dollar", "flame", "dollar"]
+    let icons = ["flame", "dollar"]
     var body: some View {
+        
         VStack {
             ForEach(0..<2) { j in
                 HStack (alignment: .center) {
                     ForEach(0..<4) {i in
-                        HomeViewNavBoardButton(iconName: icons[i], text: icons[i])
+                        HomeViewNavBoardButton(iconName: icons[i % 2], text: icons[i % 2])
                         if i != 3 {
                             Spacer()
                         }

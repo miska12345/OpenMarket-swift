@@ -25,10 +25,9 @@ struct ShopPoster: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack (spacing: 20) {
                         ForEach(0..<5) { _ in
-                            ItemContainer()
-                                .aspectRatio(contentMode: .fit)
+                            PosterItemContainer()
                         }
-                    }.padding(10)
+                    }.padding()
                 }
             }
         }
