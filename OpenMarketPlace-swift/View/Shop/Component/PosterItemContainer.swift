@@ -35,10 +35,15 @@ struct PosterItemContainer: View {
                                 )
                         }
                         let priceToShow = String.toCurrencyStr(balance: price, useSymbol: true)
-                        Text(itemName)
-                            .fontWeight(.semibold)
-                            .lineLimit(2)
-                            .foregroundColor(.black)
+                        VStack {
+                            Text(itemName)
+                                .fontWeight(.semibold)
+                                .lineLimit(2)
+                                .foregroundColor(.black)
+                            Spacer()
+                        }
+                        .frame(minHeight: 50)
+                        
                         Text(priceToShow ?? "-").font(.title).foregroundColor(.red).padding(.top, 5)
                         Spacer()
                     }
@@ -46,7 +51,6 @@ struct PosterItemContainer: View {
                     .padding(.horizontal)
                     .padding(.bottom, 5)
                 }
-//                ItemViewButton().padding(.bottom)
                 ItemViewQuantityPicker()
                     .padding(.horizontal)
                     .padding(.bottom)
