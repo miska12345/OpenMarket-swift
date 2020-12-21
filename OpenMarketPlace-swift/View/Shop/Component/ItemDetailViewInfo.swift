@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct ItemDetailViewInfo: View {
+    var item : Newsfeed_ItemGrpc
     var body: some View {
         VStack (alignment: .leading) {
             HStack (alignment: .top) {
-                Text("Best goat meat for BBQ well prepared cooking ready")
+                Text(item.itemName)
                     .font(.headline)
-                    .minimumScaleFactor(0.5)
+//                    .minimumScaleFactor(0.5)
                     .lineLimit(2)
                 Spacer()
                 Image(systemName: "heart").resizable()
@@ -26,7 +27,7 @@ struct ItemDetailViewInfo: View {
             .padding(.bottom, 5)
             HStack (alignment: .bottom) {
                 HStack (alignment: .bottom) {
-                    Text("$13")
+                    Text(String.toCurrencyStr(balance: item.itemPrice, useSymbol: true)!)
                         .bold()
                         .font(.system(size: 35))
                         .minimumScaleFactor(0.5)
@@ -71,8 +72,8 @@ struct ItemDetailViewInfo: View {
     }
 }
 
-struct ItemDetailViewInfo_Previews: PreviewProvider {
-    static var previews: some View {
-        ItemDetailViewInfo()
-    }
-}
+//struct ItemDetailViewInfo_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ItemDetailViewInfo()
+//    }
+//}

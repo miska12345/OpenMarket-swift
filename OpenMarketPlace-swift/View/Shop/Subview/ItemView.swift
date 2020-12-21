@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ItemView: View {
     @Binding var showDetail: Bool
-    var itemName: String = "Best goat meat for BBQ"
+    //var itemName: String = "Best goat meat for BBQ"
+    var item : Newsfeed_ItemGrpc
     var body: some View {
         NavigationView {
             GeometryReader() { geo in
                 ZStack (alignment: .bottom) {
                     VStack (alignment: .leading) {
-                        GeneralBackButton(text: itemName, action: {
+                        GeneralBackButton(text: item.itemName, action: {
                             self.showDetail = false
                         }, dismissable: false)
                             .padding(.horizontal)
@@ -26,11 +27,11 @@ struct ItemView: View {
                                 Group {
                                     HomeViewSlider()
                                         .frame(height: 200)
-                                    ItemDetailViewInfo()
+                                    ItemDetailViewInfo(item: self.item)
                                 }.padding()
                                 ExDivider(color: AppColors.lightGray, width: 10)
                                 
-                                ItemDetailViewDetailBox().padding(.horizontal)
+                                ItemDetailViewDetailBox(itemDescription: item.itemDescription).padding(.horizontal)
                             }
                         }.frame(width: geo.size.width)
                     }
@@ -44,11 +45,25 @@ struct ItemView: View {
     }
 }
 
-struct ItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        ItemView(showDetail: Binding(get: {
-            return true
-        }, set: { (_) in
-        }))
+class ItemViewWrapper: ObservableObject {
+    @Published var shownDetailedItem: ItemView = ItemView(
+        showDetail: Binding(get: {return false}, set: {(_) in}),
+        item: {() -> Newsfeed_ItemGrpc in
+            var temp = Newsfeed_ItemGrpc()
+            temp.itemName = "ABC"
+            return temp
+        }())
+    
+    func update(v: ItemView) {
+        self.shownDetailedItem = v
     }
 }
+
+//struct ItemView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ItemView(showDetail: Binding(get: {
+//            return true
+//        }, set: { (_) in
+//        }))
+//    }
+//}

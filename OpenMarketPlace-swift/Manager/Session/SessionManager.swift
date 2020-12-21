@@ -13,6 +13,7 @@ class SessionManager: ObservableObject {
     @Published var transactionManager: TransactionManager? = nil
     @Published var marketplaceManager: MarketplaceManager? = nil
     @Published var cartManager: CartManager? = nil
+    @Published var newsfeedmanager: NewsFeedManager? = nil
     func initiateSession() {
         guard let token = AuthManager.shared.currentUser?.token else {
             print("No token")
@@ -24,6 +25,7 @@ class SessionManager: ObservableObject {
             self.marketplaceManager = MarketplaceManager(token)
             self.isLoggedIn = true
             self.cartManager = CartManager(carts: [Cart](), session: self)
+            self.newsfeedmanager = NewsFeedManager(token)
         }
         print("Session initiated!")
     }

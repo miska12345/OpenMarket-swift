@@ -9,20 +9,22 @@ import SwiftUI
 
 struct HomeViewItemCell: View {
     @Binding var showDetail: Bool
-
+    var item : Newsfeed_ItemGrpc
     var imageName: String = "Item_PS5"
-    var itemName: String = "Brand New PS5 Get It NOW!!!!"
     var tag: RecommendedItemCellTag = RecommendedItemCellTag(text: "Free Shipping", color: .orange)
     var displayTag: Bool = true
-    var price: Double = 100.0
     var coin: String = "DashCoin"
     var backgroundColor: Color = Color.white
     var heartSizeDenom: CGFloat = 16
+    @ObservedObject var currentItem : ItemViewWrapper
     var body: some View {
         let h: CGFloat = 280
         Button(action: {
             print("Item Pressed")
-            self.showDetail = true
+            DispatchQueue.main.async {
+                self.currentItem.update(v: ItemView(showDetail: self.$showDetail, item: item))
+                self.showDetail = true
+            }
         }) {
             VStack {
                 ZStack (alignment: .topTrailing) {
@@ -47,7 +49,7 @@ struct HomeViewItemCell: View {
                     }.padding()
                 }
                 VStack (alignment: .leading, spacing: 0) {
-                    Text(Bool.random() ? itemName : "Very SHort Name")
+                    Text(item.itemName)
                         .font(.system(size: 15))
                         .fontWeight(.semibold)
                         .fixedSize(horizontal: false, vertical: true)
@@ -58,7 +60,7 @@ struct HomeViewItemCell: View {
                     
                     Tag(tagConfig: tag)
                     HStack {
-                        let priceToShow = String.toCurrencyStr(balance: self.price, useSymbol: true)
+                        let priceToShow = String.toCurrencyStr(balance: item.itemPrice, useSymbol: true)
                         Text(priceToShow ?? "-")
                             .font(.system(size: 18))
                             .scaledToFill()
@@ -108,11 +110,11 @@ struct RecommendedItemCellTag {
     var color: Color = Color.black
 }
 
-struct HomeViewItemCell_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeViewItemCell(showDetail: Binding(get: {
-            return true
-        }, set: { (_) in
-        }))
-    }
-}
+//struct HomeViewItemCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeViewItemCell(showDetail: Binding(get: {
+//            return true
+//        }, set: { (_) in
+//        }))
+//    }
+//}

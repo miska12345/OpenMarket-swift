@@ -10,6 +10,7 @@ import Grid
 
 struct OrgItemGrid: View {
     @State var showDetailSheet: Bool = false
+    @ObservedObject var shownItem: ItemViewWrapper = ItemViewWrapper()
     var body: some View {
         VStack (alignment: .leading) {
 //            HStack {
@@ -21,7 +22,11 @@ struct OrgItemGrid: View {
 //            }
             OrgNavLink(title: "Items")
             Grid(0..<6) { _ in
-                HomeViewItemCell(showDetail: $showDetailSheet)
+                HomeViewItemCell(showDetail: $showDetailSheet, item: {() -> Newsfeed_ItemGrpc in
+                    var temp = Newsfeed_ItemGrpc()
+                    temp.itemName = "ABC"
+                    return temp
+                }(), currentItem: shownItem)
             }
             .gridStyle(
                 StaggeredGridStyle(.vertical, tracks: 2, spacing: 10)

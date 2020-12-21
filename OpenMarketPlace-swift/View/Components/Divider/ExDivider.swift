@@ -10,3 +10,4 @@ struct ExDivider: View {
             .edgesIgnoringSafeArea(.horizontal)
     }
 }
+

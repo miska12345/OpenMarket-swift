@@ -15,15 +15,17 @@ struct HomeViewNavBoardButton: View {
                        label: {
                         VStack(spacing: 5) {
                             ZStack {
-//                                Color(hex: 0xcccccc)
+                                //Color(hex: 0xcccccc)
                                 Image(iconName).resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .padding(10)
+                                    
                                 
                             }
-//                            .clipShape(Circle())
-//                            .shadow(color: .gray, radius: 1, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
+
+                            .shadow(color: Color.white, radius: 1, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
                             .frame(width: 60, height: 60, alignment: .center)
+                            .clipShape(Circle())
                             Text(text)
                                 .font(.body)
                                 .foregroundColor(.black)

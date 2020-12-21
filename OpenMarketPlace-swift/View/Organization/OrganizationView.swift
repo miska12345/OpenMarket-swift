@@ -14,19 +14,6 @@ struct OrganizationView: View {
         ZStack(alignment: .top) {
             AppColors.lightGray
             VStack(alignment: .leading, spacing: 0) {
-//                Label {
-//                    Text("Back")
-//                        .fontWeight(.semibold)
-//                        .lineLimit(1)
-//                } icon: {
-//                    Image(systemName: "chevron.left")
-//                }.onTapGesture {
-//                    self.presentationMode.wrappedValue.dismiss()
-//                }.padding(.horizontal)
-//                .padding(.top)
-//                .background(
-//                    Color.white
-//                )
                 GeneralBackButton()
                     .padding()
                     .background(Color.white)

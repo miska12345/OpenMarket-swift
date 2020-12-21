@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TabBarView: View {
-    @ObservedObject var session: SessionManager
+    @EnvironmentObject var session: SessionManager
     var body: some View {
         TabView {
             ShopView()
@@ -42,6 +42,6 @@ struct TabBarView: View {
 
 struct TabBarView_Previews: PreviewProvider {
     static var previews: some View {
-        TabBarView(session: SessionManager())
+        TabBarView()
     }
 }

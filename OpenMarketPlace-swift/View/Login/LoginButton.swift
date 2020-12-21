@@ -13,7 +13,7 @@ struct LoginButtons: View {
     enum alertState {
         case standartError
     }
-    var session: SessionManager
+    @EnvironmentObject var session: SessionManager
     
     @Binding var bindUsername: String
     @Binding var bindPassword: String
@@ -70,7 +70,7 @@ struct LoginButtons: View {
                 }
             }
             EmptyView().fullScreenCover(isPresented: $presentedTabBarView, content: {
-                TabBarView(session: session)
+                TabBarView()
             })
         }
     }

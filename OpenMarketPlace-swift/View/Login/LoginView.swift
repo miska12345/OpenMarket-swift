@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject var session: SessionManager
+    @EnvironmentObject var session: SessionManager
     @State var username: String = "123"
     @State var password: String = "123"
     @State private var presentedPasswordReset = false
@@ -50,7 +50,7 @@ struct LoginView: View {
                         }
                     }
                     .padding(.vertical, 8)
-                    LoginButtons(session: session, bindUsername: $username,
+                    LoginButtons(bindUsername: $username,
                                  bindPassword: $password)
                 }
                 Spacer()
@@ -64,6 +64,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(session: SessionManager())
+        LoginView()
     }
 }

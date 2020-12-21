@@ -94,6 +94,7 @@ struct EventView: View {
     
     var regularEventView: some View {
         ForEach(self.events.items, id: \.self) { item in
+            
             EventViewCell(showQRCodeView: $showQRView, qrViewToShow: qrViewToShow, event: item).environmentObject(session)
                 .environmentObject(events)
         }
