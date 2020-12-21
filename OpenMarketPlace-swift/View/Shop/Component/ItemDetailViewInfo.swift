@@ -25,16 +25,47 @@ struct ItemDetailViewInfo: View {
             }
             .padding(.bottom, 5)
             HStack (alignment: .bottom) {
-                Text("$13")
-                    .bold()
-                    .font(.system(size: 35))
-                    .minimumScaleFactor(0.5)
-                    .foregroundColor(.red)
-                    .scaledToFill()
-//                Spacer()
-                Text("DashCoin")
-                    .foregroundColor(.gray)
-//                    .padding(.top)
+                HStack (alignment: .bottom) {
+                    Text("$13")
+                        .bold()
+                        .font(.system(size: 35))
+                        .minimumScaleFactor(0.5)
+                        .foregroundColor(.red)
+                        .scaledToFill()
+    //                Spacer()
+                    Text("DashCoin")
+                        .foregroundColor(.gray)
+    //                    .padding(.top)
+                }
+                Spacer()
+                NavigationLink(destination: OrganizationView(),
+                               label: {
+                                HStack {
+                                    Image("DefaultAvatar_Male")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 25, height: 25, alignment: .center)
+                                        .clipShape(Circle())
+                                    Text("Organization of Bubble Tea")
+                                        .font(.system(size: 12))
+                                        .lineLimit(2)
+                                        .multilineTextAlignment(.leading)
+                                }
+                                .frame(width: 150)
+                               }
+                ).buttonStyle(PlainButtonStyle())
+//                HStack {
+//                    Image("DefaultAvatar_Male")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(width: 25, height: 25, alignment: .center)
+//                        .clipShape(Circle())
+//                    Text("Organization of Bubble Tea")
+//                        .font(.system(size: 12))
+//                        .lineLimit(2)
+//                        .multilineTextAlignment(.leading)
+//                }
+//                .frame(width: 150)
             }
         }
     }

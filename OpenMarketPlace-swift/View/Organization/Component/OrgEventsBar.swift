@@ -12,7 +12,7 @@ struct OrgEventsBar: View {
         VStack (alignment: .leading) {
             OrgNavLink(title: "Events")
             Divider()
-            ScrollView(.horizontal) {
+            ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(0..<5) { i in
                         OrgEventCell()
