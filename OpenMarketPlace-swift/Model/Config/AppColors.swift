@@ -19,4 +19,5 @@ struct AppColors {
     static let generalCoinForegroundColor = Color.init(#colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1))
     static let lightGray = Color(hex: 0xf7f8fa)
     static let lightGray2 = Color(hex: 0xf3f3f3)
+    static let darkGray = Color(hex: 0x595959)
 }

@@ -8,8 +8,22 @@
 import SwiftUI
 
 struct OrganizationView: View {
+    @State var selection: Int = 0
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            AppColors.lightGray
+            ScrollView () {
+                VStack {
+                    OrgTitleBar()
+                    Image("TestPoster2")
+                        .resizable()
+                        .frame(height: 250, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        
+                    OrgEventsBar()
+                    OrgItemGrid()
+                }
+            }
+        }
     }
 }
 
