@@ -37,7 +37,7 @@ struct CartViewItemCell: View {
                     }
                     Spacer()
                     HStack (alignment: .bottom) {
-                        Text("$200")
+                        Text("$300")
                             .fontWeight(.semibold)
                         Spacer()
                         ItemViewQuantityPicker()

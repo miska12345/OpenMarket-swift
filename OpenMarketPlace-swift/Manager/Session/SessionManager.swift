@@ -24,7 +24,7 @@ class SessionManager: ObservableObject {
             self.transactionManager = TransactionManager(token)
             self.marketplaceManager = MarketplaceManager(token)
             self.isLoggedIn = true
-            self.cartManager = CartManager(carts: [Cart](), session: self)
+            self.cartManager = CartManager(carts: [String : Cart](), session: self)
             self.newsfeedmanager = NewsFeedManager(token)
         }
         print("Session initiated!")

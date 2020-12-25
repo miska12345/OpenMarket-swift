@@ -9,57 +9,85 @@ import Foundation
 
 class CartManager: ObservableObject {
     
-    @Published var carts = [Cart]()
+    @Published var carts = [String: Cart]()
+    let CACHED_ORG = "CACHE_LIST_OF_ORGS"
+    let defaults = UserDefaults.standard
     @Published var session : SessionManager
-    init(carts: [Cart], session : SessionManager) {
+    
+    init(carts: [String : Cart], session : SessionManager) {
         self.carts = carts
         self.session = session
     }
     
-    func addCart(for cart: Cart) {
-        for oldCart in carts {
-            if (cart.id == oldCart.id) {
-                return
-            }
-            
-        }
-        self.carts.append(cart)
-    }
+//    func addCart(for cart: Cart, orgName: String) {
+//        carts[orgName] = cart
+//    }
     
-    func addItemToCart(newItem: Item) {
-        let currency = newItem.itemCurrency
-        for cart in carts {
-            if (cart.id == currency){
-                cart.addItem(with: newItem)
-                return
-            }
+    func addItemToCart(newItem: Item, orgName: String) {
+        print("called")
+        if let potentialCart = self.carts[orgName] {
+            potentialCart.addItem(with: newItem)
+        } else {
+            self.carts[orgName] = Cart(id: newItem.itemCurrency, shopName: orgName, items: [newItem])
         }
-        addCart(for: Cart(id: currency, shopName: newItem.owner, items: [newItem]))
+        self.onUpdateCarts(orgName: orgName)
         
     }
     
-    func deleteCart(for cart: Cart) {
-        if let index = carts.firstIndex(of: cart) {
-            carts.remove(at: index)
-        } else {
-            print("No such cart")
-        }
+    func deleteCart(for cart: Cart, orgName: String) {
+        self.carts.removeValue(forKey: orgName)
     }
     
-    func onDeleteCartTapped(for cart: Cart) {
+    func onDeleteCartTapped(for cart: Cart, orgName: String) {
         if (cart.items.count == 0) {
-            deleteCart(for: cart)
+            deleteCart(for: cart, orgName: orgName)
         }
     }
     
-    func onCheckoutTapped(for cart: Cart, perform: @escaping ([Marketplace_ItemGrpc]?, OMError?) -> ()) {
-        let toCheckOut = self.carts[self.carts.firstIndex(of: cart)!]
-        var checkoutItems = [Marketplace_ItemGrpc]()
-        for item in toCheckOut.items{
-            checkoutItems.append(convertToItemGrpc(item: item))
+//    func onCheckoutTapped(for cart: Cart, perform: @escaping ([Marketplace_ItemGrpc]?, OMError?) -> ()) {
+//        let toCheckOut = self.carts[self.carts.firstIndex(of: cart)!]
+//        var checkoutItems = [Marketplace_ItemGrpc]()
+//        for item in toCheckOut.items{
+//            checkoutItems.append(convertToItemGrpc(item: item))
+//        }
+//        session.marketplaceManager?.checkout(items: checkoutItems, orgId: toCheckOut.shopName, currencyId: toCheckOut.id, perform: perform)
+//    }
+    
+    func getListingFromCache() {
+        print("called cache")
+        guard let savedOrgs = defaults.value(forKey: CACHED_ORG) as? [String] else {
+            print("you fucked up")
+            return
         }
-        session.marketplaceManager?.checkout(items: checkoutItems, orgId: toCheckOut.shopName, currencyId: toCheckOut.id, perform: perform)
+        
+        print(defaults.value(forKey: savedOrgs[0]) as! [String])
+        
+        
     }
+    
+    func onUpdateCarts(orgName: String) {
+        guard let savedOrgs = defaults.value(forKey: CACHED_ORG) as! NSArray? else {
+            defaults.setValue([orgName] as NSArray, forKey: CACHED_ORG)
+            defaults.setValue(self.carts[orgName], forKey: orgName)
+            return
+        }
+        
+        if (!savedOrgs.contains(orgName)) {
+            savedOrgs.adding(orgName)
+            defaults.setValue(savedOrgs, forKey: self.CACHED_ORG)
+        }
+        
+        var result = [String]()
+        for item in self.carts[orgName]!.items {
+            result.append(item.itemName)
+        }
+        defaults.setValue(result, forKey: orgName)
+    }
+    
+
+    
+    
+    
     
     func convertToItemGrpc(item : Item) -> Marketplace_ItemGrpc {
         var itemgrpc = Marketplace_ItemGrpc()

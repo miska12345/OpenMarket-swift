@@ -64,6 +64,8 @@ class ItemViewWrapper: ObservableObject {
 //        ItemView(showDetail: Binding(get: {
 //            return true
 //        }, set: { (_) in
-//        }))
+//        }), item: {() -> {
+//
+//        }})
 //    }
 //}

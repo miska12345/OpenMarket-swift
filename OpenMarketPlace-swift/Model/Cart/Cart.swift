@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Cart: Identifiable, ObservableObject, Equatable {
+class Cart: Equatable, Identifiable, ObservableObject{    
     //currency id
     let id: String
     let shopName: String
@@ -18,7 +18,7 @@ class Cart: Identifiable, ObservableObject, Equatable {
         self.id = id
         self.shopName = shopName
         self.items = items
-        updateSubtotal()
+        //updateSubtotal()
     }
     
     func setItemQuantity(with item: Item, q quantity: Int) {
