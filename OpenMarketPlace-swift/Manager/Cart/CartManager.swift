@@ -23,6 +23,10 @@ class CartManager: ObservableObject {
 //        carts[orgName] = cart
 //    }
     
+    func isCartEmpty() -> Bool {
+        return self.carts.count == 0
+    }
+    
     func addItemToCart(newItem: Item, orgName: String) {
         print("called")
         if let potentialCart = self.carts[orgName] {
