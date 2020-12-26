@@ -8,20 +8,19 @@
 import SwiftUI
 
 struct CartViewCheckoutButton: View {
+    var title: String = "Check Out"
+    var action: ()->Void = {}
     var body: some View {
         RoundedRectangle(cornerRadius: 20)
             .foregroundColor(AppColors.primaryColor)
             .frame(height: 50)
             .shadow(color: .gray, radius: 2, x: 0, y: 0)
             .overlay(
-                Text("Check Out")
+                Text(title)
                     .font(.system(size: 20))
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
             )
-            .onTapGesture(perform: {
-                print("CheckOut La")
-            })
     }
 }
 

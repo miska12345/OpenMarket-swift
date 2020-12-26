@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct NewCartView: View {
+    @State var showCheckOutView: Bool = false
+    @State var isPresented = false
     var body: some View {
         NavigationView() {
             ZStack (alignment: .bottom) {
@@ -24,12 +26,21 @@ struct NewCartView: View {
                     }
                     .padding()
                 }
-                CartViewCheckoutButton().padding()
+                NavigationLink(
+                    destination: NewCheckOutView(),
+                    isActive: $isPresented,
+                    label: {
+                        CartViewCheckoutButton()
+                            .padding()
+                    }).isDetailLink(false)
+                    .buttonStyle(PlainButtonStyle())
                 
                 .navigationTitle("Cart")
                 .navigationBarTitleDisplayMode(.inline)
             }
+            
         }
+        .environment(\.rootPresentationMode, self.$isPresented)
     }
 }
 

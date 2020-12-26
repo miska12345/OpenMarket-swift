@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct CartViewItemCell: View {
+    var isQuantityChangable: Bool = false
+    var isCancelable: Bool = true
+    var isOutOfStock: Bool = false
+    var backgroundColor: Color = Color.white
     var body: some View {
         HStack (alignment: .top, spacing: 0) {
             Image("Item_PS5")
@@ -18,6 +22,7 @@ struct CartViewItemCell: View {
                     RoundedRectangle(cornerRadius: 10)
                 )
                 .padding(.vertical, 10)
+//                .padding(.leading, 20)
             Spacer()
             ZStack (alignment: .bottom) {
                 VStack (alignment: .leading) {
@@ -27,12 +32,14 @@ struct CartViewItemCell: View {
                             .minimumScaleFactor(0.5)
                             .font(.system(size: 16))
                         Spacer()
-                        Button(action: {
-                            print("Delete item pressed")
-                        }) {
-                            Image(systemName: "xmark")
-                                .foregroundColor(.gray)
-                                .padding(.leading)
+                        if isCancelable {
+                            Button(action: {
+                                print("Delete item pressed")
+                            }) {
+                                Image(systemName: "xmark")
+                                    .foregroundColor(.gray)
+                                    .padding(.leading)
+                            }
                         }
                     }
                     Spacer()
@@ -40,19 +47,33 @@ struct CartViewItemCell: View {
                         Text("$300")
                             .fontWeight(.semibold)
                         Spacer()
-                        ItemViewQuantityPicker()
-                            .frame(width: 110)
+                        if isQuantityChangable {
+                            ItemViewQuantityPicker()
+                                .frame(width: 110)
+                        } else {
+                            if isOutOfStock {
+                                Text("Out of Stock")
+                                    .foregroundColor(.red)
+                            } else {
+                                Text("20")
+                                    .frame(minWidth: 50, minHeight: 40)
+                                    .background(AppColors.lightGray)
+                                    
+                                    .clipShape(RoundedRectangle(cornerRadius: 10, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))
+                            }
+                        }
                     }
                 }.padding(.vertical, 10)
-                .padding(.trailing, 20)
+//                .padding(.trailing, 20)
                 ExDivider(color: AppColors.lightGray2, width: 1)
             }
         }
+        .padding(.horizontal, 20)
         .frame(maxHeight: 125)
         .background(
-            Color.white
+            backgroundColor
         )
-        .padding(.leading, 20)
+//        .padding(.leading, 20)
         .onTapGesture {
             print("Item tapped")
         }

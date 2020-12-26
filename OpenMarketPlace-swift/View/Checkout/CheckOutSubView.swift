@@ -30,7 +30,7 @@ struct CheckOutSubView: View {
                         .frame(width: 150, height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .scaledToFit()
             }
-        
+
             List(unprocessed) {item in
                 VStack{
                     HStack{
@@ -46,18 +46,18 @@ struct CheckOutSubView: View {
                         Text("\(item.orderQuantity)")
                     }
                 }
-                
-                    
+
+
             }
             .shadow(radius: 10)
             .padding(.all, 20)
-            
+
             GeneralButton(title: "OK") {
                 self.showSheet = false
             }.padding()
             .padding([.horizontal], 5)
             Spacer()
-            
+
         }
     }
 }
