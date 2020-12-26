@@ -13,28 +13,23 @@ struct TabBarView: View {
         TabView {
             ShopView()
                 .tabItem {
-                    Image(systemName: "1.square.fill")
+                    Image(systemName: "house.fill")
                     Text("Home")
                 }
             NewCartView()
                 .tabItem {
-                    Image(systemName: "2.square.fill")
+                    Image(systemName: "cart.fill")
                     Text("Cart")
-                }
-            ShopView()
-                .tabItem {
-                    Image(systemName: "3.square.fill")
-                    Text("Shop")
                 }
             EventView(session: session)
                 .tabItem {
-                    Image(systemName: "4.square.fill")
+                    Image(systemName: "gift.fill")
                     Text("Event")
                 }
-            NewWalletView(session: session)
+            ProfileView(session: _session)
                 .tabItem {
-                    Image(systemName: "5.square.fill")
-                    Text("Wallet")
+                    Image(systemName: "person.fill")
+                    Text("Account")
                 }
         }
     }

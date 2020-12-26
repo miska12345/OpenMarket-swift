@@ -8,41 +8,99 @@
 import SwiftUI
 
 struct ProfileView: View {
-    var usernmae: String;
+    @EnvironmentObject var session: SessionManager
     var body: some View {
-
-        ZStack{
-            Color(red: 0.9547, green: 0.9297, blue: 0.9297).ignoresSafeArea()
-            ScrollView{
-                VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: /*@START_MENU_TOKEN@*/nil/*@END_MENU_TOKEN@*/, content: {
-                    Image("eagle")
-                        .resizable()
-                        .clipShape(Circle())
-                        .frame(width: 150, height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .aspectRatio(1, contentMode: ContentMode.fit)
-
-                    Text(usernmae)
-                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                        .padding ()
-                    Divider().padding(.bottom)
-                    
-                    ForEach (data, id:\.self) { str in
-                        let img = Image("eagle")
-                        OrgMinView(OrganizationName: str, OrgLogo: img)
-                            .padding(.bottom, 1)
+        NavigationView {
+            ZStack {
+                AppColors.lightGray.edgesIgnoringSafeArea(.all)
+                VStack (spacing: 0) {
+                    HStack {
+                        Text("Account")
+                            .font(.title2)
                     }
-                })
+                    ScrollView {
+                        VStack {
+                            InfoCell()
+                            NavigationLink(
+                                destination: NewWalletView(session: session),
+                                label: {
+                                    NavButtonWithBackground(text: "My Wallet")
+                                }).buttonStyle(PlainButtonStyle())
+                            
+                            NavigationLink(
+                                destination: OrderView(),
+                                label: {
+                                    NavButtonWithBackground(text: "My Orders")
+                                }).buttonStyle(PlainButtonStyle())
+                            NavButtonWithBackground(text: "My Organizations")
+                            NavPanelForOpenMarket()
+                            HStack {
+                                Spacer()
+                                Text("Log Out")
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(Color.gray)
+                                Spacer()
+                            }
+                            .frame(height: 50)
+                            .background(Color.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            Spacer()
+                        }.padding()
+                    }
+                }
             }
+            .navigationBarTitle("Account")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarHidden(true)
         }
-        
-        
+    }
+    
+    struct NavPanelForOpenMarket: View {
+        var body: some View {
+            VStack (spacing: 25) {
+                NavButton(text: "Help Center")
+                NavButton(text: "About OpenMarket")
+            }.padding()
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+        }
+    }
+    
+    struct NavButtonWithBackground: View {
+        var text: String = "My Wallet"
+        var body: some View {
+            NavButton(text: text).padding().background(Color.white).clipShape(RoundedRectangle(cornerRadius: 10))
+        }
+    }
+    
+    struct InfoCell: View {
+        var body: some View {
+            HStack {
+                Image("DefaultAvatar_Male")
+                    .resizable()
+                    .frame(width: 75, height: 75, alignment: .center)
+                    .scaledToFit()
+                VStack (alignment: .leading) {
+                    Text("Miska")
+                        .font(.system(size: 20))
+                        .bold()
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(1)
+                        .scaledToFit()
+                    Text("ID: miska123")
+                        .lineLimit(1)
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+            }.padding()
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+        }
     }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(usernmae: "JGod")
+        ProfileView()
     }
 }
-
-let data = ["Organization of Hua ClassMate", "Organization of Tua ClassMate", "Organization of Jua ClassMate", "Organization of Kua ClassMate", "Organization of Dua ClassMate", "Organization of Zua ClassMate"]

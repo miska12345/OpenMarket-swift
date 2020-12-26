@@ -10,9 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var session : SessionManager
     var body: some View {
-        LoginView()
-//        OrganizationView()
-        //ShopView()
+        LoginView(session: _session)
     }
 }
 
