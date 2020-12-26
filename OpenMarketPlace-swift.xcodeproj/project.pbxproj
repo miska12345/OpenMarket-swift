@@ -61,6 +61,15 @@
 		004705AC251E8BBE00BE9E6B /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004705AB251E8BBE00BE9E6B /* EventDetailView.swift */; };
 		004AC4D8251AA3EC00E0EA33 /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004AC4D7251AA3EC00E0EA33 /* CartManager.swift */; };
 		004AC4E9251ABD1C00E0EA33 /* GeneralButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004AC4E8251ABD1C00E0EA33 /* GeneralButton.swift */; };
+		00545AA82596B36600F92AE2 /* NewsFeed.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00545AA72596B36600F92AE2 /* NewsFeed.pb.swift */; };
+		00545AAB2596B3BF00F92AE2 /* GeneralBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00545AAA2596B3BF00F92AE2 /* GeneralBackButton.swift */; };
+		00545AAF2596B3E000F92AE2 /* NewsFeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00545AAE2596B3E000F92AE2 /* NewsFeedManager.swift */; };
+		00545AB72596B40B00F92AE2 /* OrgTitleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00545AB22596B40B00F92AE2 /* OrgTitleBar.swift */; };
+		00545AB82596B40B00F92AE2 /* OrgEventsBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00545AB32596B40B00F92AE2 /* OrgEventsBar.swift */; };
+		00545AB92596B40B00F92AE2 /* OrgNavLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00545AB42596B40B00F92AE2 /* OrgNavLink.swift */; };
+		00545ABA2596B40B00F92AE2 /* OrgItemGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00545AB52596B40B00F92AE2 /* OrgItemGrid.swift */; };
+		00545ABB2596B40B00F92AE2 /* OrgEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00545AB62596B40B00F92AE2 /* OrgEventCell.swift */; };
+		00545ABE2596B49700F92AE2 /* NewsFeed.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00545ABD2596B49700F92AE2 /* NewsFeed.grpc.swift */; };
 		008C27E6258C17AC0029C26F /* BottomSheet-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 008C27E5258C17AC0029C26F /* BottomSheet-SwiftUI */; };
 		008C27EB258C23240029C26F /* WalletTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008C27EA258C23240029C26F /* WalletTopBar.swift */; };
 		008C2800258C45CE0029C26F /* HomePageSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008C27FF258C45CE0029C26F /* HomePageSearchBar.swift */; };
@@ -175,6 +184,15 @@
 		004705AB251E8BBE00BE9E6B /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		004AC4D7251AA3EC00E0EA33 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
 		004AC4E8251ABD1C00E0EA33 /* GeneralButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralButton.swift; sourceTree = "<group>"; };
+		00545AA72596B36600F92AE2 /* NewsFeed.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeed.pb.swift; sourceTree = "<group>"; };
+		00545AAA2596B3BF00F92AE2 /* GeneralBackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralBackButton.swift; sourceTree = "<group>"; };
+		00545AAE2596B3E000F92AE2 /* NewsFeedManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedManager.swift; sourceTree = "<group>"; };
+		00545AB22596B40B00F92AE2 /* OrgTitleBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgTitleBar.swift; sourceTree = "<group>"; };
+		00545AB32596B40B00F92AE2 /* OrgEventsBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgEventsBar.swift; sourceTree = "<group>"; };
+		00545AB42596B40B00F92AE2 /* OrgNavLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgNavLink.swift; sourceTree = "<group>"; };
+		00545AB52596B40B00F92AE2 /* OrgItemGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgItemGrid.swift; sourceTree = "<group>"; };
+		00545AB62596B40B00F92AE2 /* OrgEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgEventCell.swift; sourceTree = "<group>"; };
+		00545ABD2596B49700F92AE2 /* NewsFeed.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeed.grpc.swift; sourceTree = "<group>"; };
 		008C27EA258C23240029C26F /* WalletTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTopBar.swift; sourceTree = "<group>"; };
 		008C27FF258C45CE0029C26F /* HomePageSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageSearchBar.swift; sourceTree = "<group>"; };
 		008C2802258C463A0029C26F /* HomePageSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageSearchTextField.swift; sourceTree = "<group>"; };
@@ -414,6 +432,7 @@
 		000CF630251B262600EAAEED /* Organization */ = {
 			isa = PBXGroup;
 			children = (
+				00545AB12596B40B00F92AE2 /* Component */,
 				000CF631251B262600EAAEED /* OrganizationStore.swift */,
 				008C2872258F207C0029C26F /* OrganizationView.swift */,
 			);
@@ -484,6 +503,7 @@
 		0022AD46258AE4E10086861C /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				00545AAA2596B3BF00F92AE2 /* GeneralBackButton.swift */,
 				004AC4E8251ABD1C00E0EA33 /* GeneralButton.swift */,
 			);
 			path = Button;
@@ -518,6 +538,7 @@
 		0047051E251D8D2A00BE9E6B /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				00545AAD2596B3E000F92AE2 /* NewsFeed */,
 				679CC55F251F1B8A00CDEF9E /* Transaction */,
 				679CC479251EFA7D00CDEF9E /* Cart */,
 				679CC46F251E9E2800CDEF9E /* MarketPlaceManager */,
@@ -575,6 +596,26 @@
 				67185AEA25203EE1008812DB /* CheckOutSubView.swift */,
 			);
 			path = Checkout;
+			sourceTree = "<group>";
+		};
+		00545AAD2596B3E000F92AE2 /* NewsFeed */ = {
+			isa = PBXGroup;
+			children = (
+				00545AAE2596B3E000F92AE2 /* NewsFeedManager.swift */,
+			);
+			path = NewsFeed;
+			sourceTree = "<group>";
+		};
+		00545AB12596B40B00F92AE2 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				00545AB22596B40B00F92AE2 /* OrgTitleBar.swift */,
+				00545AB32596B40B00F92AE2 /* OrgEventsBar.swift */,
+				00545AB42596B40B00F92AE2 /* OrgNavLink.swift */,
+				00545AB52596B40B00F92AE2 /* OrgItemGrid.swift */,
+				00545AB62596B40B00F92AE2 /* OrgEventCell.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		008C27F0258C300C0029C26F /* Component */ = {
@@ -678,6 +719,8 @@
 		679CC566251F1BD500CDEF9E /* GRPC */ = {
 			isa = PBXGroup;
 			children = (
+				00545ABD2596B49700F92AE2 /* NewsFeed.grpc.swift */,
+				00545AA72596B36600F92AE2 /* NewsFeed.pb.swift */,
 				679CC567251F1BD500CDEF9E /* proto */,
 				679CC56E251F1BD500CDEF9E /* MarketPlace.pb.swift */,
 				0022AD2E2589D2F90086861C /* StampEvent.grpc.swift */,
@@ -878,10 +921,12 @@
 				000CF60B251B014800EAAEED /* DetailButton.swift in Sources */,
 				000CF635251B262600EAAEED /* OrgMinView.swift in Sources */,
 				00470566251DBA1B00BE9E6B /* RegistrationView.swift in Sources */,
+				00545ABE2596B49700F92AE2 /* NewsFeed.grpc.swift in Sources */,
 				679CC58C251F1BFF00CDEF9E /* InfoView.swift in Sources */,
 				0022AD352589D8FA0086861C /* DateExtension.swift in Sources */,
 				0008516925191F7700BFE2BE /* AppDelegate.swift in Sources */,
 				008C285A258ED42D0029C26F /* ExDivider.swift in Sources */,
+				00545AA82596B36600F92AE2 /* NewsFeed.pb.swift in Sources */,
 				000CF5FF251ADDB600EAAEED /* CheckoutView.swift in Sources */,
 				008C2821258D629C0029C26F /* HomeViewNavBoard.swift in Sources */,
 				008DE0AC258B192B005F6F8E /* WalletToolBarMenu.swift in Sources */,
@@ -895,6 +940,9 @@
 				0008516B25191F7700BFE2BE /* SceneDelegate.swift in Sources */,
 				00470573251DBD6200BE9E6B /* UIResponder.swift in Sources */,
 				008DE0A7258AFB58005F6F8E /* WalletSegmentedPicker.swift in Sources */,
+				00545AB92596B40B00F92AE2 /* OrgNavLink.swift in Sources */,
+				00545AB82596B40B00F92AE2 /* OrgEventsBar.swift in Sources */,
+				00545AB72596B40B00F92AE2 /* OrgTitleBar.swift in Sources */,
 				00ABA913252028A8004FD55D /* NewEventView.swift in Sources */,
 				008C2869258EF7120029C26F /* CartViewOrgCell.swift in Sources */,
 				004AC4E9251ABD1C00E0EA33 /* GeneralButton.swift in Sources */,
@@ -910,6 +958,7 @@
 				008C2816258C88350029C26F /* ItemViewQuantityPicker.swift in Sources */,
 				00470563251DB61800BE9E6B /* OMError.swift in Sources */,
 				000CF62A251B261700EAAEED /* ItemDescriptionAndSeller.swift in Sources */,
+				00545AAF2596B3E000F92AE2 /* NewsFeedManager.swift in Sources */,
 				679CC57D251F1BD500CDEF9E /* MarketPlace.pb.swift in Sources */,
 				004AC4D8251AA3EC00E0EA33 /* CartManager.swift in Sources */,
 				0047052D251D9EEF00BE9E6B /* User.swift in Sources */,
@@ -928,8 +977,10 @@
 				679CC580251F1BD500CDEF9E /* Transaction.grpc.swift in Sources */,
 				679CC561251F1B8A00CDEF9E /* TransactionManager.swift in Sources */,
 				008C2873258F207C0029C26F /* OrganizationView.swift in Sources */,
+				00545AAB2596B3BF00F92AE2 /* GeneralBackButton.swift in Sources */,
 				008C27EB258C23240029C26F /* WalletTopBar.swift in Sources */,
 				0047050E251D822E00BE9E6B /* AuthManager.swift in Sources */,
+				00545ABB2596B40B00F92AE2 /* OrgEventCell.swift in Sources */,
 				000CF685251D6E0500EAAEED /* EventManager.swift in Sources */,
 				00F5C9182520654100FC20C0 /* EventDropDownPicker.swift in Sources */,
 				0022AD2F2589D2F90086861C /* StampEvent.pb.swift in Sources */,
@@ -972,6 +1023,7 @@
 				0047051B251D8C5400BE9E6B /* Constants.swift in Sources */,
 				000CF621251B25FD00EAAEED /* TrendingRow.swift in Sources */,
 				679CC577251F1BD500CDEF9E /* Transaction.proto in Sources */,
+				00545ABA2596B40B00F92AE2 /* OrgItemGrid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
