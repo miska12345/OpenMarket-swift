@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var session: SessionManager
+    @EnvironmentObject var viewModel: TabBarModel
     var body: some View {
         NavigationView {
             ZStack {
@@ -44,6 +45,9 @@ struct ProfileView: View {
                             .frame(height: 50)
                             .background(Color.white)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .onTapGesture {
+                                self.viewModel.showTabbarView()
+                            }
                             Spacer()
                         }.padding()
                     }
