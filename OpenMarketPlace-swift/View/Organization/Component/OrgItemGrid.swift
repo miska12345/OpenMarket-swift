@@ -22,11 +22,7 @@ struct OrgItemGrid: View {
 //            }
             OrgNavLink(title: "Items")
             Grid(0..<6) { _ in
-                HomeViewItemCell(showDetail: $showDetailSheet, item: {() -> Newsfeed_ItemGrpc in
-                    var temp = Newsfeed_ItemGrpc()
-                    temp.itemName = "ABC"
-                    return temp
-                }(), currentItem: shownItem)
+                HomeViewItemCell(showDetail: $showDetailSheet, item: Item(id: 1, itemName: "ABC", price: 10, itemDescription: "dlkfjakldnv", orderQuantity: 10, stock: 10, category: "", owner: ""), currentItem: shownItem)
             }
             .gridStyle(
                 StaggeredGridStyle(.vertical, tracks: 2, spacing: 10)

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeViewItemCell: View {
     @Binding var showDetail: Bool
-    var item : Newsfeed_ItemGrpc
+    var item : Item
     var imageName: String = "Item_PS5"
     var tag: RecommendedItemCellTag = RecommendedItemCellTag(text: "Free Shipping", color: .orange)
     var displayTag: Bool = true
@@ -60,7 +60,7 @@ struct HomeViewItemCell: View {
                     
                     Tag(tagConfig: tag)
                     HStack {
-                        let priceToShow = String.toCurrencyStr(balance: item.itemPrice, useSymbol: true)
+                        let priceToShow = String.toCurrencyStr(balance: item.price, useSymbol: true)
                         Text(priceToShow ?? "-")
                             .font(.system(size: 18))
                             .scaledToFill()

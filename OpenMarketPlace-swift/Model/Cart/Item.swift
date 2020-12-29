@@ -7,12 +7,12 @@
 
 import Foundation
 
-class Item: Equatable, Identifiable{
-    let id: String
+class Item: Equatable, Identifiable, ObservableObject{
+    let id: Int
     let itemName: String
     let price: Double
     let itemDescription: String
-    var orderQuantity: Int
+    @Published var orderQuantity: Int
     var stock: Int
     var imageName: String = "cssa_logo"
     let category: String
@@ -20,7 +20,7 @@ class Item: Equatable, Identifiable{
     //ADD THIS TO INIT LATER
     let itemCurrency: String = "DashCoin"
     
-    init(id: String, itemName: String, price: Double, itemDescription: String, orderQuantity: Int, stock: Int, category: String, owner: String) {
+    init(id: Int, itemName: String, price: Double, itemDescription: String, orderQuantity: Int, stock: Int, category: String, owner: String) {
         self.id = id;
         self.itemName = itemName
         self.price = price
@@ -40,6 +40,6 @@ class Item: Equatable, Identifiable{
     }
     
     static func == (lhs: Item, rhs: Item) -> Bool {
-        return lhs.id.elementsEqual(rhs.id)
+        return lhs.id == rhs.id
     }
 }
