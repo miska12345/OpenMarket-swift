@@ -11,7 +11,7 @@ struct OrganizationView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var session: SessionManager
     @State var organization = OrgMetadata()
-    var orgID: String = "testOrgx"
+    var orgID: String = "testOrg"
     var body: some View {
         ZStack(alignment: .top) {
             AppColors.lightGray
@@ -24,7 +24,7 @@ struct OrganizationView: View {
                         OrgTitleBar(name: organization.orgName, currency: organization.orgCurrency)
                         Image("TestPoster2")
                             .resizable()
-                            .frame(height: 250, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .frame(height: 250, alignment: .center)
                         
                         VStack {
                             OrgEventsBar()

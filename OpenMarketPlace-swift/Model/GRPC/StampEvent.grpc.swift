@@ -49,10 +49,10 @@ fileprivate final class Event_StampEventgetEventCallBase: ClientCallUnaryBase<Ev
   override class var method: String { return "/event.StampEvent/getEvent" }
 }
 
-internal protocol Event_StampEventgetOwnedEventCall: ClientCallUnary {}
+internal protocol Event_StampEventgetEventListCall: ClientCallUnary {}
 
-fileprivate final class Event_StampEventgetOwnedEventCallBase: ClientCallUnaryBase<Event_GetOwnedEventRequest, Event_GetOwnedEventResult>, Event_StampEventgetOwnedEventCall {
-  override class var method: String { return "/event.StampEvent/getOwnedEvent" }
+fileprivate final class Event_StampEventgetEventListCallBase: ClientCallUnaryBase<Event_GetEventListRequest, Event_GetEventListResult>, Event_StampEventgetEventListCall {
+  override class var method: String { return "/event.StampEvent/getEventList" }
 }
 
 
@@ -83,10 +83,10 @@ internal protocol Event_StampEventService: ServiceClient {
   func getEvent(_ request: Event_GetEventRequest, metadata customMetadata: Metadata, completion: @escaping (Event_GetEventResult?, CallResult) -> Void) throws -> Event_StampEventgetEventCall
 
   /// Synchronous. Unary.
-  func getOwnedEvent(_ request: Event_GetOwnedEventRequest, metadata customMetadata: Metadata) throws -> Event_GetOwnedEventResult
+  func getEventList(_ request: Event_GetEventListRequest, metadata customMetadata: Metadata) throws -> Event_GetEventListResult
   /// Asynchronous. Unary.
   @discardableResult
-  func getOwnedEvent(_ request: Event_GetOwnedEventRequest, metadata customMetadata: Metadata, completion: @escaping (Event_GetOwnedEventResult?, CallResult) -> Void) throws -> Event_StampEventgetOwnedEventCall
+  func getEventList(_ request: Event_GetEventListRequest, metadata customMetadata: Metadata, completion: @escaping (Event_GetEventListResult?, CallResult) -> Void) throws -> Event_StampEventgetEventListCall
 
 }
 
@@ -132,13 +132,13 @@ internal extension Event_StampEventService {
   }
 
   /// Synchronous. Unary.
-  func getOwnedEvent(_ request: Event_GetOwnedEventRequest) throws -> Event_GetOwnedEventResult {
-    return try self.getOwnedEvent(request, metadata: self.metadata)
+  func getEventList(_ request: Event_GetEventListRequest) throws -> Event_GetEventListResult {
+    return try self.getEventList(request, metadata: self.metadata)
   }
   /// Asynchronous. Unary.
   @discardableResult
-  func getOwnedEvent(_ request: Event_GetOwnedEventRequest, completion: @escaping (Event_GetOwnedEventResult?, CallResult) -> Void) throws -> Event_StampEventgetOwnedEventCall {
-    return try self.getOwnedEvent(request, metadata: self.metadata, completion: completion)
+  func getEventList(_ request: Event_GetEventListRequest, completion: @escaping (Event_GetEventListResult?, CallResult) -> Void) throws -> Event_StampEventgetEventListCall {
+    return try self.getEventList(request, metadata: self.metadata, completion: completion)
   }
 
 }
@@ -193,14 +193,14 @@ internal final class Event_StampEventServiceClient: ServiceClientBase, Event_Sta
   }
 
   /// Synchronous. Unary.
-  internal func getOwnedEvent(_ request: Event_GetOwnedEventRequest, metadata customMetadata: Metadata) throws -> Event_GetOwnedEventResult {
-    return try Event_StampEventgetOwnedEventCallBase(channel)
+  internal func getEventList(_ request: Event_GetEventListRequest, metadata customMetadata: Metadata) throws -> Event_GetEventListResult {
+    return try Event_StampEventgetEventListCallBase(channel)
       .run(request: request, metadata: customMetadata)
   }
   /// Asynchronous. Unary.
   @discardableResult
-  internal func getOwnedEvent(_ request: Event_GetOwnedEventRequest, metadata customMetadata: Metadata, completion: @escaping (Event_GetOwnedEventResult?, CallResult) -> Void) throws -> Event_StampEventgetOwnedEventCall {
-    return try Event_StampEventgetOwnedEventCallBase(channel)
+  internal func getEventList(_ request: Event_GetEventListRequest, metadata customMetadata: Metadata, completion: @escaping (Event_GetEventListResult?, CallResult) -> Void) throws -> Event_StampEventgetEventListCall {
+    return try Event_StampEventgetEventListCallBase(channel)
       .start(request: request, metadata: customMetadata, completion: completion)
   }
 
