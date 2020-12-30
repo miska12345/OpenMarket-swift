@@ -8,17 +8,23 @@
 import SwiftUI
 
 struct ItemViewQuantityPicker: View {
-    @State var quantity: UInt = 1
+    var quantity: UInt = 1
+    var performUponIncreament: ((_ amount: Int) -> Void)?
+    var performUponDecreament: ((_ amount: Int) -> Void)?
+    
+    func doNoting(amount: Int) {
+        print("do nothing")
+    }
     var body: some View {
         HStack {
             if quantity > 0 {
                 if isLastItem() {
                     ItemViewButton(iconName: "trash.fill") {
-                        decrementQuantity()
+                        performUponDecreament!(Int(quantity))
                     }
                 } else {
                     ItemViewButton(iconName: "minus") {
-                        decrementQuantity()
+                        performUponDecreament!(1)
                     }
                 }
                 Spacer()
@@ -27,26 +33,20 @@ struct ItemViewQuantityPicker: View {
                 Spacer()
             }
             ItemViewButton(iconName: "plus") {
-                incrementQuantity()
+                performUponIncreament!(1)
             }
         }
     }
     
-    func incrementQuantity() {
-        self.quantity += 1
-    }
-    
-    func decrementQuantity() {
-        self.quantity -= 1
-    }
+
     
     func isLastItem() -> Bool {
         return self.quantity == 1
     }
 }
-
-struct ItemViewQuantityPicker_Previews: PreviewProvider {
-    static var previews: some View {
-        ItemViewQuantityPicker()
-    }
-}
+//
+//struct ItemViewQuantityPicker_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ItemViewQuantityPicker()
+//    }
+//}

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ItemDetailViewInfo: View {
-    var item : Newsfeed_ItemGrpc
+    var item : Item
     var body: some View {
         VStack (alignment: .leading) {
             HStack (alignment: .top) {
@@ -27,7 +27,7 @@ struct ItemDetailViewInfo: View {
             .padding(.bottom, 5)
             HStack (alignment: .bottom) {
                 HStack (alignment: .bottom) {
-                    Text(String.toCurrencyStr(balance: item.itemPrice, useSymbol: true)!)
+                    Text(String.toCurrencyStr(balance: item.price, useSymbol: true)!)
                         .bold()
                         .font(.system(size: 35))
                         .minimumScaleFactor(0.5)
@@ -47,7 +47,7 @@ struct ItemDetailViewInfo: View {
                                         .scaledToFit()
                                         .frame(width: 25, height: 25, alignment: .center)
                                         .clipShape(Circle())
-                                    Text("Organization of Bubble Tea")
+                                    Text(self.item.owner)
                                         .font(.system(size: 12))
                                         .lineLimit(2)
                                         .multilineTextAlignment(.leading)

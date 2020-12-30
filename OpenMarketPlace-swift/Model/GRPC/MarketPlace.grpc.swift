@@ -25,10 +25,16 @@ import Foundation
 import SwiftGRPC
 import SwiftProtobuf
 
-internal protocol Marketplace_MarketPlacehandleAddItemsCall: ClientCallUnary {}
+internal protocol Marketplace_MarketPlacecheckoutCall: ClientCallUnary {}
 
-fileprivate final class Marketplace_MarketPlacehandleAddItemsCallBase: ClientCallUnaryBase<Marketplace_AddItemRequest, Marketplace_AddItemResult>, Marketplace_MarketPlacehandleAddItemsCall {
-  override class var method: String { return "/marketplace.MarketPlace/handleAddItems" }
+fileprivate final class Marketplace_MarketPlacecheckoutCallBase: ClientCallUnaryBase<Marketplace_CheckOutRequest, Marketplace_CheckOutResult>, Marketplace_MarketPlacecheckoutCall {
+  override class var method: String { return "/marketplace.MarketPlace/checkout" }
+}
+
+internal protocol Marketplace_MarketPlacegetAllOrdersCall: ClientCallUnary {}
+
+fileprivate final class Marketplace_MarketPlacegetAllOrdersCallBase: ClientCallUnaryBase<Marketplace_GetAllOrdersRequest, Marketplace_GetAllOrdersResult>, Marketplace_MarketPlacegetAllOrdersCall {
+  override class var method: String { return "/marketplace.MarketPlace/getAllOrders" }
 }
 
 internal protocol Marketplace_MarketPlacehandleGetOrgItemsCall: ClientCallUnary {}
@@ -37,26 +43,20 @@ fileprivate final class Marketplace_MarketPlacehandleGetOrgItemsCallBase: Client
   override class var method: String { return "/marketplace.MarketPlace/handleGetOrgItems" }
 }
 
-internal protocol Marketplace_MarketPlacehandleCheckoutCall: ClientCallUnary {}
-
-fileprivate final class Marketplace_MarketPlacehandleCheckoutCallBase: ClientCallUnaryBase<Marketplace_CheckOutRequest, Marketplace_CheckOutResult>, Marketplace_MarketPlacehandleCheckoutCall {
-  override class var method: String { return "/marketplace.MarketPlace/handleCheckout" }
-}
-
-internal protocol Marketplace_MarketPlacehandleGetSimilarItemsCall: ClientCallUnary {}
-
-fileprivate final class Marketplace_MarketPlacehandleGetSimilarItemsCallBase: ClientCallUnaryBase<Marketplace_GetSimilarItemsRequest, Marketplace_GetSimilarItemsResult>, Marketplace_MarketPlacehandleGetSimilarItemsCall {
-  override class var method: String { return "/marketplace.MarketPlace/handleGetSimilarItems" }
-}
-
 
 /// Instantiate Marketplace_MarketPlaceServiceClient, then call methods of this protocol to make API calls.
 internal protocol Marketplace_MarketPlaceService: ServiceClient {
   /// Synchronous. Unary.
-  func handleAddItems(_ request: Marketplace_AddItemRequest, metadata customMetadata: Metadata) throws -> Marketplace_AddItemResult
+  func checkout(_ request: Marketplace_CheckOutRequest, metadata customMetadata: Metadata) throws -> Marketplace_CheckOutResult
   /// Asynchronous. Unary.
   @discardableResult
-  func handleAddItems(_ request: Marketplace_AddItemRequest, metadata customMetadata: Metadata, completion: @escaping (Marketplace_AddItemResult?, CallResult) -> Void) throws -> Marketplace_MarketPlacehandleAddItemsCall
+  func checkout(_ request: Marketplace_CheckOutRequest, metadata customMetadata: Metadata, completion: @escaping (Marketplace_CheckOutResult?, CallResult) -> Void) throws -> Marketplace_MarketPlacecheckoutCall
+
+  /// Synchronous. Unary.
+  func getAllOrders(_ request: Marketplace_GetAllOrdersRequest, metadata customMetadata: Metadata) throws -> Marketplace_GetAllOrdersResult
+  /// Asynchronous. Unary.
+  @discardableResult
+  func getAllOrders(_ request: Marketplace_GetAllOrdersRequest, metadata customMetadata: Metadata, completion: @escaping (Marketplace_GetAllOrdersResult?, CallResult) -> Void) throws -> Marketplace_MarketPlacegetAllOrdersCall
 
   /// Synchronous. Unary.
   func handleGetOrgItems(_ request: Marketplace_GetOrgItemsRequest, metadata customMetadata: Metadata) throws -> Marketplace_GetOrgItemsResult
@@ -64,29 +64,27 @@ internal protocol Marketplace_MarketPlaceService: ServiceClient {
   @discardableResult
   func handleGetOrgItems(_ request: Marketplace_GetOrgItemsRequest, metadata customMetadata: Metadata, completion: @escaping (Marketplace_GetOrgItemsResult?, CallResult) -> Void) throws -> Marketplace_MarketPlacehandleGetOrgItemsCall
 
-  /// Synchronous. Unary.
-  func handleCheckout(_ request: Marketplace_CheckOutRequest, metadata customMetadata: Metadata) throws -> Marketplace_CheckOutResult
-  /// Asynchronous. Unary.
-  @discardableResult
-  func handleCheckout(_ request: Marketplace_CheckOutRequest, metadata customMetadata: Metadata, completion: @escaping (Marketplace_CheckOutResult?, CallResult) -> Void) throws -> Marketplace_MarketPlacehandleCheckoutCall
-
-  /// Synchronous. Unary.
-  func handleGetSimilarItems(_ request: Marketplace_GetSimilarItemsRequest, metadata customMetadata: Metadata) throws -> Marketplace_GetSimilarItemsResult
-  /// Asynchronous. Unary.
-  @discardableResult
-  func handleGetSimilarItems(_ request: Marketplace_GetSimilarItemsRequest, metadata customMetadata: Metadata, completion: @escaping (Marketplace_GetSimilarItemsResult?, CallResult) -> Void) throws -> Marketplace_MarketPlacehandleGetSimilarItemsCall
-
 }
 
 internal extension Marketplace_MarketPlaceService {
   /// Synchronous. Unary.
-  func handleAddItems(_ request: Marketplace_AddItemRequest) throws -> Marketplace_AddItemResult {
-    return try self.handleAddItems(request, metadata: self.metadata)
+  func checkout(_ request: Marketplace_CheckOutRequest) throws -> Marketplace_CheckOutResult {
+    return try self.checkout(request, metadata: self.metadata)
   }
   /// Asynchronous. Unary.
   @discardableResult
-  func handleAddItems(_ request: Marketplace_AddItemRequest, completion: @escaping (Marketplace_AddItemResult?, CallResult) -> Void) throws -> Marketplace_MarketPlacehandleAddItemsCall {
-    return try self.handleAddItems(request, metadata: self.metadata, completion: completion)
+  func checkout(_ request: Marketplace_CheckOutRequest, completion: @escaping (Marketplace_CheckOutResult?, CallResult) -> Void) throws -> Marketplace_MarketPlacecheckoutCall {
+    return try self.checkout(request, metadata: self.metadata, completion: completion)
+  }
+
+  /// Synchronous. Unary.
+  func getAllOrders(_ request: Marketplace_GetAllOrdersRequest) throws -> Marketplace_GetAllOrdersResult {
+    return try self.getAllOrders(request, metadata: self.metadata)
+  }
+  /// Asynchronous. Unary.
+  @discardableResult
+  func getAllOrders(_ request: Marketplace_GetAllOrdersRequest, completion: @escaping (Marketplace_GetAllOrdersResult?, CallResult) -> Void) throws -> Marketplace_MarketPlacegetAllOrdersCall {
+    return try self.getAllOrders(request, metadata: self.metadata, completion: completion)
   }
 
   /// Synchronous. Unary.
@@ -99,38 +97,30 @@ internal extension Marketplace_MarketPlaceService {
     return try self.handleGetOrgItems(request, metadata: self.metadata, completion: completion)
   }
 
-  /// Synchronous. Unary.
-  func handleCheckout(_ request: Marketplace_CheckOutRequest) throws -> Marketplace_CheckOutResult {
-    return try self.handleCheckout(request, metadata: self.metadata)
-  }
-  /// Asynchronous. Unary.
-  @discardableResult
-  func handleCheckout(_ request: Marketplace_CheckOutRequest, completion: @escaping (Marketplace_CheckOutResult?, CallResult) -> Void) throws -> Marketplace_MarketPlacehandleCheckoutCall {
-    return try self.handleCheckout(request, metadata: self.metadata, completion: completion)
-  }
-
-  /// Synchronous. Unary.
-  func handleGetSimilarItems(_ request: Marketplace_GetSimilarItemsRequest) throws -> Marketplace_GetSimilarItemsResult {
-    return try self.handleGetSimilarItems(request, metadata: self.metadata)
-  }
-  /// Asynchronous. Unary.
-  @discardableResult
-  func handleGetSimilarItems(_ request: Marketplace_GetSimilarItemsRequest, completion: @escaping (Marketplace_GetSimilarItemsResult?, CallResult) -> Void) throws -> Marketplace_MarketPlacehandleGetSimilarItemsCall {
-    return try self.handleGetSimilarItems(request, metadata: self.metadata, completion: completion)
-  }
-
 }
 
 internal final class Marketplace_MarketPlaceServiceClient: ServiceClientBase, Marketplace_MarketPlaceService {
   /// Synchronous. Unary.
-  internal func handleAddItems(_ request: Marketplace_AddItemRequest, metadata customMetadata: Metadata) throws -> Marketplace_AddItemResult {
-    return try Marketplace_MarketPlacehandleAddItemsCallBase(channel)
+  internal func checkout(_ request: Marketplace_CheckOutRequest, metadata customMetadata: Metadata) throws -> Marketplace_CheckOutResult {
+    return try Marketplace_MarketPlacecheckoutCallBase(channel)
       .run(request: request, metadata: customMetadata)
   }
   /// Asynchronous. Unary.
   @discardableResult
-  internal func handleAddItems(_ request: Marketplace_AddItemRequest, metadata customMetadata: Metadata, completion: @escaping (Marketplace_AddItemResult?, CallResult) -> Void) throws -> Marketplace_MarketPlacehandleAddItemsCall {
-    return try Marketplace_MarketPlacehandleAddItemsCallBase(channel)
+  internal func checkout(_ request: Marketplace_CheckOutRequest, metadata customMetadata: Metadata, completion: @escaping (Marketplace_CheckOutResult?, CallResult) -> Void) throws -> Marketplace_MarketPlacecheckoutCall {
+    return try Marketplace_MarketPlacecheckoutCallBase(channel)
+      .start(request: request, metadata: customMetadata, completion: completion)
+  }
+
+  /// Synchronous. Unary.
+  internal func getAllOrders(_ request: Marketplace_GetAllOrdersRequest, metadata customMetadata: Metadata) throws -> Marketplace_GetAllOrdersResult {
+    return try Marketplace_MarketPlacegetAllOrdersCallBase(channel)
+      .run(request: request, metadata: customMetadata)
+  }
+  /// Asynchronous. Unary.
+  @discardableResult
+  internal func getAllOrders(_ request: Marketplace_GetAllOrdersRequest, metadata customMetadata: Metadata, completion: @escaping (Marketplace_GetAllOrdersResult?, CallResult) -> Void) throws -> Marketplace_MarketPlacegetAllOrdersCall {
+    return try Marketplace_MarketPlacegetAllOrdersCallBase(channel)
       .start(request: request, metadata: customMetadata, completion: completion)
   }
 
@@ -143,30 +133,6 @@ internal final class Marketplace_MarketPlaceServiceClient: ServiceClientBase, Ma
   @discardableResult
   internal func handleGetOrgItems(_ request: Marketplace_GetOrgItemsRequest, metadata customMetadata: Metadata, completion: @escaping (Marketplace_GetOrgItemsResult?, CallResult) -> Void) throws -> Marketplace_MarketPlacehandleGetOrgItemsCall {
     return try Marketplace_MarketPlacehandleGetOrgItemsCallBase(channel)
-      .start(request: request, metadata: customMetadata, completion: completion)
-  }
-
-  /// Synchronous. Unary.
-  internal func handleCheckout(_ request: Marketplace_CheckOutRequest, metadata customMetadata: Metadata) throws -> Marketplace_CheckOutResult {
-    return try Marketplace_MarketPlacehandleCheckoutCallBase(channel)
-      .run(request: request, metadata: customMetadata)
-  }
-  /// Asynchronous. Unary.
-  @discardableResult
-  internal func handleCheckout(_ request: Marketplace_CheckOutRequest, metadata customMetadata: Metadata, completion: @escaping (Marketplace_CheckOutResult?, CallResult) -> Void) throws -> Marketplace_MarketPlacehandleCheckoutCall {
-    return try Marketplace_MarketPlacehandleCheckoutCallBase(channel)
-      .start(request: request, metadata: customMetadata, completion: completion)
-  }
-
-  /// Synchronous. Unary.
-  internal func handleGetSimilarItems(_ request: Marketplace_GetSimilarItemsRequest, metadata customMetadata: Metadata) throws -> Marketplace_GetSimilarItemsResult {
-    return try Marketplace_MarketPlacehandleGetSimilarItemsCallBase(channel)
-      .run(request: request, metadata: customMetadata)
-  }
-  /// Asynchronous. Unary.
-  @discardableResult
-  internal func handleGetSimilarItems(_ request: Marketplace_GetSimilarItemsRequest, metadata customMetadata: Metadata, completion: @escaping (Marketplace_GetSimilarItemsResult?, CallResult) -> Void) throws -> Marketplace_MarketPlacehandleGetSimilarItemsCall {
-    return try Marketplace_MarketPlacehandleGetSimilarItemsCallBase(channel)
       .start(request: request, metadata: customMetadata, completion: completion)
   }
 

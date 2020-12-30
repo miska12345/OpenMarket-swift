@@ -19,34 +19,27 @@ class CartManager: ObservableObject {
         self.session = session
     }
     
-//    func addCart(for cart: Cart, orgName: String) {
-//        carts[orgName] = cart
-//    }
     
     func isCartEmpty() -> Bool {
         return self.carts.count == 0
     }
     
-    func addItemToCart(newItem: Item, orgName: String) {
-        print("called")
+    func addItemToCart(newItem: Item, orgName: String, quanity: Int) {
+        var toAdd = newItem.copy()
+        toAdd.orderQuantity = quanity
         if let potentialCart = self.carts[orgName] {
-            potentialCart.addItem(with: newItem)
+            potentialCart.addItem(with: toAdd)
         } else {
-            self.carts[orgName] = Cart(id: newItem.itemCurrency, shopName: orgName, items: [newItem])
+
+            self.carts[orgName] = Cart(id: newItem.itemCurrency, shopName: orgName, items: [toAdd])
         }
-        self.onUpdateCarts(orgName: orgName)
         
     }
     
-    func deleteCart(for cart: Cart, orgName: String) {
+    func deleteCart(orgName: String) {
         self.carts.removeValue(forKey: orgName)
     }
     
-    func onDeleteCartTapped(for cart: Cart, orgName: String) {
-        if (cart.items.count == 0) {
-            deleteCart(for: cart, orgName: orgName)
-        }
-    }
     
 //    func onCheckoutTapped(for cart: Cart, perform: @escaping ([Marketplace_ItemGrpc]?, OMError?) -> ()) {
 //        let toCheckOut = self.carts[self.carts.firstIndex(of: cart)!]
@@ -72,7 +65,11 @@ class CartManager: ObservableObject {
     func onUpdateCarts(orgName: String) {
         guard let savedOrgs = defaults.value(forKey: CACHED_ORG) as! NSArray? else {
             defaults.setValue([orgName] as NSArray, forKey: CACHED_ORG)
-            defaults.setValue(self.carts[orgName], forKey: orgName)
+            var result = [String]()
+            for item in self.carts[orgName]!.items {
+                result.append(item.itemName)
+            }
+            defaults.setValue(result, forKey: orgName)
             return
         }
         
@@ -89,16 +86,22 @@ class CartManager: ObservableObject {
     }
     
 
+    func getCartsKeys() -> [String] {
+        var result = [String]()
+        for (key, _) in self.carts {
+            result.append(key)
+        }
+        
+        return result
+    }
     
     
     
-    
-    func convertToItemGrpc(item : Item) -> Marketplace_ItemGrpc {
-        var itemgrpc = Marketplace_ItemGrpc()
-        itemgrpc.itemID = item.id
+    func convertToItemGrpc(item : Item) -> Marketplace_MarketPlaceItem {
+        var itemgrpc = Marketplace_MarketPlaceItem()
+        itemgrpc.itemID = Int32(item.id)
         itemgrpc.itemName = item.itemName
         itemgrpc.itemPrice = item.price
-        itemgrpc.itemCount = Int32(item.orderQuantity)
         itemgrpc.belongTo = item.owner
         
         return itemgrpc

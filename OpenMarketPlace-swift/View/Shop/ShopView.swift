@@ -14,7 +14,7 @@ struct ShopView: View {
     @State var firstAppear = false
     @ObservedObject var shownItem : ItemViewWrapper = ItemViewWrapper()
     @State var showDetailSheet = false
-    @State var items : [Newsfeed_ItemGrpc] = []
+    @State var items : [Item] = []
 
     @EnvironmentObject var session: SessionManager
     var body: some View {
@@ -54,9 +54,8 @@ struct ShopView: View {
                                 SegmentItem(selectionIndex: 0, title: "Picks For You"),
                                 SegmentItem(selectionIndex: 1, title: "Top Deals")
                             ])
-                            
-                            Grid(items, id: \.self) { item in
-                                HomeViewItemCell(showDetail: $showDetailSheet, item: item, currentItem: shownItem)
+                            Grid(self.items.indices) { i in
+                                HomeViewItemCell(showDetail: $showDetailSheet, item: self.items[i], currentItem: shownItem)
                             }.padding(.horizontal)
                             
                             Text("You've reached my bottom line").padding()
@@ -76,7 +75,7 @@ struct ShopView: View {
                 //TODO change any to any cateogry later if needed
                 self.session.newsfeedmanager?.getTopDeals(limit: Constants.TOP_DEALS_COUNT, category: "any", perform: { (itemsGRPC, error) in
                     if (error == nil) {
-                        items = itemsGRPC!
+                        self.items = convertNewsFeedItemToItem(items: itemsGRPC!)
                         self.firstAppear = true
                     }
                     
@@ -86,6 +85,14 @@ struct ShopView: View {
         .sheet(isPresented: $showDetailSheet, content: {
             shownItem.shownDetailedItem
         })
+    }
+    
+    func convertNewsFeedItemToItem(items : [Newsfeed_ItemGrpc]) -> [Item] {
+        var result = [Item]()
+        for item in items {
+            result.append(Item(id: Int(item.itemID), itemName: item.itemName, price: item.itemPrice, itemDescription: item.itemDescription, orderQuantity: 0, stock: Int(item.itemStock), category: item.category, owner: item.belongTo))
+        }
+        return result
     }
 }
 
