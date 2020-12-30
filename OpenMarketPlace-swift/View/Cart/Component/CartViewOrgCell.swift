@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct CartViewOrgCell: View {
+    @ObservedObject var cart: Cart
+    @EnvironmentObject var session: SessionManager
     var body: some View {
         VStack (alignment: .trailing, spacing: 0) {
             HStack (alignment: .top) {
                 Label {
-                                    Text("Organization of Bubble Tea(2)")
-                                        .fontWeight(.semibold)
-                                        .lineLimit(1)
+                    Text(cart.shopName)
+                        .fontWeight(.semibold)
+                        .lineLimit(1)
                 } icon: {
                     Image(systemName: "gamecontroller.fill")
                         .foregroundColor(.white)
@@ -24,15 +26,17 @@ struct CartViewOrgCell: View {
                         .clipShape(Circle())
                 }
                 Spacer()
-                Button(action: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/{}/*@END_MENU_TOKEN@*/) {
+                Button(action: {
+                    self.session.cartManager?.deleteCart(orgName: self.cart.shopName)
+                }) {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundColor(Color(hex: 0xe0a6b5))
                 }
             }.padding()
             ExDivider(color: Color(hex: 0xe0a6b5), width: 1)
             VStack {
-                ForEach(0..<2) { _ in
-                    CartViewItemCell()
+                ForEach(cart.items) { item in
+                    CartViewItemCell(isQuantityChangable: true, item: item)
                 }
             }
             HStack (alignment: .bottom) {
@@ -40,7 +44,7 @@ struct CartViewOrgCell: View {
 //                Text("$20 DashCoin")
 //                    .foregroundColor(.red)
                 Label {
-                    Text("200")
+                    Text(String(cart.subtotal))
                         .fontWeight(.semibold)
                         .foregroundColor(.red)
                 } icon: {
@@ -61,6 +65,6 @@ struct CartViewOrgCell: View {
 
 struct CartViewOrgCell_Previews: PreviewProvider {
     static var previews: some View {
-        CartViewOrgCell()
+        CartViewOrgCell(cart: Cart(id: "bruh", shopName: "Organization of Bubble Tea", items: []))
     }
 }

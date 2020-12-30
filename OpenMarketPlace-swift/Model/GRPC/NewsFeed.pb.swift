@@ -24,7 +24,7 @@ struct Newsfeed_ItemGrpc {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var itemID: String = String()
+  var itemID: Int32 = 0
 
   var itemName: String = String()
 
@@ -206,7 +206,7 @@ extension Newsfeed_ItemGrpc: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.itemID)
+      case 1: try decoder.decodeSingularInt32Field(value: &self.itemID)
       case 2: try decoder.decodeSingularStringField(value: &self.itemName)
       case 3: try decoder.decodeSingularStringField(value: &self.itemImageLink)
       case 4: try decoder.decodeSingularStringField(value: &self.itemDescription)
@@ -221,8 +221,8 @@ extension Newsfeed_ItemGrpc: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.itemID.isEmpty {
-      try visitor.visitSingularStringField(value: self.itemID, fieldNumber: 1)
+    if self.itemID != 0 {
+      try visitor.visitSingularInt32Field(value: self.itemID, fieldNumber: 1)
     }
     if !self.itemName.isEmpty {
       try visitor.visitSingularStringField(value: self.itemName, fieldNumber: 2)

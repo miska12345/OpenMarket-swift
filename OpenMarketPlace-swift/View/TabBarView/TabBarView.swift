@@ -17,7 +17,7 @@ struct TabBarView: View {
                     Image(systemName: "house.fill")
                     Text("Home")
                 }
-            NewCartView()
+            NewCartView(cartManager: session.cartManager!)
                 .tabItem {
                     Image(systemName: "cart.fill")
                     Text("Cart")

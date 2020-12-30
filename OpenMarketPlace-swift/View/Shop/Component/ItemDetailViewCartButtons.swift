@@ -9,6 +9,9 @@ import SwiftUI
 
 struct ItemDetailViewCartButtons: View {
     var size: CGFloat = 50
+    let currentItem: Item
+    let orgName: String
+    @EnvironmentObject var session : SessionManager
     var body: some View {
         HStack {
             cartButton().padding(.trailing)
@@ -19,7 +22,7 @@ struct ItemDetailViewCartButtons: View {
     
     func addToCartButton() -> some View {
         Button(action: {
-            print("Add to cart")
+            session.cartManager?.addItemToCart(newItem: self.currentItem, orgName: self.orgName, quanity: 1)
         }) {
             RoundedRectangle(cornerRadius: 25)
                 .foregroundColor(AppColors.primaryColor)
@@ -33,7 +36,7 @@ struct ItemDetailViewCartButtons: View {
     
     func cartButton() -> some View {
         Button(action: {
-            print("Round Action")
+            
         }) {
             ZStack {
                 Image(systemName: "cart.fill")
@@ -53,6 +56,6 @@ struct ItemDetailViewCartButtons: View {
 
 struct ItemDetailViewShopButtons_Previews: PreviewProvider {
     static var previews: some View {
-        ItemDetailViewCartButtons()
+        ItemDetailViewCartButtons(currentItem: Item(id: 1, itemName: "name", price: 20.0, itemDescription: "", orderQuantity: 0, stock: 0, category: "", owner: ""), orgName: "arasaka")
     }
 }

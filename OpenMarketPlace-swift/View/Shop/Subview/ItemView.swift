@@ -10,7 +10,7 @@ import SwiftUI
 struct ItemView: View {
     @Binding var showDetail: Bool
     //var itemName: String = "Best goat meat for BBQ"
-    var item : Newsfeed_ItemGrpc
+    var item : Item
     var body: some View {
         NavigationView {
             GeometryReader() { geo in
@@ -35,7 +35,7 @@ struct ItemView: View {
                             }
                         }.frame(width: geo.size.width)
                     }
-                    ItemDetailViewCartButtons().padding(.horizontal)
+                    ItemDetailViewCartButtons(currentItem: self.item, orgName: item.owner).padding(.horizontal)
                 }
             }
             .navigationBarTitle("")
@@ -48,9 +48,8 @@ struct ItemView: View {
 class ItemViewWrapper: ObservableObject {
     @Published var shownDetailedItem: ItemView = ItemView(
         showDetail: Binding(get: {return false}, set: {(_) in}),
-        item: {() -> Newsfeed_ItemGrpc in
-            var temp = Newsfeed_ItemGrpc()
-            temp.itemName = "ABC"
+        item: {() -> Item in
+            var temp = Item(id: 1, itemName: "", price: 10.0, itemDescription: "", orderQuantity: 1, stock: 1, category: "", owner: "")
             return temp
         }())
     
