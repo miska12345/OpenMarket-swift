@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TabBarView: View {
     @EnvironmentObject var session: SessionManager
+    var viewModel: TabBarModel = TabBarModel()
     var body: some View {
         TabView {
             ShopView()
@@ -32,6 +33,11 @@ struct TabBarView: View {
                     Text("Account")
                 }
         }
+        .introspectTabBarController { tabBarController in
+            // customize here the UITabBarViewController if you like
+            self.viewModel.tabBarController = tabBarController
+        }
+        .environmentObject(self.viewModel)
     }
 }
 

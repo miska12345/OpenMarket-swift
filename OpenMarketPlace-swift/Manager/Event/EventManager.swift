@@ -83,17 +83,11 @@ class EventManager {
     
     func getOwnedEvent(perform: @escaping ([Event_Event]?, OMError?)->()) {
         print("get own event called")
-        var req = Event_GetOwnedEventRequest()
-        req.count = 30
-        req.exclusiveStartKey = self.ownedEventLastEvKey
-        _ = try? client.getOwnedEvent(req) { result, callResult in
-            switch result?.error {
-            case .nothing:
-//                self.ownedEventLastEvKey = result?.lastEvaluatedKey ?? ""
-                perform(result?.events, nil)
-            default:
-                perform(nil, OMError(message: "Unknown error"))
-            }
+        var req = Event_GetEventListRequest()
+        req.maxCount = 999
+        req.ownerID = AuthManager.shared.currentUser!.username
+        _ = try? client.getEventList(req) { result, callResult in
+            perform(result?.events, nil)
         }
     }
 }

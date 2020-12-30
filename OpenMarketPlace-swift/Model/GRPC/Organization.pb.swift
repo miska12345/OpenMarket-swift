@@ -19,7 +19,203 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-struct orgName {
+enum Error: SwiftProtobuf.Enum {
+  typealias RawValue = Int
+  case none // = 0
+  case orgDoesNotExist // = 1
+  case UNRECOGNIZED(Int)
+
+  init() {
+    self = .none
+  }
+
+  init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .none
+    case 1: self = .orgDoesNotExist
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  var rawValue: Int {
+    switch self {
+    case .none: return 0
+    case .orgDoesNotExist: return 1
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+}
+
+#if swift(>=4.2)
+
+extension Error: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  static var allCases: [Error] = [
+    .none,
+    .orgDoesNotExist,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
+struct AddOrgResult {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var error: AddOrgResult.AddOrgError = .none
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  enum AddOrgError: SwiftProtobuf.Enum {
+    typealias RawValue = Int
+    case none // = 0
+    case alreadyExist // = 1
+    case invalidOrgParameter // = 2
+    case UNRECOGNIZED(Int)
+
+    init() {
+      self = .none
+    }
+
+    init?(rawValue: Int) {
+      switch rawValue {
+      case 0: self = .none
+      case 1: self = .alreadyExist
+      case 2: self = .invalidOrgParameter
+      default: self = .UNRECOGNIZED(rawValue)
+      }
+    }
+
+    var rawValue: Int {
+      switch self {
+      case .none: return 0
+      case .alreadyExist: return 1
+      case .invalidOrgParameter: return 2
+      case .UNRECOGNIZED(let i): return i
+      }
+    }
+
+  }
+
+  init() {}
+}
+
+#if swift(>=4.2)
+
+extension AddOrgResult.AddOrgError: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  static var allCases: [AddOrgResult.AddOrgError] = [
+    .none,
+    .alreadyExist,
+    .invalidOrgParameter,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
+struct IsUserFollowingRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var userID: String = String()
+
+  var orgID: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct GetOrgResult {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var error: Error {
+    get {return _storage._error}
+    set {_uniqueStorage()._error = newValue}
+  }
+
+  var organization: OrgMetadata {
+    get {return _storage._organization ?? OrgMetadata()}
+    set {_uniqueStorage()._organization = newValue}
+  }
+  /// Returns true if `organization` has been explicitly set.
+  var hasOrganization: Bool {return _storage._organization != nil}
+  /// Clears the value of `organization`. Subsequent reads from it will return its default value.
+  mutating func clearOrganization() {_uniqueStorage()._organization = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
+
+struct IsUserFollowingResult {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var isFollowing: Bool = false
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct GetFollowerRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var orgID: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct GetFollowerResult {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var userIds: [String] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct UpdateFollowerRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var userID: String = String()
+
+  var orgID: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct UpdateFollowerResult {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct GetOrgRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -31,7 +227,67 @@ struct orgName {
   init() {}
 }
 
-struct orgMetadata {
+struct OrgUpdateResult {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var error: OrgUpdateResult.UpdateError = .none
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  enum UpdateError: SwiftProtobuf.Enum {
+    typealias RawValue = Int
+    case none // = 0
+    case cannotFindOrg // = 1
+    case internalError // = 2
+    case posterAlreadyExist // = 3
+    case UNRECOGNIZED(Int)
+
+    init() {
+      self = .none
+    }
+
+    init?(rawValue: Int) {
+      switch rawValue {
+      case 0: self = .none
+      case 1: self = .cannotFindOrg
+      case 2: self = .internalError
+      case 3: self = .posterAlreadyExist
+      default: self = .UNRECOGNIZED(rawValue)
+      }
+    }
+
+    var rawValue: Int {
+      switch self {
+      case .none: return 0
+      case .cannotFindOrg: return 1
+      case .internalError: return 2
+      case .posterAlreadyExist: return 3
+      case .UNRECOGNIZED(let i): return i
+      }
+    }
+
+  }
+
+  init() {}
+}
+
+#if swift(>=4.2)
+
+extension OrgUpdateResult.UpdateError: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  static var allCases: [OrgUpdateResult.UpdateError] = [
+    .none,
+    .cannotFindOrg,
+    .internalError,
+    .posterAlreadyExist,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
+struct OrgMetadata {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -42,11 +298,13 @@ struct orgMetadata {
 
   var orgOwnerID: String = String()
 
-  var orgSlogan: String = String()
-
   var orgPortraitS3Key: String = String()
 
-  var orgCurrencies: [String] = []
+  var orgCurrency: String = String()
+
+  var followerCount: UInt32 = 0
+
+  var orgPosterS3Key: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -55,8 +313,297 @@ struct orgMetadata {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-extension orgName: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = "orgName"
+extension Error: SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "NONE"),
+    1: .same(proto: "ORG_DOES_NOT_EXIST"),
+  ]
+}
+
+extension AddOrgResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "AddOrgResult"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "error"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularEnumField(value: &self.error)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.error != .none {
+      try visitor.visitSingularEnumField(value: self.error, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: AddOrgResult, rhs: AddOrgResult) -> Bool {
+    if lhs.error != rhs.error {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension AddOrgResult.AddOrgError: SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "NONE"),
+    1: .same(proto: "ALREADY_EXIST"),
+    2: .same(proto: "INVALID_ORG_PARAMETER"),
+  ]
+}
+
+extension IsUserFollowingRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "IsUserFollowingRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "userId"),
+    2: .same(proto: "orgId"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.userID)
+      case 2: try decoder.decodeSingularStringField(value: &self.orgID)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.userID.isEmpty {
+      try visitor.visitSingularStringField(value: self.userID, fieldNumber: 1)
+    }
+    if !self.orgID.isEmpty {
+      try visitor.visitSingularStringField(value: self.orgID, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: IsUserFollowingRequest, rhs: IsUserFollowingRequest) -> Bool {
+    if lhs.userID != rhs.userID {return false}
+    if lhs.orgID != rhs.orgID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension GetOrgResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "GetOrgResult"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "error"),
+    2: .same(proto: "organization"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _error: Error = .none
+    var _organization: OrgMetadata? = nil
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _error = source._error
+      _organization = source._organization
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularEnumField(value: &_storage._error)
+        case 2: try decoder.decodeSingularMessageField(value: &_storage._organization)
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if _storage._error != .none {
+        try visitor.visitSingularEnumField(value: _storage._error, fieldNumber: 1)
+      }
+      if let v = _storage._organization {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: GetOrgResult, rhs: GetOrgResult) -> Bool {
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._error != rhs_storage._error {return false}
+        if _storage._organization != rhs_storage._organization {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension IsUserFollowingResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "IsUserFollowingResult"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "isFollowing"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBoolField(value: &self.isFollowing)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.isFollowing != false {
+      try visitor.visitSingularBoolField(value: self.isFollowing, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: IsUserFollowingResult, rhs: IsUserFollowingResult) -> Bool {
+    if lhs.isFollowing != rhs.isFollowing {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension GetFollowerRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "GetFollowerRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "orgId"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.orgID)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.orgID.isEmpty {
+      try visitor.visitSingularStringField(value: self.orgID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: GetFollowerRequest, rhs: GetFollowerRequest) -> Bool {
+    if lhs.orgID != rhs.orgID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension GetFollowerResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "GetFollowerResult"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "userIds"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeRepeatedStringField(value: &self.userIds)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.userIds.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.userIds, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: GetFollowerResult, rhs: GetFollowerResult) -> Bool {
+    if lhs.userIds != rhs.userIds {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension UpdateFollowerRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "UpdateFollowerRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "userId"),
+    2: .same(proto: "orgId"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.userID)
+      case 2: try decoder.decodeSingularStringField(value: &self.orgID)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.userID.isEmpty {
+      try visitor.visitSingularStringField(value: self.userID, fieldNumber: 1)
+    }
+    if !self.orgID.isEmpty {
+      try visitor.visitSingularStringField(value: self.orgID, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: UpdateFollowerRequest, rhs: UpdateFollowerRequest) -> Bool {
+    if lhs.userID != rhs.userID {return false}
+    if lhs.orgID != rhs.orgID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension UpdateFollowerResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "UpdateFollowerResult"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: UpdateFollowerResult, rhs: UpdateFollowerResult) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension GetOrgRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "GetOrgRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "orgName"),
   ]
@@ -77,22 +624,61 @@ extension orgName: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBa
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: orgName, rhs: orgName) -> Bool {
+  static func ==(lhs: GetOrgRequest, rhs: GetOrgRequest) -> Bool {
     if lhs.orgName != rhs.orgName {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension orgMetadata: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = "orgMetadata"
+extension OrgUpdateResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "OrgUpdateResult"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "error"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularEnumField(value: &self.error)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.error != .none {
+      try visitor.visitSingularEnumField(value: self.error, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: OrgUpdateResult, rhs: OrgUpdateResult) -> Bool {
+    if lhs.error != rhs.error {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension OrgUpdateResult.UpdateError: SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "NONE"),
+    1: .same(proto: "CANNOT_FIND_ORG"),
+    2: .same(proto: "INTERNAL_ERROR"),
+    3: .same(proto: "POSTER_ALREADY_EXIST"),
+  ]
+}
+
+extension OrgMetadata: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "OrgMetadata"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "orgName"),
     2: .same(proto: "orgDescription"),
     3: .same(proto: "orgOwnerId"),
-    4: .same(proto: "orgSlogan"),
     5: .same(proto: "orgPortraitS3Key"),
-    6: .same(proto: "orgCurrencies"),
+    6: .same(proto: "orgCurrency"),
+    7: .same(proto: "followerCount"),
+    8: .same(proto: "orgPosterS3Key"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -101,9 +687,10 @@ extension orgMetadata: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
       case 1: try decoder.decodeSingularStringField(value: &self.orgName)
       case 2: try decoder.decodeSingularStringField(value: &self.orgDescription)
       case 3: try decoder.decodeSingularStringField(value: &self.orgOwnerID)
-      case 4: try decoder.decodeSingularStringField(value: &self.orgSlogan)
       case 5: try decoder.decodeSingularStringField(value: &self.orgPortraitS3Key)
-      case 6: try decoder.decodeRepeatedStringField(value: &self.orgCurrencies)
+      case 6: try decoder.decodeSingularStringField(value: &self.orgCurrency)
+      case 7: try decoder.decodeSingularUInt32Field(value: &self.followerCount)
+      case 8: try decoder.decodeSingularStringField(value: &self.orgPosterS3Key)
       default: break
       }
     }
@@ -119,25 +706,29 @@ extension orgMetadata: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
     if !self.orgOwnerID.isEmpty {
       try visitor.visitSingularStringField(value: self.orgOwnerID, fieldNumber: 3)
     }
-    if !self.orgSlogan.isEmpty {
-      try visitor.visitSingularStringField(value: self.orgSlogan, fieldNumber: 4)
-    }
     if !self.orgPortraitS3Key.isEmpty {
       try visitor.visitSingularStringField(value: self.orgPortraitS3Key, fieldNumber: 5)
     }
-    if !self.orgCurrencies.isEmpty {
-      try visitor.visitRepeatedStringField(value: self.orgCurrencies, fieldNumber: 6)
+    if !self.orgCurrency.isEmpty {
+      try visitor.visitSingularStringField(value: self.orgCurrency, fieldNumber: 6)
+    }
+    if self.followerCount != 0 {
+      try visitor.visitSingularUInt32Field(value: self.followerCount, fieldNumber: 7)
+    }
+    if !self.orgPosterS3Key.isEmpty {
+      try visitor.visitSingularStringField(value: self.orgPosterS3Key, fieldNumber: 8)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: orgMetadata, rhs: orgMetadata) -> Bool {
+  static func ==(lhs: OrgMetadata, rhs: OrgMetadata) -> Bool {
     if lhs.orgName != rhs.orgName {return false}
     if lhs.orgDescription != rhs.orgDescription {return false}
     if lhs.orgOwnerID != rhs.orgOwnerID {return false}
-    if lhs.orgSlogan != rhs.orgSlogan {return false}
     if lhs.orgPortraitS3Key != rhs.orgPortraitS3Key {return false}
-    if lhs.orgCurrencies != rhs.orgCurrencies {return false}
+    if lhs.orgCurrency != rhs.orgCurrency {return false}
+    if lhs.followerCount != rhs.followerCount {return false}
+    if lhs.orgPosterS3Key != rhs.orgPosterS3Key {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

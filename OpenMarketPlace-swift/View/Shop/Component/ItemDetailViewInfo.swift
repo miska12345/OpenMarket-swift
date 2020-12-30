@@ -39,7 +39,7 @@ struct ItemDetailViewInfo: View {
     //                    .padding(.top)
                 }
                 Spacer()
-                NavigationLink(destination: OrganizationView(),
+                NavigationLink(destination: OrganizationView(orgID: self.item.owner),
                                label: {
                                 HStack {
                                     Image("DefaultAvatar_Male")

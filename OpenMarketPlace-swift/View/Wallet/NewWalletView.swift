@@ -7,8 +7,10 @@
 
 import SwiftUI
 import BottomSheet_SwiftUI
+import Introspect
 
 struct NewWalletView: View {
+    @EnvironmentObject var viewModel: TabBarModel
     @ObservedObject var session: SessionManager
     @ObservedObject var currencies: DictModel = DictModel()
     @State var currentSelection: Int = 0
@@ -24,40 +26,40 @@ struct NewWalletView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            NavigationView {
-                ZStack {
-                    Image("WalletBackground").resizable()
-                        .aspectRatio(geometry.size, contentMode: .fill)
-                        .edgesIgnoringSafeArea(.all)
-                    VStack(alignment: .center) {
-                        WalletTopBar(welcomeMsgColor: ColorScheme.welcomeMsgColor, username: AuthManager.shared.currentUser!.username).padding(.horizontal)
-                        WalletToolBar()
-                        GeometryReader() { r2 in
-                            let h1 = r2.size.height
-                            let h2 = geometry.size.height
-                            BottomSheet(
-                                isOpen: $bottomSheetOpened,
-                                config: BottomSheetConfig(minHeightRatio: (h1 / h2), maxHeight: h2, indicatorSize: CGSize(width: 30, height: 3), snapRatio: 0, indicatorColor: Color(hex: 0xd6d6d6))
-                            ) {
-                                ZStack {
-                                    VStack {
-                                        SegmentControl(selection: $selection, items: [SegmentItem(selectionIndex: 0, title: "Currency", colorOnSelect: ColorScheme.segmentedSelectorColor, colorOnUnselect: Color.gray, colorForUnderline: ColorScheme.segmentedSelectorColor),
-                                                                                      SegmentItem(selectionIndex: 1, title: "History", colorOnSelect: AppColors.primaryColor, colorOnUnselect: Color.gray)
-                                                                                      
-                                        ])
-                                        ScrollView {
-                                            buildTabView
-                                        }
+            ZStack {
+                Image("WalletBackground").resizable()
+                    .aspectRatio(geometry.size, contentMode: .fill)
+                    .edgesIgnoringSafeArea(.all)
+                VStack(alignment: .center) {
+//                    WalletTopBar(welcomeMsgColor: ColorScheme.welcomeMsgColor, username: AuthManager.shared.currentUser!.username).padding(.horizontal)
+                    GeneralBackButton(action: {
+                        self.viewModel.showTabbarView()
+                    }).padding(.horizontal).foregroundColor(.white)
+                    WalletToolBar()
+                    GeometryReader() { r2 in
+                        let h1 = r2.size.height
+                        let h2 = geometry.size.height
+                        BottomSheet(
+                            isOpen: $bottomSheetOpened,
+                            config: BottomSheetConfig(minHeightRatio: (h1 / h2), maxHeight: h2, indicatorSize: CGSize(width: 30, height: 3), snapRatio: 0, indicatorColor: Color(hex: 0xd6d6d6))
+                        ) {
+                            ZStack {
+                                VStack {
+                                    SegmentControl(selection: $selection, items: [SegmentItem(selectionIndex: 0, title: "Currency", colorOnSelect: ColorScheme.segmentedSelectorColor, colorOnUnselect: Color.gray, colorForUnderline: ColorScheme.segmentedSelectorColor),
+                                                                                  SegmentItem(selectionIndex: 1, title: "History", colorOnSelect: AppColors.primaryColor, colorOnUnselect: Color.gray)
+                                                                                  
+                                    ])
+                                    ScrollView {
+                                        buildTabView
                                     }
-                                    
                                 }
+                                
                             }
                         }
-                        
-                        Spacer()
-                    }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-                }.navigationBarHidden(true)
-                .navigationBarTitle("", displayMode: .inline)
+                    }
+                    
+                    Spacer()
+                }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
             }
         }.onAppear(perform: {
             if firstRefresh {
@@ -66,6 +68,12 @@ struct NewWalletView: View {
             }
             
         })
+        .onAppear(perform: {
+            self.viewModel.hideTabbarView()
+        })
+        .edgesIgnoringSafeArea(.bottom)
+        .navigationBarHidden(true)
+        .navigationBarTitle("", displayMode: .inline)
     }
     
     func refresh() {

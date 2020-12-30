@@ -115,6 +115,32 @@ extension Event_OwnerType: CaseIterable {
 
 #endif  // swift(>=4.2)
 
+struct Event_GetEventListResult {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var events: [Event_Event] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Event_GetEventListRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var ownerID: String = String()
+
+  var maxCount: Int32 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 struct Event_CreateEventRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -259,36 +285,6 @@ struct Event_GetEventResult {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-struct Event_GetOwnedEventRequest {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var exclusiveStartKey: String = String()
-
-  var count: UInt32 = 0
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
-struct Event_GetOwnedEventResult {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var error: Event_Error = .nothing
-
-  var lastEvaluatedKey: String = String()
-
-  var events: [Event_Event] = []
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
 struct Event_Event {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -343,6 +339,70 @@ extension Event_OwnerType: SwiftProtobuf._ProtoNameProviding {
     0: .same(proto: "USER"),
     1: .same(proto: "ORGANIZATION"),
   ]
+}
+
+extension Event_GetEventListResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetEventListResult"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "events"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeRepeatedMessageField(value: &self.events)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.events.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.events, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Event_GetEventListResult, rhs: Event_GetEventListResult) -> Bool {
+    if lhs.events != rhs.events {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Event_GetEventListRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetEventListRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "ownerID"),
+    2: .same(proto: "maxCount"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.ownerID)
+      case 2: try decoder.decodeSingularInt32Field(value: &self.maxCount)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.ownerID.isEmpty {
+      try visitor.visitSingularStringField(value: self.ownerID, fieldNumber: 1)
+    }
+    if self.maxCount != 0 {
+      try visitor.visitSingularInt32Field(value: self.maxCount, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Event_GetEventListRequest, rhs: Event_GetEventListRequest) -> Bool {
+    if lhs.ownerID != rhs.ownerID {return false}
+    if lhs.maxCount != rhs.maxCount {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
 }
 
 extension Event_CreateEventRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
@@ -698,82 +758,6 @@ extension Event_GetEventResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       }
       if !storagesAreEqual {return false}
     }
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Event_GetOwnedEventRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".GetOwnedEventRequest"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "exclusiveStartKey"),
-    2: .same(proto: "count"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.exclusiveStartKey)
-      case 2: try decoder.decodeSingularUInt32Field(value: &self.count)
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.exclusiveStartKey.isEmpty {
-      try visitor.visitSingularStringField(value: self.exclusiveStartKey, fieldNumber: 1)
-    }
-    if self.count != 0 {
-      try visitor.visitSingularUInt32Field(value: self.count, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Event_GetOwnedEventRequest, rhs: Event_GetOwnedEventRequest) -> Bool {
-    if lhs.exclusiveStartKey != rhs.exclusiveStartKey {return false}
-    if lhs.count != rhs.count {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Event_GetOwnedEventResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".GetOwnedEventResult"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "error"),
-    2: .same(proto: "lastEvaluatedKey"),
-    3: .same(proto: "events"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularEnumField(value: &self.error)
-      case 2: try decoder.decodeSingularStringField(value: &self.lastEvaluatedKey)
-      case 3: try decoder.decodeRepeatedMessageField(value: &self.events)
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.error != .nothing {
-      try visitor.visitSingularEnumField(value: self.error, fieldNumber: 1)
-    }
-    if !self.lastEvaluatedKey.isEmpty {
-      try visitor.visitSingularStringField(value: self.lastEvaluatedKey, fieldNumber: 2)
-    }
-    if !self.events.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.events, fieldNumber: 3)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Event_GetOwnedEventResult, rhs: Event_GetOwnedEventResult) -> Bool {
-    if lhs.error != rhs.error {return false}
-    if lhs.lastEvaluatedKey != rhs.lastEvaluatedKey {return false}
-    if lhs.events != rhs.events {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

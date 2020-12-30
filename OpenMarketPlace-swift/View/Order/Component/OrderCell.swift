@@ -8,25 +8,33 @@
 import SwiftUI
 
 struct OrderCell: View {
+    var order: Marketplace_Order = Marketplace_Order()
     var body: some View {
         VStack (alignment: .trailing, spacing: 0) {
-            HStack (alignment: .top) {
-                OrgLabel()
+            HStack {
+                OrgLabel(orgName: order.sellerID)
                 Spacer()
-                PaymentStatusTag()
+                switch order.status {
+                    case Marketplace_OrderStatus.pendingPayment:
+                        PaymentStatusTag.STATUS_PENDING
+                    case Marketplace_OrderStatus.paymentConfirmed:
+                        PaymentStatusTag.STATUS_CONFIRMED
+                    default:
+                        PaymentStatusTag.STATUS_ERROR
+                }
             }.padding()
             ExDivider(color: Color(hex: 0xe0a6b5), width: 1)
             VStack {
-                ForEach(0..<2) { _ in
+                ForEach(0..<2) { i in
                     CartViewItemCell(isCancelable: false)
                 }
             }
 //            Divider().padding(.horizontal)
             HStack (alignment: .bottom) {
-                Text("Order #: 12345567")
+                Text("Order #: \(order.orderID)")
                 Spacer()
                 Label {
-                    Text("200")
+                    Text(String.toCurrencyStr(balance: order.totalAmount) ?? "-")
                         .fontWeight(.semibold)
                         .foregroundColor(.red)
                 } icon: {
@@ -35,7 +43,11 @@ struct OrderCell: View {
                 }
             }.padding()
             Divider()
-            NavButton(text: "Detail").padding()
+            NavigationLink(
+                destination: OrderDetailView(order: order),
+                label: {
+                    NavButton(text: "Detail").padding()
+                }).buttonStyle(PlainButtonStyle())
         }
         .background(
             Color.white

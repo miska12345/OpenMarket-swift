@@ -12,6 +12,7 @@ struct GeneralBackButton: View {
     var text: String = "Back"
     var action: ()->Void = {}
     var dismissable: Bool = true
+    var useSpacer: Bool = true
     
     var body: some View {
         HStack() {
@@ -22,12 +23,15 @@ struct GeneralBackButton: View {
             } icon: {
                 Image(systemName: "chevron.left")
             }.onTapGesture {
+                print("Back")
                 action()
                 if dismissable {
                     dismiss()
                 }
             }
-            Spacer()
+            if useSpacer {
+                Spacer()
+            }
         }
     }
     
