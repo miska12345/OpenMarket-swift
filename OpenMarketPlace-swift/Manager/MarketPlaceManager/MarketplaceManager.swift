@@ -35,25 +35,7 @@ class MarketplaceManager: ObservableObject {
         }
         
     }
-    
-//    func getSimilarItems(itemId: String, itemCategory: String, withCount: Int,
-//                         perform: @escaping ([Marketplace_MarketPlaceItem]?, OMError?) -> ()) {
-//        var request = Marketplace_GetSimilarItemsRequest()
-//        request.itemIds = itemId
-//        request.itemCategory = itemCategory
-//        request.withCount = Int32(withCount)
-//
-//        _ = try? self.client.handleGetSimilarItems(request) {result, callResult in
-//            if let realItem = result?.items {
-//                DispatchQueue.main.async {
-//                    perform(realItem, nil)
-//                }
-//            }
-//            else {
-//                perform(nil, OMError(message: "Error while getting similar items for \(itemId)"))
-//            }
-//        }
-//    }
+
     func getOrdersAsBuyer(perform: @escaping ([Marketplace_Order]?, OMError?) -> ()) {
             var request = Marketplace_GetAllOrdersRequest()
             request.role = .buyer
@@ -73,5 +55,4 @@ class MarketplaceManager: ObservableObject {
 
 
     }
-    
 }
