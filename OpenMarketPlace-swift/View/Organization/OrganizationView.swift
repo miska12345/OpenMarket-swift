@@ -9,7 +9,9 @@ import SwiftUI
 
 struct OrganizationView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State var selection: Int = 0
+    @EnvironmentObject var session: SessionManager
+    @State var organization = OrgMetadata()
+    var orgID: String = "testOrgx"
     var body: some View {
         ZStack(alignment: .top) {
             AppColors.lightGray
@@ -19,7 +21,7 @@ struct OrganizationView: View {
                     .background(Color.white)
                 ScrollView () {
                     VStack(spacing: 0) {
-                        OrgTitleBar()
+                        OrgTitleBar(name: organization.orgName, currency: organization.orgCurrency)
                         Image("TestPoster2")
                             .resizable()
                             .frame(height: 250, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
@@ -33,6 +35,15 @@ struct OrganizationView: View {
             }
         }
         .navigationBarHidden(true)
+        .onAppear(perform: {
+            session.organizationManager?.getOrg(name: orgID, perform: { (org, error) in
+                if error == nil {
+                    self.organization = org!
+                } else {
+                    print(error?.message!)
+                }
+            })
+        })
     }
 }
 

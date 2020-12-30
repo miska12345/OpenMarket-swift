@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct OrgLabel: View {
+    var orgName: String = "Organization of Bubble Tea"
     var body: some View {
         Label {
-                            Text("Organization of Bubble Tea(2)")
+                            Text(orgName)
                                 .fontWeight(.semibold)
                                 .lineLimit(1)
         } icon: {
