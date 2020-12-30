@@ -39,6 +39,7 @@ struct OrderView: View {
     }
     
     func refreshOrders() {
+<<<<<<< HEAD
         session.marketplaceManager?.getOrdersAsBuyer(perform: { (orders, error) in
             if error == nil {
                 self.orders = orders?.sorted(by: { (order1, order2) -> Bool in
@@ -47,6 +48,16 @@ struct OrderView: View {
                 print(self.orders.count)
             }
         })
+=======
+//        session.marketplaceManager?.getOrdersAsBuyer(perform: { (orders, error) in
+//            if error == nil {
+//                self.orders = orders?.sorted(by: { (order1, order2) -> Bool in
+//                    return Date.fromStr(timestamp: order1.createdAt)! > Date.fromStr(timestamp: order2.createdAt)!
+//                }) ?? []
+//                print(self.orders.count)
+//            }
+//        })
+>>>>>>> 29892b1525dba8293a97f6ebbc69d4f3f4966cc4
     }
 }
 
