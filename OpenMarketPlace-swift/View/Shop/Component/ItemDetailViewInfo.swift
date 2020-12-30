@@ -34,7 +34,7 @@ struct ItemDetailViewInfo: View {
                         .foregroundColor(.red)
                         .scaledToFill()
     //                Spacer()
-                    Text("DashCoin")
+                    Text(item.itemCurrency)
                         .foregroundColor(.gray)
     //                    .padding(.top)
                 }

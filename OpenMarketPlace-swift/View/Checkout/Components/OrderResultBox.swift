@@ -9,11 +9,13 @@ import SwiftUI
 
 struct OrderResultBox: View {
     @State var showUnavailableItem = false
+    var order: Marketplace_Order = Marketplace_Order()
+    
     var body: some View {
         VStack (alignment: .leading, spacing: 0) {
             HStack (alignment: .top) {
                 Label {
-                    Text("Organization of Bubble Tea(2)")
+                    Text(order.sellerID)
                         .fontWeight(.semibold)
                         .lineLimit(1)
                 } icon: {
@@ -28,8 +30,8 @@ struct OrderResultBox: View {
             }.padding()
             ExDivider(color: Color(hex: 0xe0a6b5), width: 1)
             VStack {
-                ForEach(0..<2) { _ in
-                    CartViewItemCell(isQuantityChangable: false, isCancelable: false)
+                ForEach(order.items.indices) { index in
+                    CartViewItemCell(isQuantityChangable: false, isCancelable: false, item: convertOrderedItemToItem(orderedItem: order.items[index]))
                 }
             }
             Divider().padding(.horizontal)
@@ -51,7 +53,7 @@ struct OrderResultBox: View {
                     Text("Total")
                     Spacer()
                     Label {
-                        Text("200")
+                        Text(String(self.order.totalAmount))
                     } icon: {
                         Image(systemName: "dollarsign.circle.fill")
                             .foregroundColor(.yellow)
@@ -64,7 +66,7 @@ struct OrderResultBox: View {
                 HStack (alignment: .bottom) {
                     Text("Order #")
                     Spacer()
-                    Text("12312-12312-124123-213213")
+                    Text(order.orderID)
                         .foregroundColor(AppColors.secondaryColor)
                 }
             }.padding()
@@ -80,6 +82,15 @@ struct OrderResultBox: View {
         .sheet(isPresented: $showUnavailableItem, content: {
             FailedItemView(showUnavailableItem: $showUnavailableItem)
         })
+    }
+    
+    func convertOrderedItemToItem(orderedItem: Marketplace_OrderedItem) -> Item {
+        //let result : Item
+        return Item (id: Int(orderedItem.itemID), itemName: orderedItem.itemName
+                      , price: orderedItem.itemPrice, itemDescription: ""
+                      , orderQuantity: Int(orderedItem.quantity), stock: -1
+                      , category: "", owner: "")
+        //return result
     }
 }
 

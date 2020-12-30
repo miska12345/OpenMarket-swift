@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CheckOutResultView: View {
     @Environment(\.rootPresentationMode) private var rootPresentationMode
+    var sucessOrders = [Marketplace_Order]()
     var body: some View {
         ZStack {
             AppColors.lightGray.edgesIgnoringSafeArea(.all)
@@ -23,8 +24,8 @@ struct CheckOutResultView: View {
                     
                     ScrollView {
                         VStack (spacing: 20) {
-                            ForEach (0..<2) { _ in
-                                OrderResultBox()
+                            ForEach(self.sucessOrders.indices) { index in
+                                OrderResultBox(showUnavailableItem: false, order: self.sucessOrders[index])
                             }
                         }.padding()
                     }

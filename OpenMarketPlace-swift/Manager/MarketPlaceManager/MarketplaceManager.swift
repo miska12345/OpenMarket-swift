@@ -54,28 +54,24 @@ class MarketplaceManager: ObservableObject {
 //            }
 //        }
 //    }
-//
-//    func checkout(items: [Marketplace_MarketPlaceItem], orgId: String, currencyId: String, perform: @escaping ([Marketplace_MarketPlaceItem]?, OMError) -> ()) {
-//        var request = Marketplace_CheckOutRequest()
-//        request.items = items;
-//        request.fromOrg = orgId;
-//        request.currencyID = currencyId
-//        _ = try? self.client.handleCheckout(request) {result, callResult in
-//            switch(result?.checkoutStatus) {
-//                case .success:
-//                    perform(nil, OMError(message: "Success"))
-//                case .sucessWithFewItemOutOfStock:
-//                     perform(result?.unprocessedItem, OMError(message: "Success, the following items are out of stock"))
-//                case .failItemOutOfStock:
-//                    perform(result?.unprocessedItem, OMError(message: "Sorry, all items are out of stock"))
-//                case .failPaymentCannotBeVerified, .failTransactionTimeOut:
-//                    perform(nil, OMError(message: "Sorry, your payment can not be verfied or your request timed out please try again later"))
-//                default:
-//                    perform(nil, OMError(message: "Unknown error, probably COVID-19"))
-//            }
-//        }
-//
-//
-//    }
+    func getOrdersAsBuyer(perform: @escaping ([Marketplace_Order]?, OMError?) -> ()) {
+            var request = Marketplace_GetAllOrdersRequest()
+            request.role = .buyer
+            request.maxCount = Int32(999)
+            _ = try? client.getAllOrders(request) { result, callResult in
+                //TODO add condition for when result.error is internal service error
+                perform(result?.orders, nil)
+            }
+    }
+
+    func checkout(items: Dictionary<Int32, Int32>, perform: @escaping ([Marketplace_Order]?, OMError?) -> ()) {
+        var request = Marketplace_CheckOutRequest()
+        request.items = items;
+        _ = try? self.client.checkout(request) {result, callResult in
+            perform(result?.successOrders, nil)
+        }
+
+
+    }
     
 }
