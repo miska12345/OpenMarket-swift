@@ -14,7 +14,7 @@ This repo contains:
 1. OpenMarket APP uses GRPC to communicate with the backend server [here](https://github.com/miska12345/OpenMarket). 
 
 ## Demo
-![Alt Text](https://media.giphy.com/media/b3HeCJinp5oEaZ6Mtw/giphy.gif)
+![Alt Text](https://media.giphy.com/media/3dz6cixEZFXjchmh45/giphy.gif)
 ## Features
 
 ### Authentication
